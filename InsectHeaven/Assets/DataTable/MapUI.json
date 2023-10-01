@@ -1,0 +1,20 @@
+[
+ {
+   "Key": 10101,
+   "Desc": "1씬 이동",
+   "UIType": "SceneChange",
+   "Parameter": 2001
+ },
+ {
+   "Key": 10102,
+   "Desc": "2씬 이동",
+   "UIType": "SceneChange",
+   "Parameter": 2002
+ },
+ {
+   "Key": 10103,
+   "Desc": "3씬 이동",
+   "UIType": "SceneChange",
+   "Parameter": 2003
+ }
+]

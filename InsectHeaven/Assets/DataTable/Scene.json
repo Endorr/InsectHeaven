@@ -1,0 +1,22 @@
+[
+ {
+   "Key": 1001,
+   "SceneName": 1,
+   "SceneBasePath": 100001
+ },
+ {
+   "Key": 2001,
+   "SceneName": 2,
+   "SceneBasePath": 100002
+ },
+ {
+   "Key": 2002,
+   "SceneName": 3,
+   "SceneBasePath": 100003
+ },
+ {
+   "Key": 2003,
+   "SceneName": 4,
+   "SceneBasePath": 100004
+ }
+]
