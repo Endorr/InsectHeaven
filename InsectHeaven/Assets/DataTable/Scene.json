@@ -2,21 +2,25 @@
  {
    "Key": 1001,
    "SceneName": 1,
-   "SceneBasePath": 100001
+   "SceneBasePath": "Start",
+   "SceneType": "System"
  },
  {
    "Key": 2001,
    "SceneName": 2,
-   "SceneBasePath": 100002
+   "SceneBasePath": "MainLobby",
+   "SceneType": "Explore"
  },
  {
    "Key": 2002,
    "SceneName": 3,
-   "SceneBasePath": 100003
+   "SceneBasePath": "CombatScene",
+   "SceneType": "Combat"
  },
  {
    "Key": 2003,
    "SceneName": 4,
-   "SceneBasePath": 100004
+   "SceneBasePath": "Room_1",
+   "SceneType": "Explore"
  }
 ]

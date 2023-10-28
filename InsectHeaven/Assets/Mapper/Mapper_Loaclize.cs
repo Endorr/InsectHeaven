@@ -1,6 +1,5 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
 using System.Text;
 
@@ -8,7 +7,6 @@ enum LanguageLegion { Korea, English};
 
 public struct LocalizeDataSet
 {
-    public int Key;
     public string Kr;
     public string Eng;
 }
@@ -16,43 +14,54 @@ public struct LocalizeDataSet
 public class Mapper_Loaclize : DefaultMapper
 {
     //Data
-    string JsonFilePath = Application.dataPath + "DataTable/" + "Localize" + ".Json";
     LanguageLegion Legion;
-    //map DataSet;
+    private Dictionary<int, LocalizeDataSet> Map_Localize;
+    private LocalizeDataSet NewDataSet;
 
-    // Start is called before the first frame update
-    void Start()
+    public override void Initialize()
     {
-        Legion = LanguageLegion.Korea;
+        base.Initialize();
         
-        Initialize();
+        Map_Localize = new Dictionary<int, LocalizeDataSet>();
+        NewDataSet = new LocalizeDataSet();
+        
+        ReadData<LocalizeDataSet>(PathReplacer("Localize"), ref Map_Localize, ref NewDataSet);
+        
+        Legion = LanguageLegion.Korea;
     }
 
-    protected override void Initialize()
+    protected override void ResetData()
     {
-        FileStream fileStream = new FileStream(JsonFilePath, FileMode.Open);
-        byte[] data = new byte[fileStream.Length];
-        fileStream.Read(data, 0, data.Length);
-        fileStream.Close();
-        string json = Encoding.UTF8.GetString(data);
-
-        LocalizeDataSet Test = JsonUtility.FromJson<LocalizeDataSet>(json);
-        Debug.Log(Test.Key);
-        Debug.Log(Test.Kr);
-        Debug.Log(Test.Eng);
+        NewDataSet.Kr = null;
+        NewDataSet.Eng = null;
     }
 
-    public override bool GetRowData<T>(int _Key, ref T _RowData)
+    protected override void FillData(string DataString)
     {
-        switch (Legion)
+        if (null == NewDataSet.Kr)
         {
-            case LanguageLegion.Korea:
-                return true;
-            case LanguageLegion.English:
-                return false;
+            NewDataSet.Kr = DataString;
+        }
+        else if (null == NewDataSet.Eng)
+        {
+            NewDataSet.Eng = DataString;
+        }
+    }
+
+    public string GetLocalString(int _key)
+    {
+        if (Map_Localize.ContainsKey(_key))
+        {
+            if (LanguageLegion.Korea == Legion)
+            {
+                return Map_Localize[_key].Kr;
+            }
+            else if (LanguageLegion.English == Legion)
+            {
+                return Map_Localize[_key].Eng;
+            }
         }
 
-        Debug.Log("No Legion or Key");
-        return false;
+        return "Missing String";
     }
 }

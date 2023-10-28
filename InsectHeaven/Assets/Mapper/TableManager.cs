@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 public enum EMapper
 {
-    Localize
+    Localize,
+    Scene
 }
 
-public class TableManager : MonoBehaviour
+public class TableManager : ManagerBase
 {
     public static TableManager instance;
     Dictionary<EMapper, DefaultMapper> MapperDictionary;
 
-    public void Awake()
+    public override void Awake()
     {
         instance = this;
-        DontDestroyOnLoad(this.gameObject);
-        
+
         FillTableMapper();
     }
 
@@ -32,6 +32,14 @@ public class TableManager : MonoBehaviour
 
     void FillTableMapper()
     {
+        MapperDictionary = new Dictionary<EMapper, DefaultMapper>();
+        
         MapperDictionary.Add(EMapper.Localize, new Mapper_Loaclize());
+        MapperDictionary.Add(EMapper.Scene, new Mapper_Scene());
+
+        foreach (var mapper in MapperDictionary)
+        {
+            mapper.Value.Initialize();
+        }
     }
 }
