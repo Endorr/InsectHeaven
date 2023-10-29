@@ -44,6 +44,7 @@ public class Mapper_Loaclize : DefaultMapper
         }
         else if (null == NewDataSet.Eng)
         {
+            DataString = DataString.Remove(DataString.Length - 1);
             NewDataSet.Eng = DataString;
         }
     }

@@ -38,7 +38,8 @@ public class IH_SceneManager : ManagerBase
         
         if (SceneMapper.GetSceneData(sceneId, ref CurrentSceneData))
         {
-            if (ESceneType.Combat.ToString() != CurrentSceneData.SceneType)
+            string combatstring = ESceneType.Combat.ToString();
+            if (false == CurrentSceneData.SceneType.Equals(combatstring))
                 LastMainSceneID = sceneId;
             CurrentSceneID = sceneId;
 

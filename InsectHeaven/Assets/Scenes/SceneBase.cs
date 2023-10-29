@@ -17,4 +17,10 @@ public class SceneBase : MonoBehaviour
     {
 
     }
+    
+    public void ButtonEvent(int EventID)
+    {
+        IH_WidgetManager WidgetMng = (IH_WidgetManager)GameManager.Instance.GetManager(EManagerType.Widget);
+        WidgetMng.ButtonEventCall(EventID);
+    }
 }

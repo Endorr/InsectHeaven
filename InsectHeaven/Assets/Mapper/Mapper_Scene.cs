@@ -44,6 +44,7 @@ public class Mapper_Scene : DefaultMapper
         }
         else if (null == NewDatSet.SceneType)
         {
+            DataString = DataString.Remove(DataString.Length - 1);
             NewDatSet.SceneType = DataString;
         }
     }

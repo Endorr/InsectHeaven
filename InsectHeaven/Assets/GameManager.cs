@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
-        
+
         AwakeManager();
     }
 
@@ -53,11 +53,5 @@ public class GameManager : MonoBehaviour
 
         Debug.Assert(false);
         return _managerList[0];
-    }
-
-    public void ButtonEvent(int EventID)
-    {
-        IH_WidgetManager WidgetMng = (IH_WidgetManager)GetManager(EManagerType.Widget);
-        WidgetMng.ButtonEventCall(EventID);
     }
 }
