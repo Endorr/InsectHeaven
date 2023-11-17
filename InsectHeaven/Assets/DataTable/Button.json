@@ -5,13 +5,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Option",
-   "#Decs": "타이틀 화면에서 게임을 시작한다. 세이브포인트가 있을경우 이어하기 버튼으로 변한다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 2,
@@ -19,13 +13,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Option",
-   "#Decs": "지금까지 해금한 스토리중 원하는 시점에서 시작한다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 3,
@@ -33,13 +21,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Option",
-   "#Decs": "원하는 난이도의 모드를 선택한다.",
-   "#ConditionParameter1": "게임적인 요소를 줄인 루트진행 데이터필요",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 4,
@@ -47,13 +29,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Option",
-   "#Decs": "원하는 난이도의 모드를 선택한다.",
-   "#ConditionParameter1": "게임적인 요소모두 포함한 루트진행 데이터필요.",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 5,
@@ -61,13 +37,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Archive",
-   "#Decs": "지금까지 해금한 일러스트 및 추가 스토리를 열람할 수 있는 상세 창으로 이동한다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 6,
@@ -75,13 +45,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Archive",
-   "#Decs": "아카이브 상세창에서 일러스트를 열람할 수 있는 버튼. 섬네일 형식의 일러스트 목록을 클릭하면 전체화면으로 볼 수 있다. X키를 누르면 아카이브 상세창으로 돌아간다.",
-   "#ConditionParameter1": "게임 일러스트 데이터필요",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 7,
@@ -89,13 +53,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Archive",
-   "#Decs": "아카이브 상세창에서 BGM을 열람할 수 있는 버튼. BGM 목록을 클릭하면 전체화면으로 볼 수 있다. X키를 누르면 아카이브 상세창으로 돌아간다.",
-   "#ConditionParameter1": "게임BGM데이터 필요",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 8,
@@ -103,13 +61,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Archive",
-   "#Decs": "아카이브 상세창에서 특전 일러스트를 열람할 수 있는 버튼. 섬네일 형식의 일러스트 목록을 클릭하면 전체화면으로 볼 수 있다. X키를 누르면 아카이브 상세창으로 돌아간다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 9,
@@ -117,13 +69,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Archive",
-   "#Decs": "목록위의 버튼. 플레이어에게는 보이지 않는다. 지금까지 해금한 특전일러스트와 스크립트 정보를 확인할 수 있는 상세 설명창으로 이동한다.  ws 혹은 방향키로 상하 이동이 가능하다.클릭과 엔터로 선택할 수 있다.",
-   "#ConditionParameter1": "특전 일러스트 및 스크립트 데이터 필요",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 10,
@@ -131,13 +77,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Option",
-   "#Decs": "게임설정 옵션창으로 넘어간다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 11,
@@ -145,13 +85,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Option",
-   "#Decs": "스크립트 텍스트의 폰트 크기를 10~18까지 < > 버튼으로 조절가능하다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 12,
@@ -159,13 +93,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Option",
-   "#Decs": "스크립트 텍스트의 속도를 1~3까지 < > 버튼으로 조절가능하다. 속도 예시 스크립트를 보여준다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 13,
@@ -173,13 +101,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Option",
-   "#Decs": "키보드의 방향키 및 인벤토리 버튼을 자신에게 맞추어 셋팅가능하다. 해당 키가 설정된 부분을 클릭한 뒤 원하는 키보드를 누르면 변경된다. 변경 후 <변경> 버튼과 <초기화>버튼을 눌러 설정한다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 14,
@@ -187,13 +109,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Option",
-   "#Decs": "화면에 적절한 밝기인지 가장 어두운 포함한 이미지를 예시로 분별할 수 있는지 플레이어에게 묻는다. 슬라이더로 조절한다.",
-   "#ConditionParameter1": "보여줄 이미지 데이터 필요",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 15,
@@ -201,13 +117,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Option",
-   "#Decs": "창화면/전체화면을 선택한다.창화면으로 전환할시 창 오른쪽 상단바에 최소화 버튼과 전체화면 버튼, 종료버튼이 표기된다. 왼쪽 상단 바에는 게임 타이틀과 아이콘이 표기된다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 16,
@@ -215,13 +125,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Option",
-   "#Decs": "슬라이더로 배경음의 크기를 조절한다. 현재의 배경음으로 예시를 알수있다.",
-   "#ConditionParameter1": "배경음 음악 데이터필요",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 17,
@@ -229,13 +133,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Option",
-   "#Decs": "슬라이더로 효과음의 크기를 조절한다. 예시 사운드가 들린다.",
-   "#ConditionParameter1": "효과음데이터필요",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 18,
@@ -243,13 +141,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Option",
-   "#Decs": "갑작스럽고 연속적인 색 변화 및 강한 대비의 플래시를 on off 할수 있다. 광과민성 발작을 일으킬 수 있는 특수효과를 최소화 하는 옵션이다. 이 기능을 off 하여도 광과민성 발작을 완전히 방지할 수 없으며 게임 내 연출로 인해 광과민성 발작을 유발할 수도 있는 시각적 이미지가 포함되어있음으로 플레이에 주의를 요합니다. 라는 문구를 함께 표기한다.",
-   "#ConditionParameter1": "광과민성 발작 요소 검수한 데이터 필요",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 19,
@@ -257,13 +149,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Option",
-   "#Decs": "게임을 종료한다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "System",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "System"
  },
  {
    "Key": 20,
@@ -271,13 +157,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Script",
-   "#Decs": "스크립트 정지",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Event,Combat,Explore",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Event,Combat,Explore"
  },
  {
    "Key": 21,
@@ -285,13 +165,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Script",
-   "#Decs": "스크립트 재생",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Event,Combat,Explore",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Event,Combat,Explore"
  },
  {
    "Key": 22,
@@ -299,13 +173,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Script",
-   "#Decs": "스크립트 오토",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Event,Combat,Explore",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Event,Combat,Explore"
  },
  {
    "Key": 23,
@@ -313,13 +181,7 @@
    "ButtonBasePath": "",
    "ButtonType": "MainSystem",
    "ButtonType2": "Script",
-   "#Decs": "지나간 스크립트와 대화를 다시 볼 수 있다. 팝업으로 지나간 스크립트 창이 뜬다. 스크롤할 수 있다.x버튼으로 끌수 있다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Event,Combat,Explore",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Event,Combat,Explore"
  },
  {
    "Key": 24,
@@ -327,13 +189,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Interaction",
-   "#Decs": "팝업창들을 닫는 버튼이다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Explore,Combat",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore,Combat"
  },
  {
    "Key": 25,
@@ -341,13 +197,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Script",
-   "#Decs": "누르고 있으면 스크립트가 빨리 지나간다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Event,Combat,Explore",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Event,Combat,Explore"
  },
  {
    "Key": 26,
@@ -355,13 +205,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Script",
-   "#Decs": "한 장면,이벤트, 씬의 스크립트를 스킵한다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Event,Combat,Explore",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Event,Combat,Explore"
  },
  {
    "Key": 27,
@@ -369,13 +213,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Script",
-   "#Decs": "저장,타이틀,옵션,챕터선택, 버튼이 팝업으로 볼수 있다. 저장하지 않고 타이틀과 챕터선택을 클릭할 경우 저장하지 않고 타이틀로/챕터선택으로 이동하시겠습니까? 문구가 뜬다. x버튼으로 끌수 있다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Explore,Combat",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore,Combat"
  },
  {
    "Key": 28,
@@ -383,13 +221,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Interaction",
-   "#Decs": "페이지수가 많은 스크립트 아이템혹은 단서를 습득하였을때, 아이템의 정보가 많을 경우 페이지를 넘기는 버튼",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Explore,Combat",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore,Combat"
  },
  {
    "Key": 29,
@@ -397,13 +229,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Look",
-   "#Decs": "맵내에 배치된 아이템, 단서들과 상호작용하는 버튼. 플레이어에겐 보이지 않는다.특정아이템을 사용하면 상호작용할 수 있는 부분에서 반짝이는 빛이 난다. 화면내 스크립트와 메뉴, 미니맵, 불투명도를 낮춘 창 영역에서는 상호작용할 수 없다.",
-   "#ConditionParameter1": "단서데이터 필요",
-   "#ConditionParameter2": "맵데이터 필요",
-   "#ConditionParameter3": "스크립트데이터필요",
-   "SceneType": "Explore,Combat",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore,Combat"
  },
  {
    "Key": 30,
@@ -411,13 +237,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Look",
-   "#Decs": "클릭할 경우 불투명도 낮춘 미니맵 팝업형식으로 크기 확장.키보드 z도 동일하다. 작은 원으로 현재 있는 위치를 표시한다.x버튼으로 끌수 있다.",
-   "#ConditionParameter1": "맵 데이터 필요",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Explore",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore"
  },
  {
    "Key": 31,
@@ -425,13 +245,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Inventory",
-   "#Decs": "소지하고 있는 아이템 목록을 볼 수 있는 메뉴.키보드 i로도 열린다. 롤업으로 메뉴 바가 표시된다. 키보드 i와 가방버튼, 가방 메뉴와 가방영역외 화면을 눌러 닫을 수 있다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Explore,Combat",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore,Combat"
  },
  {
    "Key": 32,
@@ -439,13 +253,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Inventory",
-   "#Decs": "가방에서 아이템을 선택하여 상세 설명으로 들어올시 사용여부를 결정한다. 장착할 수 있는 경우 장착이 가능하다.  장착을 선택한 아이템은 사용이 '장작해제'로 변한다.",
-   "#ConditionParameter1": "아이템 데이터 필요",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Explore,Combat",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore,Combat"
  },
  {
    "Key": 33,
@@ -453,13 +261,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Inventory",
-   "#Decs": "가방에서 아이템을 선택하여 상세 설명으로 들어올시 버리기여부를 결정한다.",
-   "#ConditionParameter1": "아이템 데이터 필요",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Explore,Combat",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore,Combat"
  },
  {
    "Key": 34,
@@ -467,13 +269,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Inventory",
-   "#Decs": "인물과 대화, 조사중 습득한 정보를 열람할 수있는 메뉴. 키보드 n으로도 열린다. 롤업으로 메뉴 바가 표시된다. 키보드n과 노트버튼, 노트메뉴와 노트영역외 화면을 눌러 닫을 수 있다. ",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Explore,Combat",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore,Combat"
  },
  {
    "Key": 35,
@@ -481,13 +277,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Inventory",
-   "#Decs": "가방에서 메뉴에 표시된 아이템 목록중 하나를 선택하면 팝업으로 상세 설명창을 볼수 있다. 최대 소지 아이템 갯수는 6개이다.ws 혹은 방향키로 상하 이동이 가능하다.클릭과 엔터로 선택할 수 있다. 키보드i와 가방버튼, 가방메뉴와 가방영역외 화면을 눌러 닫을 수 있다. ",
-   "#ConditionParameter1": "단서 데이터 필요",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Explore,Combat",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore,Combat"
  },
  {
    "Key": 36,
@@ -495,13 +285,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Inventory",
-   "#Decs": "노트에서 메뉴에 표시된 목록위의 버튼. 플레이어에게는 보이지 않는다. 지금까지 목격한 몬스터의 정보를 확인할 수 있는 상세 설명창으로 이동한다.  ws 혹은 방향키로 상하 이동이 가능하다.클릭과 엔터로 선택할 수 있다. 키보드n과 노트버튼, 노트메뉴와 노트영역외 화면을 눌러 닫을 수 있다. 스토리 모드를 선택했을 경우 노트 상세 설명창으로 들어오면 시간이 멈춘다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Event,Combat,Explore",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Event,Combat,Explore"
  },
  {
    "Key": 37,
@@ -509,13 +293,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Inventory",
-   "#Decs": "노트에서 메뉴에 표시된 목록위의 버튼. 플레이어에게는 보이지 않는다. 지금까지 조우한 캐릭터의 정보를 확인할 수 있는 상세 설명창으로 이동한다. ws 혹은 방향키로 상하 이동이 가능하다.클릭과 엔터로 선택할 수 있다. 키보드n과 노트버튼, 노트메뉴와 노트영역외 화면을 눌러 닫을 수 있다. 스토리 모드를 선택했을 경우 노트 상세 설명창으로 들어오면 시간이 멈춘다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Event,Combat,Explore",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Event,Combat,Explore"
  },
  {
    "Key": 38,
@@ -523,13 +301,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Inventory",
-   "#Decs": "노트에서 메뉴에 표시된 아이템 목록위의 버튼. 플레이어에게는 보이지 않는다. 선택하면  캐릭터의 설정 혹은 몬스터의 설정과 관련하여 습득한 단서및 아이템의 상세 설명창으로 이동한다.ws 혹은 방향키로 상하 이동이 가능하다.클릭과 엔터로 선택할 수 있다. 키보드n과 노트버튼, 노트메뉴와 노트영역외 화면을 눌러 닫을 수 있다. ",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Event,Combat,Explore",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Event,Combat,Explore"
  },
  {
    "Key": 39,
@@ -537,13 +309,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Inventory",
-   "#Decs": "노트에서 메뉴에 표시된 아이템 목록위의 버튼. 플레이어에게는 보이지 않는다. 선택하면 기억상세 설명창으로 이동한다.",
-   "#ConditionParameter1": "",
-   "#ConditionParameter2": "",
-   "#ConditionParameter3": "",
-   "SceneType": "Event,Combat,Explore",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Event,Combat,Explore"
  },
  {
    "Key": 40,
@@ -551,13 +317,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Inventory",
-   "#Decs": "노트 상세설명 창에서 목록에 표시된 캐릭터 이름들 위의 버튼. 플레이어에게는 보이지 않는다.목록중 하나를 선택하면 선택한 유충의 상세프로필을 볼수 있다.해당 정보창에 들어오면 인 게임 내 시간이 멈춘다",
-   "#ConditionParameter1": "몬스터 데이터 필요",
-   "#ConditionParameter2": "스크립트데이터필요",
-   "#ConditionParameter3": "",
-   "SceneType": "Event,Combat,Explore",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Event,Combat,Explore"
  },
  {
    "Key": 41,
@@ -565,13 +325,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Inventory",
-   "#Decs": "노트 상세설명 창에서 목록에 표시된 캐릭터 이름들 위의 버튼. 플레이어에게는 보이지 않는다.목록중 하나를 선택하면 선택한 캐릭터의 상세프로필을 볼수 있다.해당 정보창에 들어오면 인 게임 내 시간이 멈춘다",
-   "#ConditionParameter1": "캐릭터 데이터 필요",
-   "#ConditionParameter2": "스크립트데이터필요",
-   "#ConditionParameter3": "",
-   "SceneType": "Event,Combat,Explore",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Event,Combat,Explore"
  },
  {
    "Key": 42,
@@ -579,13 +333,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Inventory",
-   "#Decs": "노트 상세설명 창에서 목록에 표시된 캐릭터 이름들 위의 버튼. 플레이어에게는 보이지 않는다.목록중 하나를 선택하면 선택한 단서의 상세프로필을 볼수 있다.해당 정보창에 들어오면 인 게임 내 시간이 멈춘다",
-   "#ConditionParameter1": "단서 데이터 필요",
-   "#ConditionParameter2": "스크립트데이터필요",
-   "#ConditionParameter3": "",
-   "SceneType": "Event,Combat,Explore",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Event,Combat,Explore"
  },
  {
    "Key": 43,
@@ -593,13 +341,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Inventory",
-   "#Decs": "가방-아이템 상세설명창에 뜨는 이미지.마우스 클릭으로 3D형태의 아이템을 360도로 돌려 단서를 추가로 확인할 수 있다.해당 정보창에 들어오면 인 게임 내 시간이 멈춘다",
-   "#ConditionParameter1": "아이템 데이터필요",
-   "#ConditionParameter2": "스크립트데이터필요",
-   "#ConditionParameter3": "",
-   "SceneType": "Explore,Combat",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore,Combat"
  },
  {
    "Key": 44,
@@ -607,13 +349,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Inventory",
-   "#Decs": "노트 상세설명 창에서 목록에 표시된 기억들 위의 버튼. 플레이어에게는 보이지 않는다.목록중 하나를 선택하면 선택한 기억의 상세설명을 볼수 있다. 해당 정보창에 들어오면 인 게임 내 시간이 멈춘다",
-   "#ConditionParameter1": "기억데이터 필요",
-   "#ConditionParameter2": "스크립트데이터필요",
-   "#ConditionParameter3": "",
-   "SceneType": "Explore,Combat",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore,Combat"
  },
  {
    "Key": 45,
@@ -621,13 +357,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Inventory",
-   "#Decs": " 노트-습득한 단서의 상세설명창에 뜨는 이미지.마우스 클릭으로 3D형태의 아이템을 360도로 돌려 단서를 추가로 확인할 수 있다. 해당 정보창에 들어오면 인 게임 내 시간이 멈춘다",
-   "#ConditionParameter1": "단서 데이터 필요",
-   "#ConditionParameter2": "스크립트데이터필요",
-   "#ConditionParameter3": "",
-   "SceneType": "Explore,Combat",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore,Combat"
  },
  {
    "Key": 46,
@@ -635,13 +365,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Projection",
-   "#Decs": "캐릭터 혹은 유충 등장시 대화 및 조우를 통해 특정 조건을 만족하면 클릭할 수 있는 느낌표 ! 스크립트가 말풍선 안에 등장한다. 클릭시 다이얼로그 신으로 넘어가게된다.",
-   "#ConditionParameter1": "스트립트 데이터 필요",
-   "#ConditionParameter2": "분기 데이터 필요",
-   "#ConditionParameter3": "",
-   "SceneType": "Explore,Combat",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore,Combat"
  },
  {
    "Key": 47,
@@ -649,13 +373,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Confrontation",
-   "#Decs": "캐릭터 혹은 유충 등장시 대화 및 조우를 통해 특정 조건을 만족하면 클릭할 수 있는 느낌표 ! 스크립트가 말풍선 안에 등장한다. 클릭시  전투신으로 넘어가게된다.",
-   "#ConditionParameter1": "스트립트 데이터 필요",
-   "#ConditionParameter2": "분기 데이터 필요",
-   "#ConditionParameter3": "",
-   "SceneType": "Explore",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore"
  },
  {
    "Key": 48,
@@ -663,13 +381,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Projection",
-   "#Decs": " 클릭할 수 있는 스크립트가 말풍선 안에 등장한다. 맞는 말풍선을 고르면 캐릭터또는 유충의 설정 단서를 얻거나 타격을 입힐 수 있다. 틀린 말풍선을 고를 경우 플레이어에게 타격이 간다.",
-   "#ConditionParameter1": "스트립트 데이터 필요",
-   "#ConditionParameter2": "몬스터 데이터 필요",
-   "#ConditionParameter3": "캐릭터데이터 필요",
-   "SceneType": "Explore,Combat",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore,Combat"
  },
  {
    "Key": 49,
@@ -677,13 +389,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Selection",
-   "#Decs": "아이템, 단서, 캐릭터 설정 등 투영및 전투에서 필요한 요소를 얻는 분기점. 엔딩이나 진행 루트, 캐릭터의 반응이 달라지게 하는 분기점이다.",
-   "#ConditionParameter1": "선택지 데이터 필요",
-   "#ConditionParameter2": "스크립트 데이터 필요",
-   "#ConditionParameter3": "",
-   "SceneType": "Explore,Combat",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore,Combat"
  },
  {
    "Key": 50,
@@ -691,13 +397,7 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Confrontation",
-   "#Decs": "몬스터나 캐릭터를 클릭하여 직접 물리적인 타격을 입히는 버튼. 투영의 말풍선 선택외로도 타격을 입혀 클리어 할수 있다.",
-   "#ConditionParameter1": "캐릭터데이터 필요",
-   "#ConditionParameter2": "몬스터 데이터 필요",
-   "#ConditionParameter3": "레벨디자인 데이터필요",
-   "SceneType": "Explore,Combat",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore,Combat"
  },
  {
    "Key": 51,
@@ -705,12 +405,6 @@
    "ButtonBasePath": "",
    "ButtonType": "IngameSystem",
    "ButtonType2": "Projection",
-   "#Decs": "전투중이 아닌 때 캐릭터와 상호작용할 수 있는 버튼. 부위별로 캐릭터마다 대사와 반응이 다르다.",
-   "#ConditionParameter1": "캐릭터 데이터 필요",
-   "#ConditionParameter2": "스크립트 데이터 필요",
-   "#ConditionParameter3": "",
-   "SceneType": "Explore",
-   "SceneType2": "",
-   "SceneType3": ""
+   "SceneType": "Explore"
  }
 ]

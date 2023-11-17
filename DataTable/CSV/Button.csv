@@ -1,52 +1,52 @@
-Key,ButtonName,ButtonBasePath,Button Type,Button Type2,Decs,ConditionParameter1,ConditionParameter2,ConditionParameter3,SceneType,SceneType2,SceneType3
-1,시작,,MainSystem,Option,타이틀 화면에서 게임을 시작한다. 세이브포인트가 있을경우 이어하기 버튼으로 변한다.,,,,System,,
-2,챕터선택,,MainSystem,Option,지금까지 해금한 스토리중 원하는 시점에서 시작한다.,,,,System,,
-3,스토리난이도,,MainSystem,Option,원하는 난이도의 모드를 선택한다.,게임적인 요소를 줄인 루트진행 데이터필요,,,System,,
-4,노말난이도,,MainSystem,Option,원하는 난이도의 모드를 선택한다.,게임적인 요소모두 포함한 루트진행 데이터필요.,,,System,,
-5,아카이브,,MainSystem,Archive,지금까지 해금한 일러스트 및 추가 스토리를 열람할 수 있는 상세 창으로 이동한다.,,,,,,
-6,일러스트,,MainSystem,Archive,아카이브 상세창에서 일러스트를 열람할 수 있는 버튼. 섬네일 형식의 일러스트 목록을 클릭하면 전체화면으로 볼 수 있다. X키를 누르면 아카이브 상세창으로 돌아간다.,게임 일러스트 데이터필요,,,,,
-7,BGM,,MainSystem,Archive,아카이브 상세창에서 BGM을 열람할 수 있는 버튼. BGM 목록을 클릭하면 전체화면으로 볼 수 있다. X키를 누르면 아카이브 상세창으로 돌아간다.,게임BGM데이터 필요,,,,,
-8,특전,,MainSystem,Archive,아카이브 상세창에서 특전 일러스트를 열람할 수 있는 버튼. 섬네일 형식의 일러스트 목록을 클릭하면 전체화면으로 볼 수 있다. X키를 누르면 아카이브 상세창으로 돌아간다.,,,,,,
-9,특전목록,,MainSystem,Archive,목록위의 버튼. 플레이어에게는 보이지 않는다. 지금까지 해금한 특전일러스트와 스크립트 정보를 확인할 수 있는 상세 설명창으로 이동한다.  ws 혹은 방향키로 상하 이동이 가능하다.클릭과 엔터로 선택할 수 있다.,특전 일러스트 및 스크립트 데이터 필요,,,,,
-10,설정,,MainSystem,Option,게임설정 옵션창으로 넘어간다.,,,,System,,
-11,텍스트 크기,,MainSystem,Option,스크립트 텍스트의 폰트 크기를 10~18까지 < > 버튼으로 조절가능하다.,,,,System,,
-12,텍스트 속도,,MainSystem,Option,스크립트 텍스트의 속도를 1~3까지 < > 버튼으로 조절가능하다. 속도 예시 스크립트를 보여준다.,,,,System,,
-13,플레이 키 전환,,MainSystem,Option,키보드의 방향키 및 인벤토리 버튼을 자신에게 맞추어 셋팅가능하다. 해당 키가 설정된 부분을 클릭한 뒤 원하는 키보드를 누르면 변경된다. 변경 후 <변경> 버튼과 <초기화>버튼을 눌러 설정한다.,,,,System,,
-14,화면 밝기,,MainSystem,Option,화면에 적절한 밝기인지 가장 어두운 포함한 이미지를 예시로 분별할 수 있는지 플레이어에게 묻는다. 슬라이더로 조절한다.,보여줄 이미지 데이터 필요,,,System,,
-15,창/전체화면,,MainSystem,Option,"창화면/전체화면을 선택한다.창화면으로 전환할시 창 오른쪽 상단바에 최소화 버튼과 전체화면 버튼, 종료버튼이 표기된다. 왼쪽 상단 바에는 게임 타이틀과 아이콘이 표기된다.",,,,System,,
-16,배경음크기,,MainSystem,Option,슬라이더로 배경음의 크기를 조절한다. 현재의 배경음으로 예시를 알수있다.,배경음 음악 데이터필요,,,System,,
-17,효과음크기,,MainSystem,Option,슬라이더로 효과음의 크기를 조절한다. 예시 사운드가 들린다.,효과음데이터필요,,,System,,
-18,특수효과on/off,,MainSystem,Option,갑작스럽고 연속적인 색 변화 및 강한 대비의 플래시를 on off 할수 있다. 광과민성 발작을 일으킬 수 있는 특수효과를 최소화 하는 옵션이다. 이 기능을 off 하여도 광과민성 발작을 완전히 방지할 수 없으며 게임 내 연출로 인해 광과민성 발작을 유발할 수도 있는 시각적 이미지가 포함되어있음으로 플레이에 주의를 요합니다. 라는 문구를 함께 표기한다.,광과민성 발작 요소 검수한 데이터 필요,,,System,,
-19,종료,,MainSystem,Option,게임을 종료한다.,,,,System,,
-20,정지,,MainSystem,Script,스크립트 정지,,,,이벤트 Event 씬타입이 따로 필요할 것 같습니다.,Combat,Explore
-21,재생,,MainSystem,Script,스크립트 재생,,,,Event,Combat,Explore
-22,오토,,MainSystem,Script,스크립트 오토,,,,Event,Combat,Explore
-23,롤백,,MainSystem,Script,지나간 스크립트와 대화를 다시 볼 수 있다. 팝업으로 지나간 스크립트 창이 뜬다. 스크롤할 수 있다.x버튼으로 끌수 있다.,,,,Event,Combat,Explore
-24,x,,IngameSystem,Interaction,팝업창들을 닫는 버튼이다.,,,,Explore,Combat,
-25,빨리감기,,IngameSystem,Script,누르고 있으면 스크립트가 빨리 지나간다.,,,,Event,Combat,Explore
-26,스킵,,IngameSystem,Script,"한 장면,이벤트, 씬의 스크립트를 스킵한다.",,,,Event,Combat,Explore
-27,메뉴,,IngameSystem,Script,"저장,타이틀,옵션,챕터선택, 버튼이 팝업으로 볼수 있다. 저장하지 않고 타이틀과 챕터선택을 클릭할 경우 저장하지 않고 타이틀로/챕터선택으로 이동하시겠습니까? 문구가 뜬다. x버튼으로 끌수 있다.",,,,Explore,Combat,
-28,삼각형2▶,,IngameSystem,Interaction,"페이지수가 많은 스크립트 아이템혹은 단서를 습득하였을때, 아이템의 정보가 많을 경우 페이지를 넘기는 버튼",,,,Explore,Combat,
-29,조사,,IngameSystem,Look,"맵내에 배치된 아이템, 단서들과 상호작용하는 버튼. 플레이어에겐 보이지 않는다.특정아이템을 사용하면 상호작용할 수 있는 부분에서 반짝이는 빛이 난다. 화면내 스크립트와 메뉴, 미니맵, 불투명도를 낮춘 창 영역에서는 상호작용할 수 없다.",단서데이터 필요,맵데이터 필요,스크립트데이터필요,Explore,Combat,
-30,미니맵,,IngameSystem,Look,클릭할 경우 불투명도 낮춘 미니맵 팝업형식으로 크기 확장.키보드 z도 동일하다. 작은 원으로 현재 있는 위치를 표시한다.x버튼으로 끌수 있다.,맵 데이터 필요,,,Explore,,
-31,가방,,IngameSystem,Inventory,"소지하고 있는 아이템 목록을 볼 수 있는 메뉴.키보드 i로도 열린다. 롤업으로 메뉴 바가 표시된다. 키보드 i와 가방버튼, 가방 메뉴와 가방영역외 화면을 눌러 닫을 수 있다.",,,,Explore,Combat,
-32,사용,,IngameSystem,Inventory,가방에서 아이템을 선택하여 상세 설명으로 들어올시 사용여부를 결정한다. 장착할 수 있는 경우 장착이 가능하다.  장착을 선택한 아이템은 사용이 '장작해제'로 변한다.,아이템 데이터 필요,,,Explore,Combat,
-33,버리기,,IngameSystem,Inventory,가방에서 아이템을 선택하여 상세 설명으로 들어올시 버리기여부를 결정한다.,아이템 데이터 필요,,,Explore,Combat,
-34,노트,,IngameSystem,Inventory,"인물과 대화, 조사중 습득한 정보를 열람할 수있는 메뉴. 키보드 n으로도 열린다. 롤업으로 메뉴 바가 표시된다. 키보드n과 노트버튼, 노트메뉴와 노트영역외 화면을 눌러 닫을 수 있다. ",,,,Explore,Combat,
-35,아이템 목록,,IngameSystem,Inventory,"가방에서 메뉴에 표시된 아이템 목록중 하나를 선택하면 팝업으로 상세 설명창을 볼수 있다. 최대 소지 아이템 갯수는 6개이다.ws 혹은 방향키로 상하 이동이 가능하다.클릭과 엔터로 선택할 수 있다. 키보드i와 가방버튼, 가방메뉴와 가방영역외 화면을 눌러 닫을 수 있다. ",단서 데이터 필요,,,Explore,Combat,
-36,유충도감,,IngameSystem,Inventory,"노트에서 메뉴에 표시된 목록위의 버튼. 플레이어에게는 보이지 않는다. 지금까지 목격한 몬스터의 정보를 확인할 수 있는 상세 설명창으로 이동한다.  ws 혹은 방향키로 상하 이동이 가능하다.클릭과 엔터로 선택할 수 있다. 키보드n과 노트버튼, 노트메뉴와 노트영역외 화면을 눌러 닫을 수 있다. 스토리 모드를 선택했을 경우 노트 상세 설명창으로 들어오면 시간이 멈춘다.",,,,Information정보 씬 타입이 따로 필요할 것 같습니다.,,
-37,캐릭터,,IngameSystem,Inventory,"노트에서 메뉴에 표시된 목록위의 버튼. 플레이어에게는 보이지 않는다. 지금까지 조우한 캐릭터의 정보를 확인할 수 있는 상세 설명창으로 이동한다. ws 혹은 방향키로 상하 이동이 가능하다.클릭과 엔터로 선택할 수 있다. 키보드n과 노트버튼, 노트메뉴와 노트영역외 화면을 눌러 닫을 수 있다. 스토리 모드를 선택했을 경우 노트 상세 설명창으로 들어오면 시간이 멈춘다.",,,,Information,,
-38,습득한 단서,,IngameSystem,Inventory,"노트에서 메뉴에 표시된 아이템 목록위의 버튼. 플레이어에게는 보이지 않는다. 선택하면  캐릭터의 설정 혹은 몬스터의 설정과 관련하여 습득한 단서및 아이템의 상세 설명창으로 이동한다.ws 혹은 방향키로 상하 이동이 가능하다.클릭과 엔터로 선택할 수 있다. 키보드n과 노트버튼, 노트메뉴와 노트영역외 화면을 눌러 닫을 수 있다. ",,,,Information,,
-39,나의 기억,,IngameSystem,Inventory,노트에서 메뉴에 표시된 아이템 목록위의 버튼. 플레이어에게는 보이지 않는다. 선택하면 기억상세 설명창으로 이동한다.,,,,Information,,
-40,유충 목록,,IngameSystem,Inventory,노트 상세설명 창에서 목록에 표시된 캐릭터 이름들 위의 버튼. 플레이어에게는 보이지 않는다.목록중 하나를 선택하면 선택한 유충의 상세프로필을 볼수 있다.해당 정보창에 들어오면 인 게임 내 시간이 멈춘다,몬스터 데이터 필요,스크립트데이터필요,,Information,,
-41,캐릭터 목록,,IngameSystem,Inventory,노트 상세설명 창에서 목록에 표시된 캐릭터 이름들 위의 버튼. 플레이어에게는 보이지 않는다.목록중 하나를 선택하면 선택한 캐릭터의 상세프로필을 볼수 있다.해당 정보창에 들어오면 인 게임 내 시간이 멈춘다,캐릭터 데이터 필요,스크립트데이터필요,,Information,,
-42,습득한 단서 목록,,IngameSystem,Inventory,노트 상세설명 창에서 목록에 표시된 캐릭터 이름들 위의 버튼. 플레이어에게는 보이지 않는다.목록중 하나를 선택하면 선택한 단서의 상세프로필을 볼수 있다.해당 정보창에 들어오면 인 게임 내 시간이 멈춘다,단서 데이터 필요,스크립트데이터필요,,Information,,
-43,아이템,,IngameSystem,Inventory,가방-아이템 상세설명창에 뜨는 이미지.마우스 클릭으로 3D형태의 아이템을 360도로 돌려 단서를 추가로 확인할 수 있다.해당 정보창에 들어오면 인 게임 내 시간이 멈춘다,아이템 데이터필요,스크립트데이터필요,,Explore,Combat,
-44,나의 기억 목록,,IngameSystem,Inventory,노트 상세설명 창에서 목록에 표시된 기억들 위의 버튼. 플레이어에게는 보이지 않는다.목록중 하나를 선택하면 선택한 기억의 상세설명을 볼수 있다. 해당 정보창에 들어오면 인 게임 내 시간이 멈춘다,기억데이터 필요,스크립트데이터필요,,Information,,
-45,단서목록,,IngameSystem,Inventory, 노트-습득한 단서의 상세설명창에 뜨는 이미지.마우스 클릭으로 3D형태의 아이템을 360도로 돌려 단서를 추가로 확인할 수 있다. 해당 정보창에 들어오면 인 게임 내 시간이 멈춘다,단서 데이터 필요,스크립트데이터필요,,Information,,
-46,대화 말풍선,,IngameSystem,Projection,캐릭터 혹은 유충 등장시 대화 및 조우를 통해 특정 조건을 만족하면 클릭할 수 있는 느낌표 ! 스크립트가 말풍선 안에 등장한다. 클릭시 다이얼로그 신으로 넘어가게된다.,스트립트 데이터 필요,분기 데이터 필요,,Combat,Explore,
-47,전투말풍선,,IngameSystem,Confrontation,캐릭터 혹은 유충 등장시 대화 및 조우를 통해 특정 조건을 만족하면 클릭할 수 있는 느낌표 ! 스크립트가 말풍선 안에 등장한다. 클릭시  전투신으로 넘어가게된다.,스트립트 데이터 필요,분기 데이터 필요,,,,
-48,투영말풍선,,IngameSystem,Projection, 클릭할 수 있는 스크립트가 말풍선 안에 등장한다. 맞는 말풍선을 고르면 캐릭터또는 유충의 설정 단서를 얻거나 타격을 입힐 수 있다. 틀린 말풍선을 고를 경우 플레이어에게 타격이 간다.,스트립트 데이터 필요,몬스터 데이터 필요,캐릭터데이터 필요,다이얼로그 신이 따로 필요할 것 같습니다.,Combat,Explore
-49,선택,,IngameSystem,Selection,"아이템, 단서, 캐릭터 설정 등 투영및 전투에서 필요한 요소를 얻는 분기점. 엔딩이나 진행 루트, 캐릭터의 반응이 달라지게 하는 분기점이다.",선택지 데이터 필요,스크립트 데이터 필요,,다이얼로그 신이 따로 필요할 것 같습니다.,Combat,Explore
-50,공격,,IngameSystem,Confrontation,몬스터나 캐릭터를 클릭하여 직접 물리적인 타격을 입히는 버튼. 투영의 말풍선 선택외로도 타격을 입혀 클리어 할수 있다.,캐릭터데이터 필요,몬스터 데이터 필요,레벨디자인 데이터필요,,Combat,Explore
-51,만지기,,IngameSystem,Projection,전투중이 아닌 때 캐릭터와 상호작용할 수 있는 버튼. 부위별로 캐릭터마다 대사와 반응이 다르다.,캐릭터 데이터 필요,스크립트 데이터 필요,,,,
+Key,ButtonName,ButtonBasePath,ButtonType,ButtonType2,SceneType
+1,시작,,MainSystem,Option,System
+2,챕터선택,,MainSystem,Option,System
+3,스토리난이도,,MainSystem,Option,System
+4,노말난이도,,MainSystem,Option,System
+5,아카이브,,MainSystem,Archive,System
+6,일러스트,,MainSystem,Archive,System
+7,BGM,,MainSystem,Archive,System
+8,특전,,MainSystem,Archive,System
+9,특전목록,,MainSystem,Archive,System
+10,설정,,MainSystem,Option,System
+11,텍스트 크기,,MainSystem,Option,System
+12,텍스트 속도,,MainSystem,Option,System
+13,플레이 키 전환,,MainSystem,Option,System
+14,화면 밝기,,MainSystem,Option,System
+15,창/전체화면,,MainSystem,Option,System
+16,배경음크기,,MainSystem,Option,System
+17,효과음크기,,MainSystem,Option,System
+18,특수효과on/off,,MainSystem,Option,System
+19,종료,,MainSystem,Option,System
+20,정지,,MainSystem,Script,"Event,Combat,Explore"
+21,재생,,MainSystem,Script,"Event,Combat,Explore"
+22,오토,,MainSystem,Script,"Event,Combat,Explore"
+23,롤백,,MainSystem,Script,"Event,Combat,Explore"
+24,x,,IngameSystem,Interaction,"Explore,Combat"
+25,빨리감기,,IngameSystem,Script,"Event,Combat,Explore"
+26,스킵,,IngameSystem,Script,"Event,Combat,Explore"
+27,메뉴,,IngameSystem,Script,"Explore,Combat"
+28,삼각형2,,IngameSystem,Interaction,"Explore,Combat"
+29,조사,,IngameSystem,Look,"Explore,Combat"
+30,미니맵,,IngameSystem,Look,Explore
+31,가방,,IngameSystem,Inventory,"Explore,Combat"
+32,사용,,IngameSystem,Inventory,"Explore,Combat"
+33,버리기,,IngameSystem,Inventory,"Explore,Combat"
+34,노트,,IngameSystem,Inventory,"Explore,Combat"
+35,아이템 목록,,IngameSystem,Inventory,"Explore,Combat"
+36,유충도감,,IngameSystem,Inventory,"Event,Combat,Explore"
+37,캐릭터,,IngameSystem,Inventory,"Event,Combat,Explore"
+38,습득한 단서,,IngameSystem,Inventory,"Event,Combat,Explore"
+39,나의 기억,,IngameSystem,Inventory,"Event,Combat,Explore"
+40,유충 목록,,IngameSystem,Inventory,"Event,Combat,Explore"
+41,캐릭터 목록,,IngameSystem,Inventory,"Event,Combat,Explore"
+42,습득한 단서 목록,,IngameSystem,Inventory,"Event,Combat,Explore"
+43,아이템,,IngameSystem,Inventory,"Explore,Combat"
+44,나의 기억 목록,,IngameSystem,Inventory,"Explore,Combat"
+45,단서목록,,IngameSystem,Inventory,"Explore,Combat"
+46,대화 말풍선,,IngameSystem,Projection,"Explore,Combat"
+47,전투말풍선,,IngameSystem,Confrontation,Explore
+48,투영말풍선,,IngameSystem,Projection,"Explore,Combat"
+49,선택,,IngameSystem,Selection,"Explore,Combat"
+50,공격,,IngameSystem,Confrontation,"Explore,Combat"
+51,만지기,,IngameSystem,Projection,Explore

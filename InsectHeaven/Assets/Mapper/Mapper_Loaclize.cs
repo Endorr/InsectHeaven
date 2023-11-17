@@ -36,7 +36,7 @@ public class Mapper_Loaclize : DefaultMapper
         NewDataSet.Eng = null;
     }
 
-    protected override void FillData(string DataString)
+    protected override void FillData(string DataString, bool _IsArrayData)
     {
         if (null == NewDataSet.Kr)
         {

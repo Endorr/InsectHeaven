@@ -26,8 +26,7 @@ public abstract class DefaultMapper
         string json = Encoding.UTF8.GetString(data);
         
         json = Regex.Replace(json, "\\r\\n", "");
-        json = Regex.Replace(json, "\"", "");
-        
+
         bool DataSetReadStart = false;
         bool IsDataSection = false;
         bool DataReadStart = false;
@@ -42,42 +41,68 @@ public abstract class DefaultMapper
             }
             else if ('}' == text && true == DataSetReadStart)
             {
-                if (true == IsDataSection)
-                {
-                    IsDataSection = false;
-
-                    FillData(DataString);
-                    DataString = null;
-                }
-                
                 AddToDictionary(ref dictionary, key, NewDataSet);
                 
                 DataSetReadStart = false;
                 
                 key = 0;
             }
-            else if (':' == text)
+            else if (':' == text) 
             {
                 IsDataSection = true;
             }
-            else if (',' == text && true == IsDataSection)
+            else if ('"' == text)
             {
-                IsDataSection = false;
-
-                if (0 == key)
+                if (true == IsDataSection)
                 {
-                    key = Int32.Parse(DataString);
+                    if (false == DataReadStart)
+                    {
+                        DataReadStart = true;
+                        DataString = null;
+                    }
+                    else
+                    {
+                        DataReadStart = false;
+                        IsDataSection = false;
+                    
+                        FillData(DataString);
+                        DataString = null;
+                    }
                 }
-                else
+            }
+            else if (',' == text)
+            {
+                if (true == DataReadStart)
                 {
-                    FillData(DataString);
-                }
+                    if (0 == key)
+                    {
+                        key = Int32.Parse(DataString);
+                    }
+                    else
+                    {
+                        FillData(DataString, true);
+                    }
 
-                DataString = null;
+                    DataString = null;
+                }
+                else if (true == IsDataSection)
+                {
+                    if (0 == key)
+                    {
+                        key = Int32.Parse(DataString);
+                    }
+                    else
+                    {
+                        FillData(DataString);
+                    }
+                    
+                    IsDataSection = false;
+                    DataString = null;
+                }
             }
             else if (true == IsDataSection)
             {
-                if (null == DataString && ' ' == text)
+                if (' ' == text)
                     continue;
                 
                 DataString += text;
@@ -98,5 +123,5 @@ public abstract class DefaultMapper
 
     protected abstract void ResetData();
 
-    protected abstract void FillData(string DataString);
+    protected abstract void FillData(string DataString, bool _IsArrayData = false);
 }

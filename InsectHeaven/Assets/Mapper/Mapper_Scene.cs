@@ -32,7 +32,7 @@ public class Mapper_Scene : DefaultMapper
         NewDatSet.SceneType = null;
     }
 
-    protected override void FillData(string DataString)
+    protected override void FillData(string DataString, bool _IsArrayData)
     {
         if (Index_None == NewDatSet.SceneName)
         {
