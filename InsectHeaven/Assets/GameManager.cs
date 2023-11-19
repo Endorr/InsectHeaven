@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EManagerType { Table, Scene, Widget };
+public enum EManagerType { Table, Scene, Widget, Input };
 
 public class GameManager : MonoBehaviour
 {
@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         _managerList.Add(EManagerType.Table ,new TableManager());
         _managerList.Add(EManagerType.Scene, new IH_SceneManager());
         _managerList.Add(EManagerType.Widget, new IH_WidgetManager());
+        _managerList.Add(EManagerType.Input, new InputManager());
        
         //Initialize Manager
         foreach (var manager in _managerList)
