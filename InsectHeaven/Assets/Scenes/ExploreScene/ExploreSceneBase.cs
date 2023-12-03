@@ -21,23 +21,32 @@ public class ExploreSceneBase : SceneBase
         InputMng.MoveRight -= MoveRight;
     }
 
-    void MoveForward(Vector3 _Direction)
+    void MoveForward(float _MoveSensitivity)
     {
-        Camera.main.transform.Translate(Camera.main.transform.forward * Time.deltaTime);
+        Vector3 MoveVector = Vector3.forward * _MoveSensitivity;
+        MoveVector.y = 0.0f;
+        Camera.main.transform.Translate(MoveVector * Time.deltaTime);
+
     }
     
-    void MoveBackward(Vector3 _Direction)
+    void MoveBackward(float _MoveSensitivity)
     {
-        Camera.main.transform.Translate(Camera.main.transform.forward * Time.deltaTime * -1.0f);
+        Vector3 MoveVector = Vector3.back * _MoveSensitivity;
+        MoveVector.y = 0.0f;
+        Camera.main.transform.Translate(MoveVector * Time.deltaTime);
     }
     
-    void MoveLeft(Vector3 _Direction)
+    void MoveLeft(float _MoveSensitivity)
     {
-        Camera.main.transform.Translate(Camera.main.transform.right * Time.deltaTime * -1.0f);
+        Vector3 MoveVector = Vector3.left * _MoveSensitivity;
+        MoveVector.y = 0.0f;
+        Camera.main.transform.Translate(MoveVector * Time.deltaTime);
     }
     
-    void MoveRight(Vector3 _Direction)
+    void MoveRight(float _MoveSensitivity)
     {
-        Camera.main.transform.Translate(Camera.main.transform.right * Time.deltaTime);
+        Vector3 MoveVector = Vector3.right * _MoveSensitivity;
+        MoveVector.y = 0.0f;
+        Camera.main.transform.Translate(MoveVector * Time.deltaTime);
     }
 }

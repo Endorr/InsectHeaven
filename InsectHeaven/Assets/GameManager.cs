@@ -10,6 +10,12 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     private Dictionary<EManagerType, ManagerBase> _managerList;
     
+    [Header("Sensitivity")]
+    public float RotateSensitivity = 1.0f;
+    
+    [Header("Sensitivity")]
+    public float MoveSensitivity = 1.0f;
+    
     void Awake()
     {
         Instance = this;
@@ -54,5 +60,11 @@ public class GameManager : MonoBehaviour
 
         Debug.Assert(false);
         return _managerList[0];
+    }
+
+    public void GetSensitivity(ref float _Rotate, ref float _move)
+    {
+        _Rotate = RotateSensitivity;
+        _move = MoveSensitivity;
     }
 }
