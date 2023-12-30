@@ -17,7 +17,9 @@ public enum InputAction
 public class InputManager : ManagerBase
 {
     public delegate void InputMove(float _Sensitivity);
-    
+
+    public delegate void InputMoveMultiDirection(float _Sensitivity);
+
     public delegate void Crunching(float _Speed, float _ObjectHeight);
     public delegate void InputKey();
     
@@ -27,6 +29,8 @@ public class InputManager : ManagerBase
     public InputMove MoveBackward;
     public InputMove MoveLeft;
     public InputMove MoveRight;
+    public InputMoveMultiDirection MoveFowardLeft;
+    public InputMoveMultiDirection MoveFowardRight;
     public Crunching CrunchIn;
     public Crunching CrunchOut;
     public InputKey Interaction;
@@ -87,7 +91,7 @@ public class InputManager : ManagerBase
         GameKeyMap.Add(InputAction.Right, KeyCode.D);
         GameKeyMap.Add(InputAction.InterAction, KeyCode.E);
         GameKeyMap.Add(InputAction.Run, KeyCode.LeftShift);
-        GameKeyMap.Add(InputAction.Crunch, KeyCode.C);
+        GameKeyMap.Add(InputAction.Crunch, KeyCode.LeftControl);
 
         MoveSpeed = GameManager.Instance.MoveSensitivity;
         RotateSensitivity = GameManager.Instance.RotateSensitivity;
@@ -168,7 +172,20 @@ public class InputManager : ManagerBase
 
             if (Input.GetKey(GameKeyMap[InputAction.Forward]) && null != MoveForward)
             {
-                MoveForward(MoveSpeed * ((IsRunning) ? GameManager.Instance.RunningMultiplier : 1.0f));
+                if (Input.GetKey(GameKeyMap[InputAction.Left]) && null != MoveFowardLeft)
+                {
+                    MoveSpeed *= 0.75f;
+                    MoveFowardLeft(MoveSpeed * ((IsRunning) ? GameManager.Instance.RunningMultiplier : 1.0f));
+                }
+                else if (Input.GetKey(GameKeyMap[InputAction.Right]) && null != MoveFowardRight)
+                {
+                    MoveSpeed *= 0.75f;
+                    MoveFowardRight(MoveSpeed * ((IsRunning) ? GameManager.Instance.RunningMultiplier : 1.0f));
+                }
+                else
+                {
+                    MoveForward(MoveSpeed * ((IsRunning) ? GameManager.Instance.RunningMultiplier : 1.0f));
+                }
             }
             else if (Input.GetKey(GameKeyMap[InputAction.Backward]) && null != MoveBackward)
             {

@@ -17,6 +17,8 @@ public class ExploreSceneBase : SceneBase
         InputMng.MoveBackward += MoveBackward;
         InputMng.MoveLeft += MoveLeft;
         InputMng.MoveRight += MoveRight;
+        InputMng.MoveFowardLeft += MoveForwardLeft;
+        InputMng.MoveFowardRight += MoveForwardRight;
         InputMng.CrunchIn += CrunchIn;
         InputMng.CrunchOut += CrunchOut;
     }
@@ -35,6 +37,8 @@ public class ExploreSceneBase : SceneBase
         InputMng.MoveRight -= MoveRight;
         InputMng.CrunchIn -= CrunchIn;
         InputMng.CrunchOut -= CrunchOut;
+        InputMng.MoveFowardLeft -= MoveForwardLeft;
+        InputMng.MoveFowardRight -= MoveForwardRight;
     }
 
     void MoveForward(float _MoveSensitivity)
@@ -75,6 +79,34 @@ public class ExploreSceneBase : SceneBase
         Vector3 MoveVector = Vector3.right * _MoveSensitivity;
         MoveVector.y = 0.0f;
         mainCamera.transform.Translate(MoveVector * Time.deltaTime);
+    }
+    
+    void MoveForwardLeft(float _MoveSensitivity)
+    {
+        float Height = mainCamera.transform.position.y;
+        Vector3 NewDirection = Vector3.forward + Vector3.left;
+        Vector3 MoveVector =  NewDirection.normalized * _MoveSensitivity;
+        MoveVector.y = 0.0f;
+        mainCamera.transform.Translate(MoveVector * Time.deltaTime);
+        Vector3 PositionVector;
+        Quaternion RotateQuat;
+        mainCamera.transform.GetPositionAndRotation(out PositionVector, out RotateQuat);
+        PositionVector.y = Height;
+        mainCamera.transform.SetPositionAndRotation(PositionVector, RotateQuat);
+    }
+    
+    void MoveForwardRight(float _MoveSensitivity)
+    {
+        float Height = mainCamera.transform.position.y;
+        Vector3 NewDirection = Vector3.forward + Vector3.right;
+        Vector3 MoveVector =  NewDirection.normalized * _MoveSensitivity;
+        MoveVector.y = 0.0f;
+        mainCamera.transform.Translate(MoveVector * Time.deltaTime);
+        Vector3 PositionVector;
+        Quaternion RotateQuat;
+        mainCamera.transform.GetPositionAndRotation(out PositionVector, out RotateQuat);
+        PositionVector.y = Height;
+        mainCamera.transform.SetPositionAndRotation(PositionVector, RotateQuat);
     }
 
     void CrunchIn(float _CrunchSpeed, float _CrunchHeight)
