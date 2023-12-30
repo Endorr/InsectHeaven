@@ -152,6 +152,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f7c7f7cdbb4e6f8c25f156b68011c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RotateSensitivity: 1
+  MoveSensitivity: 1
+  RunningMultiplier: 1.5
+  CrunchHeight: 0.65
+  CrunchingSpeed: 1
+  CrunchSlowLate: 0.8
 --- !u!4 &19807512
 Transform:
   m_ObjectHideFlags: 0

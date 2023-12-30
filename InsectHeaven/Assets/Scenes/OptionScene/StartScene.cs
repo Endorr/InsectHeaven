@@ -7,16 +7,19 @@ public class StartScene : SceneBase
     private int frame;
     
     // Start is called before the first frame update
-    void Start()
+    protected new void Start()
     {
-       GameManager.Instance.AwakeManager();
+        base.Start();
+        
+        GameManager.Instance.AwakeManager();
 
        IH_SceneManager sceneManager = (IH_SceneManager)GameManager.Instance.GetManager(EManagerType.Scene);
        sceneManager.SetStartScene(1001);
     }
 
     // Update is called once per frame
-    void Update()
+    protected new void Update()
     {
+        base.Update();
     }
 }

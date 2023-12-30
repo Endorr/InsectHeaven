@@ -16,6 +16,18 @@ public class GameManager : MonoBehaviour
     [Header("Sensitivity")]
     public float MoveSensitivity = 1.0f;
     
+    [Header("Sensitivity")]
+    public float RunningMultiplier = 1.5f;
+
+    [Header("Sensitivity")] 
+    public float CrunchHeight = 0.65f;
+
+    [Header("Sensitivity")] 
+    public float CrunchingSpeed = 1.0f;
+
+    [Header("Sensitivity")]
+    public float CrunchSlowLate = 0.1f;
+
     void Awake()
     {
         Instance = this;
@@ -37,6 +49,7 @@ public class GameManager : MonoBehaviour
     {
         _managerList = new Dictionary<EManagerType, ManagerBase>();
 
+        //Table -> Scene -> Input (순서 준수)
         //Make Manager
         _managerList.Add(EManagerType.Table ,new TableManager());
         _managerList.Add(EManagerType.Scene, new IH_SceneManager());
@@ -60,11 +73,5 @@ public class GameManager : MonoBehaviour
 
         Debug.Assert(false);
         return _managerList[0];
-    }
-
-    public void GetSensitivity(ref float _Rotate, ref float _move)
-    {
-        _Rotate = RotateSensitivity;
-        _move = MoveSensitivity;
     }
 }

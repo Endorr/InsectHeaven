@@ -5,14 +5,14 @@ using UnityEngine;
 public class Room_1 : ExploreSceneBase
 {
     // Start is called before the first frame update
-    void Start()
+    protected new void Start()
     {
         base.Start();
     }
 
     // Update is called once per frame
-    void Update()
+    protected new void Update()
     {
-        
+        base.Update();
     }
 }
