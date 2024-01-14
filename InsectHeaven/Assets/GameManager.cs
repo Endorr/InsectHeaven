@@ -28,6 +28,15 @@ public class GameManager : MonoBehaviour
     [Header("Sensitivity")]
     public float CrunchSlowLate = 0.1f;
 
+    [Header("Sensitivity")]
+    public float SideWalkSlowLate = 0.75f;
+
+    [Header("Sensitivity")]
+    public float JumpForce = 300.0f;
+
+    [Header("Sensitivity")] 
+    public float JumpingMoveSlowLate = 0.9f;
+
     void Awake()
     {
         Instance = this;

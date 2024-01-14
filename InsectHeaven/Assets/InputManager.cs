@@ -11,16 +11,16 @@ public enum InputAction
     Right,
     InterAction,
     Run,
-    Crunch
+    Crunch,
+    Jump
 }
 
 public class InputManager : ManagerBase
 {
     public delegate void InputMove(float _Sensitivity);
-
     public delegate void InputMoveMultiDirection(float _Sensitivity);
-
-    public delegate void Crunching(float _Speed, float _ObjectHeight);
+    public delegate void HeightChanging(float _Speed, float _ObjectHeight);
+    public delegate void Jump(float _JumpForce, ref List<InputAction> _Key);
     public delegate void InputKey();
     
     public static InputManager instance;
@@ -31,8 +31,13 @@ public class InputManager : ManagerBase
     public InputMove MoveRight;
     public InputMoveMultiDirection MoveFowardLeft;
     public InputMoveMultiDirection MoveFowardRight;
-    public Crunching CrunchIn;
-    public Crunching CrunchOut;
+    public InputMoveMultiDirection MoveBackwardLeft;
+    public InputMoveMultiDirection MoveBackwardRight;
+    public HeightChanging CrunchIn;
+    public HeightChanging CrunchOut;
+    public Jump JumpStart;
+    public Jump JumpMove;
+    List<InputAction> JumpStartInputActionList = new List<InputAction>();
     public InputKey Interaction;
     public Camera mainCamera;
 
@@ -42,10 +47,11 @@ public class InputManager : ManagerBase
     private float PitchMax = 20.0f;
     
     private bool IsCrunch = false;
-    private float CrunchDelay = 1.0f;
-    private float CurrentCrunchDelay = 0.0f;
-    private float NormalHeight = 0.0f;
+    private float HeightChangeDelay = 1.0f;
+    private float CrunchDelay = 0.0f;
     private float CrunchHeight = 0.0f;
+    private float NormalHeight = 0.0f;
+    private bool IsJump = false;
     private float RotateSensitivity = 1.0f;
     private float MoveSpeed = 1.0f;
 
@@ -92,6 +98,7 @@ public class InputManager : ManagerBase
         GameKeyMap.Add(InputAction.InterAction, KeyCode.E);
         GameKeyMap.Add(InputAction.Run, KeyCode.LeftShift);
         GameKeyMap.Add(InputAction.Crunch, KeyCode.LeftControl);
+        GameKeyMap.Add(InputAction.Jump, KeyCode.Space);
 
         MoveSpeed = GameManager.Instance.MoveSensitivity;
         RotateSensitivity = GameManager.Instance.RotateSensitivity;
@@ -132,19 +139,28 @@ public class InputManager : ManagerBase
 
         //Camera Movement
         {
+            //Height Change Delay
+            {
+                if(CrunchDelay <= HeightChangeDelay)
+                {
+                    CrunchDelay += Time.deltaTime;
+                }
+            }
+
+            if (true == IsJump)
+            {
+                JumpMove(GameManager.Instance.JumpForce, ref JumpStartInputActionList);
+                return;
+            }
+            
             //Crunching
             {
-                if(CurrentCrunchDelay <= CrunchDelay)
-                {
-                    CurrentCrunchDelay += Time.deltaTime;
-                }
-                
                 if (true == Input.GetKey(GameKeyMap[InputAction.Crunch]))
                 {
-                    if (CurrentCrunchDelay > CrunchDelay)
+                    if (CrunchDelay > HeightChangeDelay)
                     {
                         IsCrunch = !IsCrunch;
-                        CurrentCrunchDelay = 0.0f;
+                        CrunchDelay = 0.0f;
                     }
                 }
                 
@@ -166,6 +182,47 @@ public class InputManager : ManagerBase
                 }
             }
             
+            //Jump
+            {
+                if (true == Input.GetKey(GameKeyMap[InputAction.Jump]))
+                {
+                    if (true == IsCrunch)
+                    {
+                        IsCrunch = !IsCrunch;
+                    }
+                    else if (false == IsJump)
+                    {
+                        IsJump = true;
+                        
+                        if (true == Input.GetKey(GameKeyMap[InputAction.Run]))
+                        {
+                            JumpStartInputActionList.Add(InputAction.Run); 
+                        }
+
+                        if (true == Input.GetKey(GameKeyMap[InputAction.Left]))
+                        {
+                            JumpStartInputActionList.Add(InputAction.Left);
+                        }
+                        else if (true == Input.GetKey(GameKeyMap[InputAction.Right]))
+                        {
+                            JumpStartInputActionList.Add(InputAction.Right);
+                        }
+
+                        if (true == Input.GetKey(GameKeyMap[InputAction.Forward]))
+                        {
+                            JumpStartInputActionList.Add(InputAction.Forward);
+                        }
+                        else if (true == Input.GetKey(GameKeyMap[InputAction.Backward]))
+                        {
+                            JumpStartInputActionList.Add(InputAction.Backward);
+                        }
+                        
+                        JumpStart(GameManager.Instance.JumpForce, ref JumpStartInputActionList);
+                        return;
+                    }
+                }
+            }
+
             bool IsRunning = Input.GetKey(GameKeyMap[InputAction.Run]) && false == IsCrunch;
             MoveSpeed = GameManager.Instance.MoveSensitivity 
                         * ((NormalHeight != mainCamera.transform.position.y) ? GameManager.Instance.CrunchSlowLate : 1.0f);
@@ -174,12 +231,12 @@ public class InputManager : ManagerBase
             {
                 if (Input.GetKey(GameKeyMap[InputAction.Left]) && null != MoveFowardLeft)
                 {
-                    MoveSpeed *= 0.75f;
+                    MoveSpeed *= GameManager.Instance.SideWalkSlowLate;
                     MoveFowardLeft(MoveSpeed * ((IsRunning) ? GameManager.Instance.RunningMultiplier : 1.0f));
                 }
                 else if (Input.GetKey(GameKeyMap[InputAction.Right]) && null != MoveFowardRight)
                 {
-                    MoveSpeed *= 0.75f;
+                    MoveSpeed *= GameManager.Instance.SideWalkSlowLate;
                     MoveFowardRight(MoveSpeed * ((IsRunning) ? GameManager.Instance.RunningMultiplier : 1.0f));
                 }
                 else
@@ -189,7 +246,20 @@ public class InputManager : ManagerBase
             }
             else if (Input.GetKey(GameKeyMap[InputAction.Backward]) && null != MoveBackward)
             {
-                MoveBackward(MoveSpeed);
+                if (Input.GetKey(GameKeyMap[InputAction.Left]) && null != MoveBackwardLeft)
+                {
+                    MoveSpeed *= GameManager.Instance.SideWalkSlowLate;
+                    MoveBackwardLeft(MoveSpeed * ((IsRunning) ? GameManager.Instance.RunningMultiplier : 1.0f));
+                }
+                else if (Input.GetKey(GameKeyMap[InputAction.Right]) && null != MoveBackwardRight)
+                {
+                    MoveSpeed *= GameManager.Instance.SideWalkSlowLate;
+                    MoveBackwardRight(MoveSpeed * ((IsRunning) ? GameManager.Instance.RunningMultiplier : 1.0f));
+                }
+                else
+                {
+                    MoveBackward(MoveSpeed);
+                }
             }
             else if (Input.GetKey(GameKeyMap[InputAction.Left]) && null != MoveLeft)
             {
@@ -210,5 +280,12 @@ public class InputManager : ManagerBase
     void Tick_Combat()
     {
         
+    }
+
+    public void JumpFinish()
+    {
+        Debug.Log("JumpFinish!");
+        IsJump = false;
+        JumpStartInputActionList.Clear();
     }
 }
