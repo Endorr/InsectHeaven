@@ -1,0 +1,202 @@
+Using pre-set license
+Built from '2022.3/staging' branch; Version is '2022.3.8f1 (b5eafc012955) revision 11922172'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19045) 64bit Core' Language: 'ko' Physical Memory: 31907 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2022.3.8f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker121
+-projectPath
+C:/Users/nanim/OneDrive/문서/GitHub/InsectHeaven/InsectHeaven
+-logFile
+Logs/AssetImportWorker121.log
+-srvPort
+51301
+Successfully changed project path to: C:/Users/nanim/OneDrive/문서/GitHub/InsectHeaven/InsectHeaven
+C:/Users/nanim/OneDrive/문서/GitHub/InsectHeaven/InsectHeaven
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [2540] Host "[IP] 192.168.35.25 [Port] 0 [Flags] 2 [Guid] 3933015506 [EditorId] 3933015506 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-NS5ONMH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [2540] Host "[IP] 192.168.35.25 [Port] 0 [Flags] 2 [Guid] 3933015506 [EditorId] 3933015506 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-NS5ONMH) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+[Physics::Module] Initialized MultithreadedJobDispatcher with 23 workers.
+mdb reader table full -> cleaning up stale readers. Current readers:
+    pid     thread     txnid
+     45040 aa34 -
+     22716 ac5c -
+     45040 ad64 -
+     41552 9170 -
+     40996 5b88 -
+     45040 ad34 -
+     23164 6888 -
+     30112 8b4c -
+     45040 9c50 -
+     45040 37d4 -
+     38760 9dec -
+     25748 6660 -
+     15468 7c20 -
+     44116 7b20 -
+     43112 af60 -
+     45144 b05c -
+     45128 b04c -
+     31644 79c4 -
+     29460 9618 -
+     48096 75a8 -
+     47756 baa8 -
+     48308 1228 -
+     44892 bcd8 -
+     31840 bda4 -
+     50628 c504 -
+     50896 c660 -
+     51004 c6f4 -
+     50480 bc88 -
+     50044 c524 -
+     40208 be94 -
+     51524 c958 -
+     47208 c518 -
+     51952 caf8 -
+     50548 c454 -
+     54052 d328 -
+     54036 d318 -
+      2584 6b8 -
+      4844 478c -
+     50280 cf40 -
+     18088 cd64 -
+     50952 cb60 -
+     57004 deb0 -
+     42816 c758 -
+     55856 344 -
+     54784 cdfc -
+     55392 3bbc -
+     55736 d780 -
+     56716 1b70 -
+     51468 e220 -
+     58108 da84 -
+     56640 d8f0 -
+     53608 cd18 -
+     54656 dbf0 -
+      9916 d8c4 -
+     60024 ea7c -
+      2640 2ff0 -
+     59496 e6e8 -
+     10344 de98 -
+     13104 d074 -
+     33684 c7ec -
+     60396 d59c -
+     55776 dbb8 -
+     46280 d104 -
+     55920 e75c -
+     59360 b5d8 -
+     60128 e790 -
+     58904 df9c -
+     58592 e670 -
+     44656 e34c -
+     52860 e2ec -
+     55792 e3c4 -
+     46256 ca0c -
+     54688 df68 -
+     11460 5438 -
+     58772 cd84 -
+      9088 de6c -
+     50124 e978 -
+     54072 3188 -
+     59084 e828 -
+      6888 def8 -
+      9060 eaa8 -
+     53540 e9bc -
+     55056 e574 -
+     27316 cd24 -
+     56544 e814 -
+     59056 df34 -
+     58696 411c -
+     54980 ca94 -
+     51988 348c -
+     55628 3b40 -
+     15184 4320 -
+     18260 e640 -
+     52784 99c -
+     54076 22ec -
+     48380 d3f8 -
+     58136 d3c0 -
+     41820 e9dc -
+     54200 e53c -
+     54720 cb20 -
+     53956 d11c -
+     22888 e3bc -
+     59448 e958 -
+     55796 d990 -
+     53704 4da4 -
+     59828 d17c -
+     54492 2d9c -
+     34700 cdb0 -
+     52928 d1b8 -
+     60200 d1c4 -
+     28072 e754 -
+     27864 9ed8 -
+     45112 4870 -
+     59004 c2bc -
+     58024 ea8c -
+     58716 c9b8 -
+     55128 e46c -
+     57364 90c -
+     28840 a650 -
+     60204 2d3c -
+     59912 e188 -
+     56396 e29c -
+     53156 ea90 -
+     13144 2744 -
+     20256 2f20 -
+     58652 34a8 -
+      4652 22d8 -
+Cleaned out 121 stale readers
+Refreshing native plugins compatible for Editor in 8.64 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2022.3.8f1 (b5eafc012955)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.8f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/nanim/OneDrive/문서/GitHub/InsectHeaven/InsectHeaven/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: AMD Radeon RX 7900 XTX (ID=0x744c)
+    Vendor:   ATI
+    VRAM:     24515 MB
+    Driver:   31.0.21029.1006
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.8f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.8f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.8f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,address=127.0.0.1:51289,server=n,suspend=y

@@ -365,7 +365,7 @@
 "Assets/Scenes/ExploreScene/MainLobby.cs"
 "Assets/Scenes/ExploreScene/Room_1.cs"
 "Assets/Scenes/IH_SceneManager.cs"
-"Assets/Scenes/OptionScene/StartScene.cs"
+"Assets/Scenes/OptionScene/StartScene/StartScene.cs"
 "Assets/Scenes/SceneBase.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs"
@@ -401,8 +401,14 @@
 "Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeB.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/VertexZoom.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs"
-"Assets/Widget/IH_WidgetManager.cs"
-"Assets/Widget/WidgetBase.cs"
+"Assets/Widget/Script/Enum_Widget.cs"
+"Assets/Widget/Script/IH_Text.cs"
+"Assets/Widget/Script/IH_TextSO.cs"
+"Assets/Widget/Script/IH_WidgetManager.cs"
+"Assets/Widget/Script/ThemeSO.cs"
+"Assets/Widget/Script/View.cs"
+"Assets/Widget/Script/ViewSO.cs"
+"Assets/Widget/Script/WidgetBase.cs"
 -langversion:9.0
 
 /deterministic
