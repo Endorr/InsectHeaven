@@ -1,5 +1,0 @@
-Key,SceneName,SceneBasePath,SceneType
-1001,1,Start,System
-2001,2,MainLobby,Explore
-2002,3,CombatScene,Combat
-2003,4,Room_1,Explore
