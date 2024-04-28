@@ -1,0 +1,2 @@
+C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\Definitions.InsectHeaven.h
+C:\Uneal\InsectHeaven\Source\InsectHeaven\Library\Dialogue\IH_DialoguePlayer.h
