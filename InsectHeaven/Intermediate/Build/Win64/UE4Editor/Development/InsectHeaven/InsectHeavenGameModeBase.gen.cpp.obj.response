@@ -32,14 +32,14 @@
 /wd4244
 /wd4838
 /I .
-/I C:\Users\nanim\OneDrive\문서\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven
-/I C:\Users\nanim\OneDrive\문서\GitHub\InsectHeaven\InsectHeaven\Source
-/I C:\Users\nanim\OneDrive\문서\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven
-/I C:\Users\nanim\OneDrive\문서\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Library
-/I C:\Users\nanim\OneDrive\문서\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Table
-/I C:\Users\nanim\OneDrive\문서\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Util
-/I C:\Users\nanim\OneDrive\문서\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Scene
-/I C:\Users\nanim\OneDrive\문서\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Widget
+/I C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven
+/I C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source
+/I C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven
+/I C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Library
+/I C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Table
+/I C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Util
+/I C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Scene
+/I C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Widget
 /I Runtime
 /I Runtime\TraceLog\Public
 /I Runtime\Core\Public
@@ -270,12 +270,12 @@
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\winrt"
-/FI"C:\Users\nanim\OneDrive\문서\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\InsectHeavenEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
-/Yu"C:\Users\nanim\OneDrive\문서\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\InsectHeavenEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
-/Fp"C:\Users\nanim\OneDrive\문서\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\InsectHeavenEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
-"C:\Users\nanim\OneDrive\문서\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\InsectHeavenGameModeBase.gen.cpp"
-/FI"C:\Users\nanim\OneDrive\문서\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Development\InsectHeaven\Definitions.InsectHeaven.h"
-/Fo"C:\Users\nanim\OneDrive\문서\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Development\InsectHeaven\InsectHeavenGameModeBase.gen.cpp.obj"
+/FI"C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\InsectHeavenEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
+/Yu"C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\InsectHeavenEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
+/Fp"C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\InsectHeavenEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
+"C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\InsectHeavenGameModeBase.gen.cpp"
+/FI"C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Development\InsectHeaven\Definitions.InsectHeaven.h"
+/Fo"C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Development\InsectHeaven\InsectHeavenGameModeBase.gen.cpp.obj"
 /TP
 /GR-
 /W4
