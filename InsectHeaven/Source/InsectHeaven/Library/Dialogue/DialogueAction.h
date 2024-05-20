@@ -17,6 +17,7 @@ public:
 	virtual void SetPaused(bool _bPause);
 	virtual void SetFinish();
 	virtual void Reset();
+	virtual FText Get_Name();
 	virtual FText Get_Description();
 
 	virtual void Tick(float _fDeltaTime);

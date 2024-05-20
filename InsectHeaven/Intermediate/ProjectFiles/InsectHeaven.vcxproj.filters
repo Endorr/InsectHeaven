@@ -3,7 +3,7 @@
   <ItemGroup>
     <None Include="..\..\InsectHeaven.uproject" />
     <Filter Include="Source">
-      <UniqueIdentifier>{E78710A5-9009-4C6F-9CE5-FD9B8D7FA8E0}</UniqueIdentifier>
+      <UniqueIdentifier>{BC808ABD-96A2-4A72-A17B-D347DA91717F}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Source\InsectHeaven.Target.cs">
       <Filter>Source</Filter>
@@ -12,7 +12,7 @@
       <Filter>Source</Filter>
     </None>
     <Filter Include="Config">
-      <UniqueIdentifier>{9451A0CB-0F1A-498A-8AD6-35A62DD481AF}</UniqueIdentifier>
+      <UniqueIdentifier>{4AC86875-BF7C-48BD-8765-7187A1BEB2CC}</UniqueIdentifier>
     </Filter>
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
@@ -24,8 +24,14 @@
       <Filter>Config</Filter>
     </None>
     <Filter Include="Source\InsectHeaven">
-      <UniqueIdentifier>{AAF93885-DBEF-4CAE-BB9F-F9D1BBE0194E}</UniqueIdentifier>
+      <UniqueIdentifier>{2899B514-BB54-45B0-AE76-65F29E8AD17A}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\InsectHeaven\DialogueEditToolWidget.cpp">
+      <Filter>Source\InsectHeaven</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\InsectHeaven\DialogueEditToolWidget.h">
+      <Filter>Source\InsectHeaven</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\InsectHeaven\IH_GameDefine.h">
       <Filter>Source\InsectHeaven</Filter>
     </ClInclude>
@@ -45,8 +51,14 @@
       <Filter>Source\InsectHeaven</Filter>
     </ClInclude>
     <Filter Include="Source\InsectHeaven\Library">
-      <UniqueIdentifier>{265A4B7B-6326-4667-9FED-5B4CFAF68AE5}</UniqueIdentifier>
+      <UniqueIdentifier>{F1A3B127-1C1E-4BDA-A30D-F94B9D1D0284}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\InsectHeaven\Library\DialogueToolWidget.cpp">
+      <Filter>Source\InsectHeaven\Library</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\InsectHeaven\Library\DialogueToolWidget.h">
+      <Filter>Source\InsectHeaven\Library</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\InsectHeaven\Library\IH_SingletonManager.cpp">
       <Filter>Source\InsectHeaven\Library</Filter>
     </ClCompile>
@@ -59,8 +71,14 @@
     <ClInclude Include="..\..\Source\InsectHeaven\Library\SingletonInterface.h">
       <Filter>Source\InsectHeaven\Library</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\InsectHeaven\Library\TestUtilityWidget.cpp">
+      <Filter>Source\InsectHeaven\Library</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\InsectHeaven\Library\TestUtilityWidget.h">
+      <Filter>Source\InsectHeaven\Library</Filter>
+    </ClInclude>
     <Filter Include="Source\InsectHeaven\Library\Dialogue">
-      <UniqueIdentifier>{E9B22E63-CC44-4F44-B1F1-988DDC1725D6}</UniqueIdentifier>
+      <UniqueIdentifier>{D9DCCEE9-D046-4050-9437-1BC798D40BAC}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\InsectHeaven\Library\Dialogue\DialogueAction.cpp">
       <Filter>Source\InsectHeaven\Library\Dialogue</Filter>
@@ -83,8 +101,17 @@
     <ClInclude Include="..\..\Source\InsectHeaven\Library\Dialogue\IH_DialoguePlayer.h">
       <Filter>Source\InsectHeaven\Library\Dialogue</Filter>
     </ClInclude>
+    <Filter Include="Source\InsectHeaven\Library\Dialogue\Action">
+      <UniqueIdentifier>{2CD31DC4-8C47-4DEA-BC40-3B121EDC3CCA}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\InsectHeaven\Library\Dialogue\Action\DialogueAction_ShowActor.cpp">
+      <Filter>Source\InsectHeaven\Library\Dialogue\Action</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\InsectHeaven\Library\Dialogue\Action\DialogueAction_ShowActor.h">
+      <Filter>Source\InsectHeaven\Library\Dialogue\Action</Filter>
+    </ClInclude>
     <Filter Include="Source\InsectHeaven\Scene">
-      <UniqueIdentifier>{1AEF82CE-5EB8-4B20-BD04-F4213D74129A}</UniqueIdentifier>
+      <UniqueIdentifier>{B0625A49-731A-484A-8E29-175FD075890F}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\InsectHeaven\Scene\IH_LevelScriptActor.cpp">
       <Filter>Source\InsectHeaven\Scene</Filter>
@@ -111,7 +138,7 @@
       <Filter>Source\InsectHeaven\Scene</Filter>
     </ClInclude>
     <Filter Include="Source\InsectHeaven\Scene\Lobby">
-      <UniqueIdentifier>{06F0B3DC-86F5-44CD-960D-62054C4CB8C1}</UniqueIdentifier>
+      <UniqueIdentifier>{4DC1E12A-742F-4A78-B026-888A902A9B93}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\InsectHeaven\Scene\Lobby\IH_SceneLobby.cpp">
       <Filter>Source\InsectHeaven\Scene\Lobby</Filter>
@@ -120,7 +147,7 @@
       <Filter>Source\InsectHeaven\Scene\Lobby</Filter>
     </ClInclude>
     <Filter Include="Source\InsectHeaven\Table">
-      <UniqueIdentifier>{95FF58F8-BEA7-49DB-8CF8-ED542C48C2B2}</UniqueIdentifier>
+      <UniqueIdentifier>{39BE35A9-B0DB-4577-85CE-8DA4F06B4112}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\InsectHeaven\Table\IH_TableDefine.cpp">
       <Filter>Source\InsectHeaven\Table</Filter>
@@ -135,7 +162,7 @@
       <Filter>Source\InsectHeaven\Table</Filter>
     </ClInclude>
     <Filter Include="Source\InsectHeaven\Table\DataStruct">
-      <UniqueIdentifier>{F2FD333F-E59C-4A8B-8D03-8BCDCD8FBAB7}</UniqueIdentifier>
+      <UniqueIdentifier>{63781A2D-ADD9-4B55-9816-DCFB2C4452C4}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\InsectHeaven\Table\DataStruct\BasePath_Directory.h">
       <Filter>Source\InsectHeaven\Table\DataStruct</Filter>
@@ -159,7 +186,7 @@
       <Filter>Source\InsectHeaven\Table\DataStruct</Filter>
     </ClInclude>
     <Filter Include="Source\InsectHeaven\Table\TableMapper">
-      <UniqueIdentifier>{2B0C795E-EB6E-46C2-8741-32E8528B568F}</UniqueIdentifier>
+      <UniqueIdentifier>{0B7E2805-C7C0-4462-98FE-6706569781B6}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\InsectHeaven\Table\TableMapper\IH_Mapper_BasePath_Dir.cpp">
       <Filter>Source\InsectHeaven\Table\TableMapper</Filter>
@@ -210,7 +237,7 @@
       <Filter>Source\InsectHeaven\Table\TableMapper</Filter>
     </ClInclude>
     <Filter Include="Source\InsectHeaven\Util">
-      <UniqueIdentifier>{A39A9A50-86C1-4F80-89A9-EDA5BDE6645A}</UniqueIdentifier>
+      <UniqueIdentifier>{7EF3137E-4C38-46B6-B2F1-FD72B1F801C4}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\InsectHeaven\Util\IH_StateBase.cpp">
       <Filter>Source\InsectHeaven\Util</Filter>
@@ -231,7 +258,7 @@
       <Filter>Source\InsectHeaven\Util</Filter>
     </ClInclude>
     <Filter Include="Source\InsectHeaven\Widget">
-      <UniqueIdentifier>{1DB88CD0-FEC9-45A4-BC0E-3DD76C3398D2}</UniqueIdentifier>
+      <UniqueIdentifier>{772AA01B-711C-404B-B42B-A220B286662D}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\InsectHeaven\Widget\IH_Widget.cpp">
       <Filter>Source\InsectHeaven\Widget</Filter>
@@ -246,7 +273,7 @@
       <Filter>Source\InsectHeaven\Widget</Filter>
     </ClInclude>
     <Filter Include="Source\InsectHeaven\Widget\Dialogue">
-      <UniqueIdentifier>{7D7DF0D1-24A4-4356-9615-D908F97161C2}</UniqueIdentifier>
+      <UniqueIdentifier>{3D717129-F467-4AB0-9EA1-17D7A6BFB274}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\InsectHeaven\Widget\Dialogue\IH_Widget_DialogueScene.cpp">
       <Filter>Source\InsectHeaven\Widget\Dialogue</Filter>
@@ -260,8 +287,17 @@
     <ClInclude Include="..\..\Source\InsectHeaven\Widget\Dialogue\IH_Widget_Portrait.h">
       <Filter>Source\InsectHeaven\Widget\Dialogue</Filter>
     </ClInclude>
+    <Filter Include="Source\InsectHeaven\Widget\DialogueTool">
+      <UniqueIdentifier>{FC8D4124-9F0F-4339-9A12-CE05FFAC1CC7}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\InsectHeaven\Widget\DialogueTool\IH_Widget_DialogueToolAction.cpp">
+      <Filter>Source\InsectHeaven\Widget\DialogueTool</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\InsectHeaven\Widget\DialogueTool\IH_Widget_DialogueToolAction.h">
+      <Filter>Source\InsectHeaven\Widget\DialogueTool</Filter>
+    </ClInclude>
     <Filter Include="Source\InsectHeaven\Widget\MainLobby">
-      <UniqueIdentifier>{C6FDF5C4-8024-4452-9F4D-75E61686252F}</UniqueIdentifier>
+      <UniqueIdentifier>{F11BF887-3A66-4DB5-99BB-34C9BE3B76C6}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\InsectHeaven\Widget\MainLobby\IH_Widget_MainLobby.cpp">
       <Filter>Source\InsectHeaven\Widget\MainLobby</Filter>

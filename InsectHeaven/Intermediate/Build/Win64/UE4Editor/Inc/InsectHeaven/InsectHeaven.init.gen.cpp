@@ -11,18 +11,22 @@
 #endif
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeInsectHeaven_init() {}
+	INSECTHEAVEN_API UFunction* Z_Construct_UDelegateFunction_UDialogueActionLayer_OnPlayingActionChanged__DelegateSignature();
 	UPackage* Z_Construct_UPackage__Script_InsectHeaven()
 	{
 		static UPackage* ReturnPackage = nullptr;
 		if (!ReturnPackage)
 		{
+			static UObject* (*const SingletonFuncArray[])() = {
+				(UObject* (*)())Z_Construct_UDelegateFunction_UDialogueActionLayer_OnPlayingActionChanged__DelegateSignature,
+			};
 			static const UE4CodeGen_Private::FPackageParams PackageParams = {
 				"/Script/InsectHeaven",
-				nullptr,
-				0,
+				SingletonFuncArray,
+				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0xF0C5688F,
-				0x7753993B,
+				0xD4E04D47,
+				0x8E075749,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UE4CodeGen_Private::ConstructUPackage(ReturnPackage, PackageParams);

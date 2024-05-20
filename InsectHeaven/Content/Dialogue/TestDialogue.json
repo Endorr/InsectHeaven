@@ -1,0 +1,28 @@
+{
+	"ActionLayers": [
+		{
+			"Actions": [
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				},
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				},
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				},
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				},
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				}
+			]
+		}
+	]
+}

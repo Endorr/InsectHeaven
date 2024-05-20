@@ -30,7 +30,7 @@ void EmptyLinkFunctionForGeneratedCodeDialogueDefine() {}
 		return EActionStateType_StaticEnum();
 	}
 	static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EActionStateType(EActionStateType_StaticEnum, TEXT("/Script/InsectHeaven"), TEXT("EActionStateType"), false, nullptr, nullptr);
-	uint32 Get_Z_Construct_UEnum_InsectHeaven_EActionStateType_Hash() { return 1812627028U; }
+	uint32 Get_Z_Construct_UEnum_InsectHeaven_EActionStateType_Hash() { return 2097713088U; }
 	UEnum* Z_Construct_UEnum_InsectHeaven_EActionStateType()
 	{
 #if WITH_HOT_RELOAD
@@ -42,22 +42,22 @@ void EmptyLinkFunctionForGeneratedCodeDialogueDefine() {}
 		if (!ReturnEnum)
 		{
 			static const UE4CodeGen_Private::FEnumeratorParam Enumerators[] = {
-				{ "None", (int64)None },
-				{ "InProgress", (int64)InProgress },
-				{ "WaitInput", (int64)WaitInput },
-				{ "Finished", (int64)Finished },
+				{ "EActionStateType::None", (int64)EActionStateType::None },
+				{ "EActionStateType::InProgress", (int64)EActionStateType::InProgress },
+				{ "EActionStateType::WaitInput", (int64)EActionStateType::WaitInput },
+				{ "EActionStateType::Finished", (int64)EActionStateType::Finished },
 			};
 #if WITH_METADATA
 			const UE4CodeGen_Private::FMetaDataPairParam Enum_MetaDataParams[] = {
 				{ "Finished.DisplayName", "Finished" },
-				{ "Finished.Name", "Finished" },
+				{ "Finished.Name", "EActionStateType::Finished" },
 				{ "InProgress.DisplayName", "InProgress" },
-				{ "InProgress.Name", "InProgress" },
+				{ "InProgress.Name", "EActionStateType::InProgress" },
 				{ "ModuleRelativePath", "Library/Dialogue/DialogueDefine.h" },
 				{ "None.DisplayName", "None" },
-				{ "None.Name", "None" },
+				{ "None.Name", "EActionStateType::None" },
 				{ "WaitInput.DisplayName", "WaitInput" },
-				{ "WaitInput.Name", "WaitInput" },
+				{ "WaitInput.Name", "EActionStateType::WaitInput" },
 			};
 #endif
 			static const UE4CodeGen_Private::FEnumParams EnumParams = {
@@ -70,7 +70,7 @@ void EmptyLinkFunctionForGeneratedCodeDialogueDefine() {}
 				RF_Public|RF_Transient|RF_MarkAsNative,
 				EEnumFlags::None,
 				UE4CodeGen_Private::EDynamicType::NotDynamic,
-				(uint8)UEnum::ECppForm::Regular,
+				(uint8)UEnum::ECppForm::EnumClass,
 				METADATA_PARAMS(Enum_MetaDataParams, UE_ARRAY_COUNT(Enum_MetaDataParams))
 			};
 			UE4CodeGen_Private::ConstructUEnum(ReturnEnum, EnumParams);

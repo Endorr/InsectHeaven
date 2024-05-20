@@ -18,8 +18,12 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 
 #define FOREACH_ENUM_EACTIONSTATETYPE(op) \
-	op(None) \
-	op(InProgress) \
-	op(WaitInput) \
-	op(Finished) 
+	op(EActionStateType::None) \
+	op(EActionStateType::InProgress) \
+	op(EActionStateType::WaitInput) \
+	op(EActionStateType::Finished) 
+
+enum class EActionStateType : uint8;
+template<> INSECTHEAVEN_API UEnum* StaticEnum<EActionStateType>();
+
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -33,6 +33,11 @@ void UDialogueAction::Reset()
 	eActionState = EActionStateType::None;
 }
 
+FText UDialogueAction::Get_Name()
+{
+	return FText::FromString("");
+}
+
 FText UDialogueAction::Get_Description()
 {
 	FString strDescScript = "";

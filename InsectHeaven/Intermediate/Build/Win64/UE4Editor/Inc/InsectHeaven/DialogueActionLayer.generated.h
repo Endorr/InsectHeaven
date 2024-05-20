@@ -13,10 +13,23 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define INSECTHEAVEN_DialogueActionLayer_generated_h
 
-#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_SPARSE_DATA
-#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_RPC_WRAPPERS
-#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_RPC_WRAPPERS_NO_PURE_DECLS
-#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_INCLASS_NO_PURE_DECLS \
+#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_42_DELEGATE \
+struct DialogueActionLayer_eventOnPlayingActionChanged_Parms \
+{ \
+	int32 ActionIndex; \
+}; \
+static inline void FOnPlayingActionChanged_DelegateWrapper(const FMulticastScriptDelegate& OnPlayingActionChanged, int32 ActionIndex) \
+{ \
+	DialogueActionLayer_eventOnPlayingActionChanged_Parms Parms; \
+	Parms.ActionIndex=ActionIndex; \
+	OnPlayingActionChanged.ProcessMulticastDelegate<UObject>(&Parms); \
+}
+
+
+#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_SPARSE_DATA
+#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_RPC_WRAPPERS
+#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_RPC_WRAPPERS_NO_PURE_DECLS
+#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUDialogueActionLayer(); \
 	friend struct Z_Construct_UClass_UDialogueActionLayer_Statics; \
@@ -25,7 +38,7 @@ public: \
 	DECLARE_SERIALIZER(UDialogueActionLayer)
 
 
-#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_INCLASS \
+#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_INCLASS \
 private: \
 	static void StaticRegisterNativesUDialogueActionLayer(); \
 	friend struct Z_Construct_UClass_UDialogueActionLayer_Statics; \
@@ -34,7 +47,7 @@ public: \
 	DECLARE_SERIALIZER(UDialogueActionLayer)
 
 
-#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_STANDARD_CONSTRUCTORS \
+#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UDialogueActionLayer(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UDialogueActionLayer) \
@@ -47,7 +60,7 @@ private: \
 public:
 
 
-#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_ENHANCED_CONSTRUCTORS \
+#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UDialogueActionLayer(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()) : Super(ObjectInitializer) { }; \
 private: \
@@ -60,28 +73,31 @@ public: \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UDialogueActionLayer)
 
 
-#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_PRIVATE_PROPERTY_OFFSET
-#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_5_PROLOG
-#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_GENERATED_BODY_LEGACY \
+#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_PRIVATE_PROPERTY_OFFSET \
+	FORCEINLINE static uint32 __PPO__Actions() { return STRUCT_OFFSET(UDialogueActionLayer, Actions); }
+
+
+#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_PROLOG
+#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_PRIVATE_PROPERTY_OFFSET \
-	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_SPARSE_DATA \
-	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_RPC_WRAPPERS \
-	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_INCLASS \
-	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_STANDARD_CONSTRUCTORS \
+	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_PRIVATE_PROPERTY_OFFSET \
+	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_SPARSE_DATA \
+	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_RPC_WRAPPERS \
+	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_INCLASS \
+	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_GENERATED_BODY \
+#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_PRIVATE_PROPERTY_OFFSET \
-	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_SPARSE_DATA \
-	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_RPC_WRAPPERS_NO_PURE_DECLS \
-	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_INCLASS_NO_PURE_DECLS \
-	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_8_ENHANCED_CONSTRUCTORS \
+	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_PRIVATE_PROPERTY_OFFSET \
+	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_SPARSE_DATA \
+	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_RPC_WRAPPERS_NO_PURE_DECLS \
+	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_INCLASS_NO_PURE_DECLS \
+	InsectHeaven_Source_InsectHeaven_Library_Dialogue_DialogueActionLayer_h_11_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

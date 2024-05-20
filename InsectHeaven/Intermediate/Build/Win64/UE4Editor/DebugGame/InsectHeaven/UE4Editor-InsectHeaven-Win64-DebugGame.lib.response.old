@@ -7,6 +7,9 @@
 /IGNORE:4221
 /NODEFAULTLIB
 "C:\Uneal\InsectHeaven\Intermediate\Build\Win64\InsectHeavenEditor\DebugGame\Engine\SharedPCH.Engine.NonOptimized.ShadowErrors.h.obj"
+"C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\DialogueAction.cpp.obj"
+"C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\DialogueActionLayer.cpp.obj"
+"C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\IH_DialoguePlayer.cpp.obj"
 "C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\IH_SingletonManager.cpp.obj"
 "C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\SingletonInterface.cpp.obj"
 "C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\IH_SceneLobby.cpp.obj"
@@ -38,6 +41,9 @@
 "C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\BasePath_Image.gen.cpp.obj"
 "C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\BasePath_Widget.gen.cpp.obj"
 "C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\Character_2D.gen.cpp.obj"
+"C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\DialogueAction.gen.cpp.obj"
+"C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\DialogueActionLayer.gen.cpp.obj"
+"C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\DialogueDefine.gen.cpp.obj"
 "C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\IH_LevelScriptActor.gen.cpp.obj"
 "C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\IH_Mapper_BasePath_Dir.gen.cpp.obj"
 "C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\IH_Mapper_BasePath_Img.gen.cpp.obj"
