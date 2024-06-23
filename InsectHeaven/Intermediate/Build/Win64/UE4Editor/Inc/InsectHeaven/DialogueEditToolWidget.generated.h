@@ -33,6 +33,8 @@ template<> INSECTHEAVEN_API UScriptStruct* StaticStruct<struct FIH_Dialogue>();
  \
 	DECLARE_FUNCTION(execCalculateActionPos); \
 	DECLARE_FUNCTION(execDeleteSelectAction); \
+	DECLARE_FUNCTION(execOnClick_Stop); \
+	DECLARE_FUNCTION(execOnClick_Play); \
 	DECLARE_FUNCTION(execOnClick_CancelAction); \
 	DECLARE_FUNCTION(execOnClick_ChangeAction); \
 	DECLARE_FUNCTION(execOnClick_LoadButton); \
@@ -44,6 +46,8 @@ template<> INSECTHEAVEN_API UScriptStruct* StaticStruct<struct FIH_Dialogue>();
  \
 	DECLARE_FUNCTION(execCalculateActionPos); \
 	DECLARE_FUNCTION(execDeleteSelectAction); \
+	DECLARE_FUNCTION(execOnClick_Stop); \
+	DECLARE_FUNCTION(execOnClick_Play); \
 	DECLARE_FUNCTION(execOnClick_CancelAction); \
 	DECLARE_FUNCTION(execOnClick_ChangeAction); \
 	DECLARE_FUNCTION(execOnClick_LoadButton); \
@@ -99,13 +103,17 @@ public: \
 	FORCEINLINE static uint32 __PPO__CPP_Scroll_Layer() { return STRUCT_OFFSET(UDialogueEditToolWidget, CPP_Scroll_Layer); } \
 	FORCEINLINE static uint32 __PPO__CPP_Scroll_ActionLine() { return STRUCT_OFFSET(UDialogueEditToolWidget, CPP_Scroll_ActionLine); } \
 	FORCEINLINE static uint32 __PPO__CPP_Canvas_ActionChange() { return STRUCT_OFFSET(UDialogueEditToolWidget, CPP_Canvas_ActionChange); } \
+	FORCEINLINE static uint32 __PPO__CPP_PropertyView_ActionList() { return STRUCT_OFFSET(UDialogueEditToolWidget, CPP_PropertyView_ActionList); } \
 	FORCEINLINE static uint32 __PPO__CPP_Btn_ChangeAction() { return STRUCT_OFFSET(UDialogueEditToolWidget, CPP_Btn_ChangeAction); } \
 	FORCEINLINE static uint32 __PPO__CPP_Btn_CancelAction() { return STRUCT_OFFSET(UDialogueEditToolWidget, CPP_Btn_CancelAction); } \
 	FORCEINLINE static uint32 __PPO__CPP_Btn_Save() { return STRUCT_OFFSET(UDialogueEditToolWidget, CPP_Btn_Save); } \
 	FORCEINLINE static uint32 __PPO__CPP_Btn_Load() { return STRUCT_OFFSET(UDialogueEditToolWidget, CPP_Btn_Load); } \
+	FORCEINLINE static uint32 __PPO__CPP_Btn_Play() { return STRUCT_OFFSET(UDialogueEditToolWidget, CPP_Btn_Play); } \
+	FORCEINLINE static uint32 __PPO__CPP_Btn_Stop() { return STRUCT_OFFSET(UDialogueEditToolWidget, CPP_Btn_Stop); } \
 	FORCEINLINE static uint32 __PPO__CPP_Widget_SelectShadow() { return STRUCT_OFFSET(UDialogueEditToolWidget, CPP_Widget_SelectShadow); } \
 	FORCEINLINE static uint32 __PPO__CPP_Txt_FileName() { return STRUCT_OFFSET(UDialogueEditToolWidget, CPP_Txt_FileName); } \
 	FORCEINLINE static uint32 __PPO__CPP_Img_Test() { return STRUCT_OFFSET(UDialogueEditToolWidget, CPP_Img_Test); } \
+	FORCEINLINE static uint32 __PPO__CPP_DetailView_Action() { return STRUCT_OFFSET(UDialogueEditToolWidget, CPP_DetailView_Action); } \
 	FORCEINLINE static uint32 __PPO__CurrentDialogue() { return STRUCT_OFFSET(UDialogueEditToolWidget, CurrentDialogue); }
 
 

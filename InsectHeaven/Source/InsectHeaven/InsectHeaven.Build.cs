@@ -17,7 +17,7 @@ public class InsectHeaven : ModuleRules
 		PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "Widget"));
 		
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "PropertyEditor", "Json", "JsonUtilities", "UMG", "Blutility",  "EditorScriptingUtilities",
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "UnrealEd", "InputCore", "PropertyEditor", "Json", "JsonUtilities", "UMG", "Blutility",  "EditorScriptingUtilities",
 			"DesktopWidgets", "DesktopPlatform", "Slate", "SlateCore" , "UMGEditor" , "ContentBrowser", "AssetRegistry"});
 
 		// Uncomment if you are using Slate UI

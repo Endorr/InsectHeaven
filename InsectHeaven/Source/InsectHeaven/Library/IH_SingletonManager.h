@@ -21,8 +21,8 @@ protected:
 	static UIH_SingletonManager* Instance;
 
 public:
-	FORCEINLINE void SetGameInstance(class UInsectHeaven* _GameInstacne) { GameInstance = _GameInstacne; }
-	FORCEINLINE class UInsectHeaven* GetGameInstance() const { return GameInstance; }
+	FORCEINLINE void SetGameInstance(class UGameInstance* _GameInstacne) { GameInstance = _GameInstacne; }
+	FORCEINLINE class UGameInstance* GetGameInstance() const { return GameInstance; }
 	
 	bool IsBuiltInInitialized() const { return bIsBuiltInInitialized; }
 	bool IsInitialized() const { return bIsInitialized; }
@@ -55,7 +55,7 @@ protected:
 	TArray<class ISingleton*> BuiltInSingletonsForTick;
 
 	UPROPERTY()
-	class UInsectHeaven* GameInstance = nullptr;
+	class UGameInstance* GameInstance = nullptr;
 
 	float DeltaTime = 0.0f;
 

@@ -17,7 +17,7 @@ void EmptyLinkFunctionForGeneratedCodeIH_SingletonManager() {}
 	INSECTHEAVEN_API UClass* Z_Construct_UClass_UIH_SingletonManager();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UObject();
 	UPackage* Z_Construct_UPackage__Script_InsectHeaven();
-	INSECTHEAVEN_API UClass* Z_Construct_UClass_UInsectHeaven_NoRegister();
+	ENGINE_API UClass* Z_Construct_UClass_UGameInstance_NoRegister();
 // End Cross Module References
 	void UIH_SingletonManager::StaticRegisterNativesUIH_SingletonManager()
 	{
@@ -55,7 +55,7 @@ void EmptyLinkFunctionForGeneratedCodeIH_SingletonManager() {}
 		{ "ModuleRelativePath", "Library/IH_SingletonManager.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UIH_SingletonManager_Statics::NewProp_GameInstance = { "GameInstance", nullptr, (EPropertyFlags)0x0020080000000000, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UIH_SingletonManager, GameInstance), Z_Construct_UClass_UInsectHeaven_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UIH_SingletonManager_Statics::NewProp_GameInstance_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UIH_SingletonManager_Statics::NewProp_GameInstance_MetaData)) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UIH_SingletonManager_Statics::NewProp_GameInstance = { "GameInstance", nullptr, (EPropertyFlags)0x0020080000000000, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UIH_SingletonManager, GameInstance), Z_Construct_UClass_UGameInstance_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UIH_SingletonManager_Statics::NewProp_GameInstance_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UIH_SingletonManager_Statics::NewProp_GameInstance_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UIH_SingletonManager_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UIH_SingletonManager_Statics::NewProp_GameInstance,
 	};
@@ -86,7 +86,7 @@ void EmptyLinkFunctionForGeneratedCodeIH_SingletonManager() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UIH_SingletonManager, 2352323160);
+	IMPLEMENT_CLASS(UIH_SingletonManager, 1855768508);
 	template<> INSECTHEAVEN_API UClass* StaticClass<UIH_SingletonManager>()
 	{
 		return UIH_SingletonManager::StaticClass();

@@ -62,10 +62,8 @@ public:
 	UIH_Widget_DialogueToolAction* FindAction(int32 _LayerIndex, int32 _ActionIndex);
 	void GrabAction(UIH_Widget_DialogueToolAction* _Widget);
 	void GrabOffAction(UIH_Widget_DialogueToolAction* _Widget);
-
 	UFUNCTION(BlueprintCallable)
 	void GrabOffAction();
-
 	void ReleaseShadow();
 
 protected:
@@ -80,6 +78,12 @@ protected:
 	
 	UFUNCTION()
 	void OnClick_CancelAction();
+
+	UFUNCTION()
+	void OnClick_Play();
+
+	UFUNCTION()
+	void OnClick_Stop();
 	
 	UFUNCTION(BlueprintCallable)
 	void DeleteSelectAction();
@@ -89,11 +93,17 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	FVector2D CalculateActionPos(int32 _LayerIndex, int32 _ActionIndex);
 
+	void LoadActiveDialogue();
+
 private:
 	void ReadCurrentDialogue();
 
 	bool OpenFiles(const FString& Title, const FString& FileTypes, FString& InOutLastPath, EFileDialogFlags::Type DialogMode, TArray<FString>& OutOpenFilenames);
 	bool SaveFile(const FString& _Title, const FString& _FileTypes, FString& _InOutLastPath, const FString& _DefaultFile, FString& _OutFileName);
+	void SetFileName(const FString& _FileName);
+
+	FIH_Dialogue LoadDialogue(const FString& _strFileName);
+	bool SaveDialogue(FIH_Dialogue& _Dialogue, const FString& _strFileName);
 
 protected:
 	UPROPERTY(meta = (BindWidget))
@@ -104,7 +114,8 @@ protected:
 
 	UPROPERTY(meta = (BindWidget))
 	class UCanvasPanel* CPP_Canvas_ActionChange = nullptr;
-	
+
+	UPROPERTY(meta = (BindWidget))
 	class USinglePropertyView* CPP_PropertyView_ActionList = nullptr;
 
 	UPROPERTY(meta = (BindWidget))
@@ -120,6 +131,12 @@ protected:
 	class UButton* CPP_Btn_Load = nullptr;
 
 	UPROPERTY(meta = (BindWidget))
+	class UButton* CPP_Btn_Play = nullptr;
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* CPP_Btn_Stop = nullptr;
+
+	UPROPERTY(meta = (BindWidget))
 	class UIH_Widget_DialogueToolAction* CPP_Widget_SelectShadow = nullptr;
 
 	UPROPERTY(meta = (BindWidget))
@@ -128,8 +145,14 @@ protected:
 	UPROPERTY(meta = (BindWidget))
 	class UImage* CPP_Img_Test = nullptr;
 
+	UPROPERTY(meta = (BindWidget))
+	class UDetailsView* CPP_DetailView_Action = nullptr;
+
 private:
 	FString LoadFilePath = TEXT("");
+
+	FString NewFileName = TEXT("NewDialogue.json");
+	FString CurrentDialogueFileName;
 
 	UPROPERTY()
 	FIH_Dialogue CurrentDialogue;

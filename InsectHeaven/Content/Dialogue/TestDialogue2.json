@@ -1,0 +1,64 @@
+{
+	"ActionLayers": [
+		{
+			"Actions": [
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				},
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				},
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				},
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				},
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				}
+			]
+		},
+		{
+			"Actions": [
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				},
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				},
+				{
+					"ClassType": "DialogueAction_Talk",
+					"bWaitInput": false
+				},
+				{
+					"ClassType": "DialogueAction_Talk",
+					"bWaitInput": false
+				},
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				},
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				},
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				},
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				}
+			]
+		}
+	]
+}

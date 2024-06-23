@@ -3,6 +3,8 @@
 #include "IH_Widget.h"
 #include "IH_Widget_DialogueScene.generated.h"
 
+DECLARE_DELEGATE(FDialogueWidgetButtonEvent);
+
 UCLASS()
 class UIH_Widget_DialogueScene : public UIH_Widget
 {
@@ -16,6 +18,13 @@ public:
 
 	void SetCharacter(int32 CharacterID, bool _IsLeft);
 	void SetText(FString _Text, bool _bImmediate);
+	void SetCommitDelegate(FDialogueWidgetButtonEvent _Delegate);
+
+	bool IsShowTalkPanel();
+	void HideTalkPanel();
+
+	UFUNCTION()
+	void OnCommit();
 
 protected:
 	UPROPERTY(meta = (BindWidget))
@@ -26,13 +35,21 @@ protected:
 
 	UPROPERTY(meta = (BindWidget))
 	class UTextBlock* CPP_Txt_Script = nullptr;
-	
-	UPROPERTY(meta = (BindWidget))
-	class UIH_Widget_Portrait* CPP_Widget_LeftCh = nullptr;
 
 	UPROPERTY(meta = (BindWidget))
-	class UIH_Widget_Portrait* CPP_Widget_RightCh = nullptr;
+	class UCanvasPanel* CPP_Canvas_Script = nullptr;
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* CPP_Btn_Commit = nullptr;
+
+	UPROPERTY(meta = (BindWidget))
+	class UImage* CPP_Img_Left = nullptr;
+
+	UPROPERTY(meta = (BindWidget))
+	class UImage* CPP_Img_Right = nullptr;
 
 private:
 	FString LeftText = "";
+
+	FDialogueWidgetButtonEvent OnClickedDelegate;
 };

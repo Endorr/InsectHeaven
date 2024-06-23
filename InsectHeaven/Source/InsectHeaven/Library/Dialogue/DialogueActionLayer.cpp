@@ -174,15 +174,15 @@ int32 UDialogueActionLayer::GetActionCount()
 	return Actions.Num();
 }
 
-// EActionStateType UDialogueActionLayer::GetCurrentState()
-// {
-// 	if(Actions.IsValidIndex(nCurrentActionIndex))
-// 	{
-// 		return Actions[nCurrentActionIndex]->GetCurrentState();
-// 	}
-//
-// 	return EActionStateType::None;
-// }
+EActionStateType UDialogueActionLayer::GetCurrentState()
+{
+	if(Actions.IsValidIndex(nCurrentActionIndex))
+	{
+		return Actions[nCurrentActionIndex]->GetCurrentState();
+	}
+
+	return EActionStateType::None;
+}
 
 bool UDialogueActionLayer::IsPlaying()
 {

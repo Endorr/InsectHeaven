@@ -2,6 +2,7 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "DialogueDefine.h"
+#include "Dom/JsonValue.h"
 
 #include "DialogueActionLayer.generated.h"
 
@@ -32,7 +33,7 @@ public:
 	void SwapAction(int32 _First, int32 _Second);
 	int32 GetActionCount();
 
-	//EActionStateType GetCurrentState();
+	EActionStateType GetCurrentState();
 	bool IsPlaying();
 
 	void OnInput();

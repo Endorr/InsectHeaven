@@ -146,7 +146,7 @@ bool UIH_SceneManager::ChangeSceneStep_LoadLevel()
 
 	UWorld* World = gMngKernel.GetGameInstance()->GetWorld();
 
-	gMngKernel.GetGameInstance()->DelegateLoadedLevelInitialized = FLoadedLevelInitialized::CreateUObject(this, &UIH_SceneManager::OnCompleteLevelLoading);
+	Cast<UInsectHeaven>(gMngKernel.GetGameInstance())->DelegateLoadedLevelInitialized = FLoadedLevelInitialized::CreateUObject(this, &UIH_SceneManager::OnCompleteLevelLoading);
 	UGameplayStatics::OpenLevel(World, ChangeSceneData.LevelPackagePath, true);
 
 	return true;

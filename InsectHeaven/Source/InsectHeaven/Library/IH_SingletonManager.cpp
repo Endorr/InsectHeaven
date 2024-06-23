@@ -4,6 +4,7 @@
 #include "IH_SceneManager.h"
 #include "IH_WidgetManager.h"
 #include "SingletonInterface.h"
+#include "Dialogue/DialogueManager.h"
 
 UIH_SingletonManager* UIH_SingletonManager::Instance = nullptr;
 
@@ -152,6 +153,7 @@ void UIH_SingletonManager::RegisterSingletons()
 	Singletons.Emplace(UIH_TableManager::MakeInstance());
 	Singletons.Emplace(UIH_SceneManager::MakeInstance());
 	Singletons.Emplace(UIH_WidgetManager::MakeInstance());
+	Singletons.Emplace(UDialogueManager::MakeInstance());
 }
 
 void UIH_SingletonManager::RegisterSingletonsForTick()
@@ -160,6 +162,7 @@ void UIH_SingletonManager::RegisterSingletonsForTick()
 
 	BuiltInSingletonsForTick.Emplace(UIH_SceneManager::GetInstance());
 	BuiltInSingletonsForTick.Emplace(UIH_WidgetManager::GetInstance());
+	BuiltInSingletonsForTick.Emplace(UDialogueManager::GetInstance());
 
 	SingletonsForTick.Reset();
 }

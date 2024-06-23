@@ -29,17 +29,25 @@
 /wd4244
 /wd4838
 /I .
-/I C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven
-/I C:\Uneal\InsectHeaven\Source
-/I C:\Uneal\InsectHeaven\Source\InsectHeaven
-/I C:\Uneal\InsectHeaven\Source\InsectHeaven\Library
-/I C:\Uneal\InsectHeaven\Source\InsectHeaven\Table
-/I C:\Uneal\InsectHeaven\Source\InsectHeaven\Util
-/I C:\Uneal\InsectHeaven\Source\InsectHeaven\Scene
-/I C:\Uneal\InsectHeaven\Source\InsectHeaven\Widget
+/I ..\Intermediate\Build\Win64\UE4Editor\Inc\Blutility
+/I Editor
+/I Editor\Blutility\Classes
+/I Editor\Blutility\Public
+/I ..\Intermediate\Build\Win64\UE4Editor\Inc\EditorSubsystem
+/I Editor\EditorSubsystem\Public
+/I Editor\MainFrame\Public
+/I Editor\Documentation\Public
 /I Runtime
 /I Runtime\TraceLog\Public
 /I Runtime\Core\Public
+/I C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven
+/I C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source
+/I C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven
+/I C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Library
+/I C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Table
+/I C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Util
+/I C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Scene
+/I C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Widget
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\CoreUObject
 /I Runtime\CoreUObject\Public
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\Engine
@@ -115,14 +123,12 @@
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\PropertyAccess
 /I Runtime\PropertyAccess\Public
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\UnrealEd
-/I Editor
 /I Programs\UnrealLightmass\Public
 /I Developer\Android\AndroidDeviceDetection\Public\Interfaces
 /I Editor\UnrealEd\Classes
 /I Editor\UnrealEd\Public
 /I Developer
 /I Developer\DirectoryWatcher\Public
-/I Editor\Documentation\Public
 /I Runtime\Projects\Public
 /I Runtime\SandboxFile\Public
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\EditorStyle
@@ -137,8 +143,6 @@
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\BlueprintGraph
 /I Editor\BlueprintGraph\Classes
 /I Editor\BlueprintGraph\Public
-/I ..\Intermediate\Build\Win64\UE4Editor\Inc\EditorSubsystem
-/I Editor\EditorSubsystem\Public
 /I Runtime\Online
 /I Runtime\Online\HTTP\Public
 /I Runtime\UnrealAudio\Public
@@ -236,6 +240,22 @@
 /I Editor\Kismet\Public
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\ClothingSystemRuntimeInterface
 /I Runtime\ClothingSystemRuntimeInterface\Public
+/I ..\Intermediate\Build\Win64\UE4Editor\Inc\JsonUtilities
+/I Runtime\JsonUtilities\Public
+/I ..\Plugins\Editor\EditorScriptingUtilities\Intermediate\Build\Win64\UE4Editor\Inc\EditorScriptingUtilities
+/I ..\Plugins\Editor\EditorScriptingUtilities\Source
+/I ..\Plugins\Editor\EditorScriptingUtilities\Source\EditorScriptingUtilities\Public
+/I Developer\DesktopWidgets\Public
+/I Developer\DesktopPlatform\Public
+/I ..\Intermediate\Build\Win64\UE4Editor\Inc\UMGEditor
+/I Editor\UMGEditor\Classes
+/I Editor\UMGEditor\Public
+/I ..\Intermediate\Build\Win64\UE4Editor\Inc\Sequencer
+/I Editor\Sequencer\Public
+/I ..\Intermediate\Build\Win64\UE4Editor\Inc\SceneOutliner
+/I Editor\SceneOutliner\Public
+/I ..\Intermediate\Build\Win64\UE4Editor\Inc\CurveEditor
+/I Editor\CurveEditor\Public
 /I ThirdParty\PhysX3\PxShared\include
 /I ThirdParty\PhysX3\PxShared\include\cudamanager
 /I ThirdParty\PhysX3\PxShared\include\filebuf
@@ -265,12 +285,12 @@
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\winrt"
-/FI"C:\Uneal\InsectHeaven\Intermediate\Build\Win64\InsectHeavenEditor\DebugGame\Engine\SharedPCH.Engine.NonOptimized.ShadowErrors.h"
-/Yu"C:\Uneal\InsectHeaven\Intermediate\Build\Win64\InsectHeavenEditor\DebugGame\Engine\SharedPCH.Engine.NonOptimized.ShadowErrors.h"
-/Fp"C:\Uneal\InsectHeaven\Intermediate\Build\Win64\InsectHeavenEditor\DebugGame\Engine\SharedPCH.Engine.NonOptimized.ShadowErrors.h.pch"
-"C:\Uneal\InsectHeaven\Source\InsectHeaven\Library\IH_SingletonManager.cpp"
-/FI"C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\Definitions.InsectHeaven.h"
-/Fo"C:\Uneal\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\IH_SingletonManager.cpp.obj"
+/FI"C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\InsectHeavenEditor\DebugGame\Engine\SharedPCH.Engine.NonOptimized.ShadowErrors.h"
+/Yu"C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\InsectHeavenEditor\DebugGame\Engine\SharedPCH.Engine.NonOptimized.ShadowErrors.h"
+/Fp"C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\InsectHeavenEditor\DebugGame\Engine\SharedPCH.Engine.NonOptimized.ShadowErrors.h.pch"
+"C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Library\IH_SingletonManager.cpp"
+/FI"C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\Definitions.InsectHeaven.h"
+/Fo"C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\DebugGame\InsectHeaven\IH_SingletonManager.cpp.obj"
 /TP
 /GR-
 /W4

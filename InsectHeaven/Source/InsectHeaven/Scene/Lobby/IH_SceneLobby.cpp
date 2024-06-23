@@ -25,8 +25,8 @@ void UIH_SceneLobby::Exit()
 
 void UIH_SceneLobby::BeginTick()
 {
-	if(UIH_Widget_MainLobby* MainLobbyWidget = Cast<UIH_Widget_MainLobby>(gWidgetMng.CreateWidgetByName(UIH_Widget_MainLobby::GetWidgetName())))
-	{
-		MainLobbyWidget->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
-	}
+	// if(UIH_Widget_MainLobby* MainLobbyWidget = Cast<UIH_Widget_MainLobby>(gWidgetMng.CreateWidgetByName(UIH_Widget_MainLobby::GetWidgetName())))
+	// {
+	// 	MainLobbyWidget->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+	// }
 }

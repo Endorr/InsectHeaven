@@ -246,6 +246,7 @@
 /I ..\Plugins\Editor\EditorScriptingUtilities\Source
 /I ..\Plugins\Editor\EditorScriptingUtilities\Source\EditorScriptingUtilities\Public
 /I Developer\DesktopWidgets\Public
+/I Developer\DesktopPlatform\Public
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\UMGEditor
 /I Editor\UMGEditor\Classes
 /I Editor\UMGEditor\Public

@@ -24,10 +24,12 @@ void EmptyLinkFunctionForGeneratedCodeDialogueEditToolWidget() {}
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector2D();
 	UMG_API UClass* Z_Construct_UClass_UScrollBox_NoRegister();
 	UMG_API UClass* Z_Construct_UClass_UCanvasPanel_NoRegister();
+	UMGEDITOR_API UClass* Z_Construct_UClass_USinglePropertyView_NoRegister();
 	UMG_API UClass* Z_Construct_UClass_UButton_NoRegister();
 	INSECTHEAVEN_API UClass* Z_Construct_UClass_UIH_Widget_DialogueToolAction_NoRegister();
 	UMG_API UClass* Z_Construct_UClass_UTextBlock_NoRegister();
 	UMG_API UClass* Z_Construct_UClass_UImage_NoRegister();
+	UMGEDITOR_API UClass* Z_Construct_UClass_UDetailsView_NoRegister();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 // End Cross Module References
 class UScriptStruct* FDialogueClip::StaticStruct()
@@ -227,6 +229,20 @@ static struct FScriptStruct_InsectHeaven_StaticRegisterNativesFIH_Dialogue
 		P_THIS->DeleteSelectAction();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(UDialogueEditToolWidget::execOnClick_Stop)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->OnClick_Stop();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UDialogueEditToolWidget::execOnClick_Play)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->OnClick_Play();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UDialogueEditToolWidget::execOnClick_CancelAction)
 	{
 		P_FINISH;
@@ -272,7 +288,9 @@ static struct FScriptStruct_InsectHeaven_StaticRegisterNativesFIH_Dialogue
 			{ "OnClick_CancelAction", &UDialogueEditToolWidget::execOnClick_CancelAction },
 			{ "OnClick_ChangeAction", &UDialogueEditToolWidget::execOnClick_ChangeAction },
 			{ "OnClick_LoadButton", &UDialogueEditToolWidget::execOnClick_LoadButton },
+			{ "OnClick_Play", &UDialogueEditToolWidget::execOnClick_Play },
 			{ "OnClick_SaveButton", &UDialogueEditToolWidget::execOnClick_SaveButton },
+			{ "OnClick_Stop", &UDialogueEditToolWidget::execOnClick_Stop },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 	}
@@ -426,6 +444,28 @@ static struct FScriptStruct_InsectHeaven_StaticRegisterNativesFIH_Dialogue
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_Play_Statics
+	{
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_Play_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Library/Dialogue/DialogueEditToolWidget.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_Play_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UDialogueEditToolWidget, nullptr, "OnClick_Play", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00080401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_Play_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_Play_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_Play()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_Play_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_SaveButton_Statics
 	{
 #if WITH_METADATA
@@ -445,6 +485,28 @@ static struct FScriptStruct_InsectHeaven_StaticRegisterNativesFIH_Dialogue
 		if (!ReturnFunction)
 		{
 			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_SaveButton_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_Stop_Statics
+	{
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_Stop_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Library/Dialogue/DialogueEditToolWidget.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_Stop_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UDialogueEditToolWidget, nullptr, "OnClick_Stop", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00080401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_Stop_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_Stop_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_Stop()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_Stop_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -472,6 +534,10 @@ static struct FScriptStruct_InsectHeaven_StaticRegisterNativesFIH_Dialogue
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_CPP_Canvas_ActionChange;
 #if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_CPP_PropertyView_ActionList_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_CPP_PropertyView_ActionList;
+#if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_CPP_Btn_ChangeAction_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_CPP_Btn_ChangeAction;
@@ -488,6 +554,14 @@ static struct FScriptStruct_InsectHeaven_StaticRegisterNativesFIH_Dialogue
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_CPP_Btn_Load;
 #if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_CPP_Btn_Play_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_CPP_Btn_Play;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_CPP_Btn_Stop_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_CPP_Btn_Stop;
+#if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_CPP_Widget_SelectShadow_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_CPP_Widget_SelectShadow;
@@ -499,6 +573,10 @@ static struct FScriptStruct_InsectHeaven_StaticRegisterNativesFIH_Dialogue
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_CPP_Img_Test_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_CPP_Img_Test;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_CPP_DetailView_Action_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_CPP_DetailView_Action;
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_CurrentDialogue_MetaData[];
 #endif
@@ -522,7 +600,9 @@ static struct FScriptStruct_InsectHeaven_StaticRegisterNativesFIH_Dialogue
 		{ &Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_CancelAction, "OnClick_CancelAction" }, // 797013548
 		{ &Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_ChangeAction, "OnClick_ChangeAction" }, // 2842796806
 		{ &Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_LoadButton, "OnClick_LoadButton" }, // 1839381115
+		{ &Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_Play, "OnClick_Play" }, // 4171642372
 		{ &Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_SaveButton, "OnClick_SaveButton" }, // 1683876630
+		{ &Z_Construct_UFunction_UDialogueEditToolWidget_OnClick_Stop, "OnClick_Stop" }, // 2100379718
 	};
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UDialogueEditToolWidget_Statics::Class_MetaDataParams[] = {
@@ -554,6 +634,14 @@ static struct FScriptStruct_InsectHeaven_StaticRegisterNativesFIH_Dialogue
 	};
 #endif
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Canvas_ActionChange = { "CPP_Canvas_ActionChange", nullptr, (EPropertyFlags)0x0020080000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UDialogueEditToolWidget, CPP_Canvas_ActionChange), Z_Construct_UClass_UCanvasPanel_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Canvas_ActionChange_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Canvas_ActionChange_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_PropertyView_ActionList_MetaData[] = {
+		{ "BindWidget", "" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Library/Dialogue/DialogueEditToolWidget.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_PropertyView_ActionList = { "CPP_PropertyView_ActionList", nullptr, (EPropertyFlags)0x0020080000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UDialogueEditToolWidget, CPP_PropertyView_ActionList), Z_Construct_UClass_USinglePropertyView_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_PropertyView_ActionList_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_PropertyView_ActionList_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Btn_ChangeAction_MetaData[] = {
 		{ "BindWidget", "" },
@@ -587,6 +675,22 @@ static struct FScriptStruct_InsectHeaven_StaticRegisterNativesFIH_Dialogue
 #endif
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Btn_Load = { "CPP_Btn_Load", nullptr, (EPropertyFlags)0x0020080000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UDialogueEditToolWidget, CPP_Btn_Load), Z_Construct_UClass_UButton_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Btn_Load_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Btn_Load_MetaData)) };
 #if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Btn_Play_MetaData[] = {
+		{ "BindWidget", "" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Library/Dialogue/DialogueEditToolWidget.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Btn_Play = { "CPP_Btn_Play", nullptr, (EPropertyFlags)0x0020080000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UDialogueEditToolWidget, CPP_Btn_Play), Z_Construct_UClass_UButton_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Btn_Play_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Btn_Play_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Btn_Stop_MetaData[] = {
+		{ "BindWidget", "" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Library/Dialogue/DialogueEditToolWidget.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Btn_Stop = { "CPP_Btn_Stop", nullptr, (EPropertyFlags)0x0020080000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UDialogueEditToolWidget, CPP_Btn_Stop), Z_Construct_UClass_UButton_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Btn_Stop_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Btn_Stop_MetaData)) };
+#if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Widget_SelectShadow_MetaData[] = {
 		{ "BindWidget", "" },
 		{ "EditInline", "true" },
@@ -611,6 +715,14 @@ static struct FScriptStruct_InsectHeaven_StaticRegisterNativesFIH_Dialogue
 #endif
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Img_Test = { "CPP_Img_Test", nullptr, (EPropertyFlags)0x0020080000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UDialogueEditToolWidget, CPP_Img_Test), Z_Construct_UClass_UImage_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Img_Test_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Img_Test_MetaData)) };
 #if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_DetailView_Action_MetaData[] = {
+		{ "BindWidget", "" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Library/Dialogue/DialogueEditToolWidget.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_DetailView_Action = { "CPP_DetailView_Action", nullptr, (EPropertyFlags)0x0020080000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UDialogueEditToolWidget, CPP_DetailView_Action), Z_Construct_UClass_UDetailsView_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_DetailView_Action_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_DetailView_Action_MetaData)) };
+#if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CurrentDialogue_MetaData[] = {
 		{ "ModuleRelativePath", "Library/Dialogue/DialogueEditToolWidget.h" },
 	};
@@ -628,13 +740,17 @@ static struct FScriptStruct_InsectHeaven_StaticRegisterNativesFIH_Dialogue
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Scroll_Layer,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Scroll_ActionLine,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Canvas_ActionChange,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_PropertyView_ActionList,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Btn_ChangeAction,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Btn_CancelAction,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Btn_Save,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Btn_Load,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Btn_Play,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Btn_Stop,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Widget_SelectShadow,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Txt_FileName,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_Img_Test,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CPP_DetailView_Action,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CurrentDialogue,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UDialogueEditToolWidget_Statics::NewProp_CurrentAddActionClass,
 	};
@@ -665,7 +781,7 @@ static struct FScriptStruct_InsectHeaven_StaticRegisterNativesFIH_Dialogue
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UDialogueEditToolWidget, 3950795006);
+	IMPLEMENT_CLASS(UDialogueEditToolWidget, 2262362361);
 	template<> INSECTHEAVEN_API UClass* StaticClass<UDialogueEditToolWidget>()
 	{
 		return UDialogueEditToolWidget::StaticClass();

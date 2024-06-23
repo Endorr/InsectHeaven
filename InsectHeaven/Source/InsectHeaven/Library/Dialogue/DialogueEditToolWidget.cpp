@@ -5,20 +5,32 @@
 
 #include "DesktopPlatformModule.h"
 #include "DialogueActionLayer.h"
+#include "EngineAnalytics.h"
+#include "FileHelpers.h"
+#include "IAssetViewport.h"
 #include "IDesktopPlatform.h"
+#include "IH_DialoguePlayer.h"
+#include "IH_GameMode_DialgueTool.h"
 #include "IH_WidgetManager.h"
+#include "LevelEditor.h"
+#include "UnrealEdGlobals.h"
 #include "Action/DialogueAction_Empty.h"
 #include "Blueprint/WidgetLayoutLibrary.h"
 #include "Components/Button.h"
 #include "Components/CanvasPanel.h"
 #include "Components/CanvasPanelSlot.h"
+#include "Components/DetailsView.h"
 #include "Components/HorizontalBox.h"
 #include "Components/Image.h"
 #include "Components/ScrollBox.h"
 #include "Components/TextBlock.h"
 #include "DialogueTool/IH_Widget_DialogueToolAction.h"
+#include "Editor/UnrealEdEngine.h"
 #include "UMGEditor/Public/Components/SinglePropertyView.h"
 #include "Framework/Application/SlateApplication.h"
+#include "Misc/FileHelper.h"
+#include "Serialization/JsonSerializer.h"
+#include "Serialization/JsonWriter.h"
 #include "Widgets/SViewport.h"
 
 static FString ActionLineObjectPath = "/Game/Widget/Dialogue/DialogueToolActionLine.DialogueToolActionLine_C";
@@ -84,6 +96,16 @@ void UDialogueEditToolWidget::NativeConstruct()
 		CPP_Btn_Load->OnClicked.AddUniqueDynamic(this, &UDialogueEditToolWidget::OnClick_LoadButton);
 	}
 
+	if(CPP_Btn_Play)
+	{
+		CPP_Btn_Play->OnClicked.AddUniqueDynamic(this, &UDialogueEditToolWidget::OnClick_Play);
+	}
+
+	if(CPP_Btn_Stop)
+	{
+		CPP_Btn_Stop->OnClicked.AddUniqueDynamic(this, &UDialogueEditToolWidget::OnClick_Stop);
+	}
+	
 	if(CPP_Widget_SelectShadow)
 	{
 		CPP_Widget_SelectShadow->SetShadow(nullptr, INDEX_NONE, INDEX_NONE);
@@ -97,6 +119,20 @@ void UDialogueEditToolWidget::NativeConstruct()
 		{
 			ActionWidget->SetParentWidget(this);
 		}
+	}
+
+	SetFileName(TEXT(""));
+	bool bLoadActiveDialogue = false;
+	GConfig->GetBool(TEXT("/Script/InsectHeaven.DialogueTool"), TEXT("OpenWithActiveDialogue"), bLoadActiveDialogue, GGameIni);
+	if (bLoadActiveDialogue)
+	{
+		LoadActiveDialogue();
+
+		FString SavedCurrentFileName;
+		GConfig->GetString(TEXT("/Script/ProjectVic.DialogueTool"), TEXT("CurrentFileName"), SavedCurrentFileName, GGameIni);
+		GConfig->GetString(TEXT("/Script/ProjectVic.DialogueTool"), TEXT("CurrentFilePath"), LoadFilePath, GGameIni);
+		
+		SetFileName(FPaths::GetCleanFilename(SavedCurrentFileName));
 	}
 }
 
@@ -210,6 +246,9 @@ void UDialogueEditToolWidget::AddNewActionAt(int32 _LayerIndex, int32 _ActionInd
 
 void UDialogueEditToolWidget::SelectAction(UIH_Widget_DialogueToolAction* _SelectAction)
 {
+	CPP_DetailView_Action->SetObject(_SelectAction->GetActionInfo());
+	CPP_DetailView_Action->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+	
 	CurrentSelectActionWidget = _SelectAction;
 
 	for(auto& elem : CPP_Scroll_ActionLine->GetAllChildren())
@@ -251,7 +290,7 @@ void UDialogueEditToolWidget::MoveAction(TPair<int32, int32> _FormerPos, TPair<i
 	if(_FormerPos != _PostPos)
 	{
 		AddNewActionAt(_PostPos.Key, _PostPos.Value, CPP_Widget_SelectShadow->GetActionInfo());
-		//DeleteAction(_FormerPos.Key, _FormerPos.Value);
+		DeleteAction(_FormerPos.Key, _FormerPos.Value);
 	}
 	
 	ReleaseShadow();
@@ -412,6 +451,119 @@ void UDialogueEditToolWidget::OnClick_CancelAction()
 	}
 }
 
+void UDialogueEditToolWidget::OnClick_Play()
+{
+	GConfig->SetBool(TEXT("/Script/InsectHeaven.DialogueTool"), TEXT("OpenWithActiveDialogue"), true, GGameIni);
+	GConfig->SetString(TEXT("/Script/InsectHeaven.DialogueTool"), TEXT("CurrentFileName"), *CurrentDialogueFileName, GGameIni);
+	GConfig->SetString(TEXT("/Script/InsectHeaven.DialogueTool"), TEXT("CurrentFilePath"), *LoadFilePath, GGameIni);
+
+	SaveDialogue(CurrentDialogue, FPaths::ProjectContentDir() + FString(TEXT("Dialogue/")) + TEXT("ActiveDialogue"));
+
+	FLevelEditorModule& LevelEditorModule = FModuleManager::GetModuleChecked<FLevelEditorModule>(TEXT("LevelEditor"));
+
+	ULevelEditorPlaySettings* PlaySettings = GetMutableDefault<ULevelEditorPlaySettings>();
+	PlaySettings->LastExecutedPlayModeType = PlayMode_InViewPort;
+
+	FPropertyChangedEvent PropChangeEvent(ULevelEditorPlaySettings::StaticClass()->FindPropertyByName(GET_MEMBER_NAME_CHECKED(ULevelEditorPlaySettings, LastExecutedPlayModeType)));
+	PlaySettings->PostEditChangeProperty(PropChangeEvent);
+
+	PlaySettings->SaveConfig();
+
+	if (FEngineAnalytics::IsAvailable())
+	{
+		// play location
+		FString PlayLocationString;
+
+		switch (PlaySettings->LastExecutedPlayModeLocation)
+		{
+		case PlayLocation_CurrentCameraLocation:
+			PlayLocationString = TEXT("CurrentCameraLocation");
+			break;
+
+		case PlayLocation_DefaultPlayerStart:
+			PlayLocationString = TEXT("DefaultPlayerStart");
+			break;
+
+		default:
+			PlayLocationString = TEXT("<UNKNOWN>");
+		}
+
+		// play mode
+		FString PlayModeString;
+
+		switch (PlaySettings->LastExecutedPlayModeType)
+		{
+		case PlayMode_InViewPort:
+			PlayModeString = TEXT("InViewPort");
+			break;
+
+		case PlayMode_InEditorFloating:
+			PlayModeString = TEXT("InEditorFloating");
+			break;
+
+		case PlayMode_InMobilePreview:
+			PlayModeString = TEXT("InMobilePreview");
+			break;
+
+		case PlayMode_InTargetedMobilePreview:
+			PlayModeString = TEXT("InTargetedMobilePreview");
+			break;
+
+		case PlayMode_InVulkanPreview:
+			PlayModeString = TEXT("InVulkanPreview");
+			break;
+
+		case PlayMode_InNewProcess:
+			PlayModeString = TEXT("InNewProcess");
+			break;
+
+		case PlayMode_InVR:
+			PlayModeString = TEXT("InVR");
+			break;
+
+		case PlayMode_Simulate:
+			PlayModeString = TEXT("Simulate");
+			break;
+
+		default:
+			PlayModeString = TEXT("<UNKNOWN>");
+		}
+
+		FEngineAnalytics::GetProvider().RecordEvent(TEXT("Editor.Usage.PIE"), TEXT("PlayLocation"), PlayLocationString);
+		FEngineAnalytics::GetProvider().RecordEvent(TEXT("Editor.Usage.PIE"), TEXT("PlayMode"), PlayModeString);
+	}
+
+	TSharedPtr<IAssetViewport> ActiveLevelViewport = LevelEditorModule.GetFirstActiveViewport();
+
+	const bool bAtPlayerStart = false;
+	FRequestPlaySessionParams SessionParams;
+
+	if (ActiveLevelViewport.IsValid() && FSlateApplication::Get().FindWidgetWindow(ActiveLevelViewport->AsWidget()).IsValid())
+	{
+		SessionParams.DestinationSlateViewport = ActiveLevelViewport;
+
+		if (!bAtPlayerStart)
+		{
+			SessionParams.StartLocation = FVector::ZeroVector;
+			SessionParams.StartRotation = FRotator::ZeroRotator;
+		}
+	}
+
+	SessionParams.WorldType = EPlaySessionWorldType::PlayInEditor;
+	SessionParams.GlobalMapOverride = TEXT("/Game/Scene/Editor/DialogueTest.DialogueTest");
+	SessionParams.GameModeOverride = AIH_GameMode_DialgueTool::StaticClass();
+	SessionParams.SessionDestination = EPlaySessionDestinationType::InProcess;
+
+	FEditorFileUtils::LoadMap(TEXT("/Game/Scene/Editor/DialogueTest"));
+
+	GUnrealEd->RequestPlaySession(SessionParams);
+}
+
+void UDialogueEditToolWidget::OnClick_Stop()
+{
+	GEditor->RequestEndPlayMap();
+}
+
 void UDialogueEditToolWidget::GrabAction(UIH_Widget_DialogueToolAction* _Widget)
 {
 	GrabStartPos = TPair<int32, int32>(INDEX_NONE, INDEX_NONE);
@@ -547,6 +699,12 @@ FVector2D UDialogueEditToolWidget::CalculateActionPos(int32 _LayerIndex, int32 _
 	return LocalPos;
 }
 
+void UDialogueEditToolWidget::LoadActiveDialogue()
+{
+	FString FilePath = FPaths::ProjectContentDir() + FString(TEXT("Dialogue/")) + FString(TEXT("ActiveDialogue"));
+	CurrentDialogue = LoadDialogue(FilePath);
+}
+
 void UDialogueEditToolWidget::ReadCurrentDialogue()
 {
 	CPP_Scroll_Layer->ClearChildren();
@@ -638,4 +796,72 @@ bool UDialogueEditToolWidget::SaveFile(const FString& _Title, const FString& _Fi
 	}
 
 	return bFileChosen;
+}
+
+void UDialogueEditToolWidget::SetFileName(const FString& _FileName)
+{
+	CurrentDialogueFileName = _FileName;
+	CPP_Txt_FileName->SetText(FText::FromString(_FileName));
+}
+
+FIH_Dialogue UDialogueEditToolWidget::LoadDialogue(const FString& _strFileName)
+{
+	const FString JsonFilePath = _strFileName;
+	FString JsonString;
+
+	FFileHelper::LoadFileToString(JsonString, *JsonFilePath);
+
+	TSharedPtr<FJsonObject> JsonObject = MakeShareable(new FJsonObject());
+	TSharedRef<TJsonReader<>> JsonReader = TJsonReaderFactory<>::Create(JsonString);
+
+	if (FJsonSerializer::Deserialize(JsonReader, JsonObject) && JsonObject.IsValid())
+	{
+		FIH_Dialogue Dialogue;
+
+		const TArray<TSharedPtr<FJsonValue>>& arrActionLayer = JsonObject->GetArrayField(TEXT("ActionLayers"));
+		for (const TSharedPtr<FJsonValue>& ActionLayer : arrActionLayer)
+		{
+			UDialogueActionLayer* pLayer = NewObject<UDialogueActionLayer>();
+			Dialogue.ActionLayers.Add(pLayer);
+
+			pLayer->LoadToJson(ActionLayer);
+		}
+
+
+		return Dialogue;
+	}
+
+	return FIH_Dialogue();
+}
+
+bool UDialogueEditToolWidget::SaveDialogue(FIH_Dialogue& _Dialogue, const FString& _strFileName)
+{
+	const FString strJsonPath = _strFileName;
+	FString JsonString; //Json converted to FString
+
+	TSharedRef<FJsonObject> JsonObject = MakeShareable(new FJsonObject());
+
+	{ // Save Action
+		TArray<TSharedPtr<FJsonValue>> Values;
+
+		for (int i = 0; i < _Dialogue.ActionLayers.Num(); ++i)
+		{
+			TSharedRef<FJsonObject> json = MakeShareable(new FJsonObject());
+			TSharedPtr<FJsonValueObject> value = MakeShareable(new FJsonValueObject(json));
+
+			_Dialogue.ActionLayers[i]->SaveToJson(json);
+
+			Values.Add(value);
+		}
+
+		JsonObject->SetArrayField(TEXT("ActionLayers"), Values);
+	}
+
+
+	FString OutputString;
+	TSharedRef< TJsonWriter<> > Writer = TJsonWriterFactory<>::Create(&OutputString);
+	FJsonSerializer::Serialize(JsonObject, Writer);
+
+	bool bResult = FFileHelper::SaveStringToFile(OutputString, *strJsonPath);
+	return bResult;
 }
