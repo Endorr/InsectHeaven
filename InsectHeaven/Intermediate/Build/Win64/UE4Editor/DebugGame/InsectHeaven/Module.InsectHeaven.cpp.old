@@ -7,7 +7,6 @@
 #include "C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Source/InsectHeaven/Scene/IH_LevelScriptActor.cpp"
 #include "C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Source/InsectHeaven/Scene/IH_SceneBase.cpp"
 #include "C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Source/InsectHeaven/Scene/IH_SceneDefine.cpp"
-#include "C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Source/InsectHeaven/Scene/Lobby/IH_SceneLobby.cpp"
 #include "C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Source/InsectHeaven/Table/IH_TableDefine.cpp"
 #include "C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Source/InsectHeaven/Table/IH_TableManager.cpp"
 #include "C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Source/InsectHeaven/Table/TableMapper/IH_Mapper_BasePath_Dir.cpp"
