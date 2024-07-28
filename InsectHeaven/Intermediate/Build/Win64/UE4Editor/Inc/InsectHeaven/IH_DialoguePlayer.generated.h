@@ -13,7 +13,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define INSECTHEAVEN_IH_DialoguePlayer_generated_h
 
-#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_IH_DialoguePlayer_h_69_DELEGATE \
+#define InsectHeaven_Source_InsectHeaven_Library_Dialogue_IH_DialoguePlayer_h_64_DELEGATE \
 struct IH_DialoguePlayer_eventOnPlayingActionChanged_Parms \
 { \
 	int32 ActionIndex; \

@@ -28,6 +28,14 @@ void UIH_SingletonManager::DestroyInstance()
 	}
 }
 
+bool UIH_SingletonManager::HasInstance()
+{
+	if(nullptr == Instance)
+		return false;
+
+	return true;
+}
+
 void UIH_SingletonManager::BuiltInInitializeSingletons()
 {
 	for(ISingleton* Singleton : Singletons)

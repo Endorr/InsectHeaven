@@ -10,14 +10,38 @@ C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Components/Visual.h
 C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\Visual.generated.h
 C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Slate/WidgetTransform.h
 C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\WidgetTransform.generated.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/PlayerController.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/OnlineReplStructs.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/CoreOnline.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\OnlineReplStructs.generated.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/PlayerMuteList.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\PlayerMuteList.generated.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\Camera/PlayerCameraManager.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\PlayerCameraManager.generated.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\Components/InputComponent.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\InputComponent.generated.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/ForceFeedbackEffect.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\ForceFeedbackEffect.generated.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/UpdateLevelVisibilityLevelInfo.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\UpdateLevelVisibilityLevelInfo.generated.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\ApplicationCore\Public\GenericPlatform/IInputInterface.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\PlayerController.generated.h
 C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Blueprint/WidgetNavigation.h
 C:\Program Files\UE_4.27\Engine\Source\Runtime\SlateCore\Public\Types/NavigationMetaData.h
 C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\WidgetNavigation.generated.h
 C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\Widget.generated.h
 C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Components/NamedSlotInterface.h
 C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\NamedSlotInterface.generated.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\Engine/LocalPlayer.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\Engine/Player.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\Player.generated.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Public\Subsystems/LocalPlayerSubsystem.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\LocalPlayerSubsystem.generated.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\LocalPlayer.generated.h
 C:\Program Files\UE_4.27\Engine\Source\Runtime\Slate\Public\Widgets/Layout/Anchors.h
 C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Slate\Anchors.generated.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Core\Public\Logging/MessageLog.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Core\Public\Logging/TokenizedMessage.h
 C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Animation/WidgetAnimation.h
 C:\Program Files\UE_4.27\Engine\Source\Runtime\MovieScene\Public\MovieSceneSequence.h
 C:\Program Files\UE_4.27\Engine\Source\Runtime\MovieScene\Public\MovieSceneSignedObject.h
@@ -102,15 +126,14 @@ C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\Dynam
 C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\WidgetBlueprintGeneratedClass.generated.h
 C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\UserWidget.generated.h
 C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Widget.generated.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Widget_DialogueToolAction.generated.h
-C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Blueprint/WidgetLayoutLibrary.h
-C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\WidgetLayoutLibrary.generated.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Library/Dialogue/DialogueEditToolWidget.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Library\Dialogue\DialogueDefine.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Library\Dialogue/DialogueEditToolWidget.h
 C:\Program Files\UE_4.27\Engine\Source\Editor\Blutility\Classes\EditorUtilityWidget.h
 C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Blutility\EditorUtilityWidget.generated.h
 C:\Program Files\UE_4.27\Engine\Source\Developer\DesktopPlatform\Public\IDesktopPlatform.h
 C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\DialogueEditToolWidget.generated.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Widget_DialogueToolAction.generated.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Blueprint/WidgetLayoutLibrary.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\WidgetLayoutLibrary.generated.h
 C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Components/Button.h
 C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Components/ContentWidget.h
 C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Components/PanelWidget.h
@@ -140,5 +163,11 @@ C:\Program Files\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/Proper
 C:\Program Files\UE_4.27\Engine\Source\Runtime\Core\Public\Math/UnitConversion.h
 C:\Program Files\UE_4.27\Engine\Source\Runtime\Core\Public\Math/UnitConversion.inl
 C:\Program Files\UE_4.27\Engine\Source\Runtime\Core\Public\Internationalization/PolyglotTextData.h
-C:\Program Files\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\AssetRegistry/ARFilter.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Library\Dialogue\DialogueDefine.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Json\Public\Dom/JsonObject.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Json\Public\JsonGlobals.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Json\Public\Serialization/JsonTypes.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Json\Public\Dom/JsonValue.h
 C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\DialogueAction.generated.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Library\Dialogue/Action/DialogueAction_Empty.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\DialogueAction_Empty.generated.h

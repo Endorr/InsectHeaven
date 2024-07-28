@@ -8,6 +8,7 @@
 #include "Components/TextBlock.h"
 #include "Components/WidgetSwitcher.h"
 #include "Dialogue/DialogueAction.h"
+#include "Dialogue/Action/DialogueAction_Empty.h"
 
 void UIH_Widget_DialogueToolAction::NativeConstruct()
 {
@@ -15,8 +16,8 @@ void UIH_Widget_DialogueToolAction::NativeConstruct()
 	
 	if(CPP_Btn_Click)
 	{
-		CPP_Btn_Click->OnPressed.AddUniqueDynamic(this, &UIH_Widget_DialogueToolAction::OnClickActon);
-		CPP_Btn_Click->OnReleased.AddUniqueDynamic(this, &UIH_Widget_DialogueToolAction::OnReleaseAction);
+		CPP_Btn_Click->OnPressed.AddUniqueDynamic(this, &UIH_Widget_DialogueToolAction::OnPressSelectButton);
+		//CPP_Btn_Click->OnReleased.AddUniqueDynamic(this, &UIH_Widget_DialogueToolAction::OnReleaseAction);
 	}
 
 	if(CPP_Btn_Option)
@@ -45,7 +46,7 @@ void UIH_Widget_DialogueToolAction::NativeDestruct()
 	Super::NativeDestruct();
 }
 
-void UIH_Widget_DialogueToolAction::SetParentWidget(UDialogueEditToolWidget* _ToolWidget)
+void UIH_Widget_DialogueToolAction::SetParentWidget(UDialogueToolWidget* _ToolWidget)
 {
 	ToolWidget = _ToolWidget;
 }
@@ -123,6 +124,24 @@ void UIH_Widget_DialogueToolAction::SetShadow(UDialogueAction* _Action, int32 _L
 	}
 }
 
+UButton* UIH_Widget_DialogueToolAction::GetSelectButton()
+{
+	return CPP_Btn_Click;
+}
+
+void UIH_Widget_DialogueToolAction::OnPressSelectButton()
+{
+	ToolWidget->DeselectAction();
+	ToolWidget->SelectAction(this);
+	if(selectClick.IsBound())
+		selectClick.Broadcast(CPP_Btn_Click);
+}
+
+FSelectDelegate& UIH_Widget_DialogueToolAction::GetSelectDelgate()
+{
+	return selectClick;
+}
+
 void UIH_Widget_DialogueToolAction::OnClickActon()
 {
 	if(nullptr == ToolWidget)
@@ -132,11 +151,11 @@ void UIH_Widget_DialogueToolAction::OnClickActon()
 	{
 		if(INDEX_NONE == ActionIndex && INDEX_NONE == LayerIndex)
 		{
-			ToolWidget->AddNewLayer();
+			ToolWidget->AddLayer();
 		}
 		else if(INDEX_NONE == ActionIndex)
 		{
-			ToolWidget->AddNewAction(LayerIndex);
+			ToolWidget->AddAction(LayerIndex,UDialogueAction_Empty::StaticClass());
 		}
 		else
 		{
@@ -145,7 +164,7 @@ void UIH_Widget_DialogueToolAction::OnClickActon()
 	else
 	{
 		ToolWidget->SelectAction(this);
-		ToolWidget->GrabAction(this);
+		ToolWidget->GrabAction(this->GetSelectButton());
 	}
 }
 
@@ -156,7 +175,7 @@ void UIH_Widget_DialogueToolAction::OnReleaseAction()
 	
 	if(0 != CPP_Switcher_Content->GetActiveWidgetIndex())
 	{
-		ToolWidget->GrabOffAction(this);
+		ToolWidget->GrabOffAction();
 	}
 }
 
@@ -176,6 +195,6 @@ void UIH_Widget_DialogueToolAction::OnClickChangeAction()
 {
 	if(nullptr != ToolWidget)
 	{
-		ToolWidget->ShowChangeActionCanvas(this);
+		ToolWidget->OpenChangeActionAt(LayerIndex,ActionIndex);
 	}
 }

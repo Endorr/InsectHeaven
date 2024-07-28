@@ -8,29 +8,45 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class UButton;
 #ifdef INSECTHEAVEN_IH_Widget_DialogueToolAction_generated_h
 #error "IH_Widget_DialogueToolAction.generated.h already included, missing '#pragma once' in IH_Widget_DialogueToolAction.h"
 #endif
 #define INSECTHEAVEN_IH_Widget_DialogueToolAction_generated_h
 
-#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_SPARSE_DATA
-#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_RPC_WRAPPERS \
+#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_9_DELEGATE \
+struct _Script_InsectHeaven_eventSelectDelegate_Parms \
+{ \
+	UButton* _Button; \
+}; \
+static inline void FSelectDelegate_DelegateWrapper(const FMulticastScriptDelegate& SelectDelegate, UButton* _Button) \
+{ \
+	_Script_InsectHeaven_eventSelectDelegate_Parms Parms; \
+	Parms._Button=_Button; \
+	SelectDelegate.ProcessMulticastDelegate<UObject>(&Parms); \
+}
+
+
+#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_SPARSE_DATA
+#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_RPC_WRAPPERS \
  \
 	DECLARE_FUNCTION(execOnClickChangeAction); \
 	DECLARE_FUNCTION(execOnClickOption); \
 	DECLARE_FUNCTION(execOnReleaseAction); \
-	DECLARE_FUNCTION(execOnClickActon);
+	DECLARE_FUNCTION(execOnClickActon); \
+	DECLARE_FUNCTION(execOnPressSelectButton);
 
 
-#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_RPC_WRAPPERS_NO_PURE_DECLS \
+#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execOnClickChangeAction); \
 	DECLARE_FUNCTION(execOnClickOption); \
 	DECLARE_FUNCTION(execOnReleaseAction); \
-	DECLARE_FUNCTION(execOnClickActon);
+	DECLARE_FUNCTION(execOnClickActon); \
+	DECLARE_FUNCTION(execOnPressSelectButton);
 
 
-#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_INCLASS_NO_PURE_DECLS \
+#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUIH_Widget_DialogueToolAction(); \
 	friend struct Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics; \
@@ -39,7 +55,7 @@ public: \
 	DECLARE_SERIALIZER(UIH_Widget_DialogueToolAction)
 
 
-#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_INCLASS \
+#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_INCLASS \
 private: \
 	static void StaticRegisterNativesUIH_Widget_DialogueToolAction(); \
 	friend struct Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics; \
@@ -48,7 +64,7 @@ public: \
 	DECLARE_SERIALIZER(UIH_Widget_DialogueToolAction)
 
 
-#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_STANDARD_CONSTRUCTORS \
+#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UIH_Widget_DialogueToolAction(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UIH_Widget_DialogueToolAction) \
@@ -61,7 +77,7 @@ private: \
 public:
 
 
-#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_ENHANCED_CONSTRUCTORS \
+#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API UIH_Widget_DialogueToolAction(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()) : Super(ObjectInitializer) { }; \
 private: \
@@ -74,7 +90,7 @@ public: \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UIH_Widget_DialogueToolAction)
 
 
-#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_PRIVATE_PROPERTY_OFFSET \
+#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__CPP_Switcher_Content() { return STRUCT_OFFSET(UIH_Widget_DialogueToolAction, CPP_Switcher_Content); } \
 	FORCEINLINE static uint32 __PPO__CPP_Txt_Name() { return STRUCT_OFFSET(UIH_Widget_DialogueToolAction, CPP_Txt_Name); } \
 	FORCEINLINE static uint32 __PPO__CPP_Txt_Desc() { return STRUCT_OFFSET(UIH_Widget_DialogueToolAction, CPP_Txt_Desc); } \
@@ -86,30 +102,31 @@ public: \
 	FORCEINLINE static uint32 __PPO__CPP_Canvas_Option() { return STRUCT_OFFSET(UIH_Widget_DialogueToolAction, CPP_Canvas_Option); } \
 	FORCEINLINE static uint32 __PPO__CPP_Img_Select() { return STRUCT_OFFSET(UIH_Widget_DialogueToolAction, CPP_Img_Select); } \
 	FORCEINLINE static uint32 __PPO__ToolWidget() { return STRUCT_OFFSET(UIH_Widget_DialogueToolAction, ToolWidget); } \
-	FORCEINLINE static uint32 __PPO__ActionInfo() { return STRUCT_OFFSET(UIH_Widget_DialogueToolAction, ActionInfo); }
+	FORCEINLINE static uint32 __PPO__ActionInfo() { return STRUCT_OFFSET(UIH_Widget_DialogueToolAction, ActionInfo); } \
+	FORCEINLINE static uint32 __PPO__selectClick() { return STRUCT_OFFSET(UIH_Widget_DialogueToolAction, selectClick); }
 
 
-#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_8_PROLOG
-#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_GENERATED_BODY_LEGACY \
+#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_PROLOG
+#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_PRIVATE_PROPERTY_OFFSET \
-	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_SPARSE_DATA \
-	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_RPC_WRAPPERS \
-	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_INCLASS \
-	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_STANDARD_CONSTRUCTORS \
+	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_PRIVATE_PROPERTY_OFFSET \
+	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_SPARSE_DATA \
+	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_RPC_WRAPPERS \
+	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_INCLASS \
+	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_GENERATED_BODY \
+#define InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_PRIVATE_PROPERTY_OFFSET \
-	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_SPARSE_DATA \
-	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_RPC_WRAPPERS_NO_PURE_DECLS \
-	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_INCLASS_NO_PURE_DECLS \
-	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_11_ENHANCED_CONSTRUCTORS \
+	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_PRIVATE_PROPERTY_OFFSET \
+	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_SPARSE_DATA \
+	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
+	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_INCLASS_NO_PURE_DECLS \
+	InsectHeaven_Source_InsectHeaven_Widget_DialogueTool_IH_Widget_DialogueToolAction_h_14_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

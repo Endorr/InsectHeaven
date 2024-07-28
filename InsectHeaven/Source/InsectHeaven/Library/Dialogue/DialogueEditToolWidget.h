@@ -1,16 +1,33 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
-#include "DialogueDefine.h"
 #include "EditorUtilityWidget.h"
 #include "IDesktopPlatform.h"
+
 #include "DialogueEditToolWidget.generated.h"
 
-class UIH_Widget_DialogueToolAction;
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDialoguePlayer_OnFinish);
 
-enum DialogueClipState {CreateLayer, DeleteLayer, CreateAction, DeleteAction, MoveAction, ChangeAction, CreateColume, ChangeActionInfo};
+enum DialogueClipState {eCreateLayer, eDeleteLayer, eCreateAction, eDeleteAction, eMoveAction, eChageAction, eCreateColumn, eChangeActionInfo};
+
+USTRUCT()
+struct FDialogueClip 
+{
+	GENERATED_USTRUCT_BODY()
+
+	DialogueClipState eClipState;
+
+	UPROPERTY()
+	class UDialogueAction* formerAction;
+	TPair<int32, int32> formerActionPos;
+
+	UPROPERTY()
+	class UDialogueAction* nowAction;
+	TPair<int32, int32> nowActionPos;
+
+	int32 layerPos;
+	int32 layerActionCnt;
+};
 
 USTRUCT(BlueprintType, Blueprintable)
 struct FIH_Dialogue
@@ -23,133 +40,158 @@ struct FIH_Dialogue
 	bool SaveToJson(const FString& _strFilePath);
 };
 
-USTRUCT()
-struct FDialogueClip
-{
-	GENERATED_USTRUCT_BODY()
-
-	DialogueClipState eClipState;
-
-	UPROPERTY()
-	class UDialogueAction* FormerAction = nullptr;
-	TPair<int32, int32> FormerActionPos;
-
-	UPROPERTY()
-	class UDialogueAction* NowAction = nullptr;
-	TPair<int32, int32> NowActionPos;
-
-	int32 LayerPos;
-	int32 LayerActionCnt;
-};
-
-UCLASS()
-class INSECTHEAVEN_API UDialogueEditToolWidget : public UEditorUtilityWidget
+UCLASS(BlueprintType, Blueprintable)
+class UDialogueToolWidget : public UEditorUtilityWidget
 {
 	GENERATED_BODY()
 
 public:
+
 	virtual void NativeConstruct() override;
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 	virtual void NativeDestruct() override;
 
-	void AddNewLayer();
-	void AddNewAction(int32 _LayerIndex);
-	void AddNewActionAt(int32 _LayerIndex, int32 _ActionIndex, UDialogueAction* _ActionInfo);
-	void SelectAction(UIH_Widget_DialogueToolAction* _SelectAction);
-	void DeleteAction(int32 _LayerIndex, int32 _ActionIndex);
-	void MoveAction(TPair<int32, int32> _FormerPos, TPair<int32, int32> _PostPos);
-	void ShowChangeActionCanvas(UIH_Widget_DialogueToolAction* _TargetAction);
-	UIH_Widget_DialogueToolAction* FindAction(int32 _LayerIndex, int32 _ActionIndex);
-	void GrabAction(UIH_Widget_DialogueToolAction* _Widget);
-	void GrabOffAction(UIH_Widget_DialogueToolAction* _Widget);
-	UFUNCTION(BlueprintCallable)
-	void GrabOffAction();
-	void ReleaseShadow();
-
-protected:
-	UFUNCTION()
-	void OnClick_SaveButton();
-	
-	UFUNCTION()
-    void OnClick_LoadButton();
-	
-	UFUNCTION()
-	void OnClick_ChangeAction();
-	
-	UFUNCTION()
-	void OnClick_CancelAction();
-
-	UFUNCTION()
-	void OnClick_Play();
-
-	UFUNCTION()
-	void OnClick_Stop();
-	
-	UFUNCTION(BlueprintCallable)
-	void DeleteSelectAction();
-	
-	FVector2D GetMousePos();
-	void CalculateMouseIndex();
-	UFUNCTION(BlueprintCallable)
-	FVector2D CalculateActionPos(int32 _LayerIndex, int32 _ActionIndex);
-
 	void LoadActiveDialogue();
+	void UnloadActiveDialogue();
 
-private:
-	void ReadCurrentDialogue();
+	void ClearWidgets();
+	void ClearSequenceInspectorWidgets();
+	void ClearSequenceTimelineWidggets();
 
-	bool OpenFiles(const FString& Title, const FString& FileTypes, FString& InOutLastPath, EFileDialogFlags::Type DialogMode, TArray<FString>& OutOpenFilenames);
-	bool SaveFile(const FString& _Title, const FString& _FileTypes, FString& _InOutLastPath, const FString& _DefaultFile, FString& _OutFileName);
+
+	void CreateWidgets();
+	void CreateSequenceInspectorWidgets();
+	void CreateSequenceTimelineWidgets();
+
 	void SetFileName(const FString& _FileName);
+	FString GetCurrentFileName() { return CurrentDialogueFileName; }
+	bool OpenFiles(const FString& Title, const FString& FileTypes, FString& InOutLastPath, EFileDialogFlags::Type DialogMode, TArray<FString>& OutOpenFilenames);
+	bool SaveFile(const FString& Title, const FString& FileTypes, FString& InOutLastPath, const FString& DefaultFile, FString& OutFilename);
 
-	FIH_Dialogue LoadDialogue(const FString& _strFileName);
-	bool SaveDialogue(FIH_Dialogue& _Dialogue, const FString& _strFileName);
+	/// <summary>
+	/// Layer
+	/// </summary>
+	void AddLayer();
+	void AddLayerAt(int32 _LayerIndex, bool _IgnoreClip = false);
+	void DeleteLayer(int32 _LayerIndex, bool _IgnoreClip = false);
 
-protected:
-	UPROPERTY(meta = (BindWidget))
-	class UScrollBox* CPP_Scroll_Layer = nullptr;
+	/// <summary>
+	/// Action
+	/// </summary>
+	void SelectAction(class UIH_Widget_DialogueToolAction* _Action);
+	void DeselectAction();
+	void AddAction(int32 _LayerIndex, TSubclassOf<UDialogueAction> _ActionClass );
+	void AddActionAt(int32 _LayerIndex, int32 _ActionIndex, TSubclassOf<UDialogueAction> _ActionClass);
+	void AddActionAt(int32 _LayerIndex, int32 _ActionIndex, UDialogueAction* _ActionInfo, bool _IgnoreClip = false);
+	void AddActionColumn(int32 _LayerIndex, int32 _ActionIndex, TSubclassOf<UDialogueAction> _ActionClass);
+	void DeleteAction(class UIH_Widget_DialogueToolAction* _Action);
+	void DeleteAction(int32 _LayerIndex, int32 _ActionIndex, bool _IgnoreClip = false);
+	void MoveAction(TPair<int32,int32> _formerPos, TPair<int32,int32> _postPos, UDialogueAction* _ActionInfo, bool  _IgnoreClip = false);	//Drag & Drop
+	void ChangeAction(int32 _LayerIndex, int32 _ActionIndex, TSubclassOf<UDialogueAction> _ActionClass, bool _IgnoreClip = false);
+	UFUNCTION() void GrabAction(class UButton* _Button);
+	UFUNCTION(BlueprintCallable) void GrabOffAction();
+	UFUNCTION() void CloseDeselectContext(class UButton* _Button);
 
-	UPROPERTY(meta = (BindWidget))
-	class UScrollBox* CPP_Scroll_ActionLine = nullptr;
+	/// <summary>
+	/// Timeline
+	/// </summary>
+	void OpenAddAction(int32 _LayerIndex);
+	void OpenAddActionAt(int32 _LayerIndex, int32 _ActionIndex);
+	void OpenChangeActionAt(int32 _LayerIndex, int32 _ActionIndex);
+	void CloseAddAction();
+	void CloseChangeAction();
+	void SetTimelineProgressText(int32 _CurrentNumber, int32 _MaxNumber);
 
-	UPROPERTY(meta = (BindWidget))
-	class UCanvasPanel* CPP_Canvas_ActionChange = nullptr;
+	/// <summary>
+	/// Calculate UI Pos
+	/// </summary>
+	FVector2D GetMousePos();	//Get Current Mouse Pos (Pixel)
+	bool CalculatePosition(class UIH_Widget_DialogueToolAction* _Action, int32& _LayerIndex, int32& _Actionindex);	//Get Current Mouse Pos (Action Index)
+	void CalculateMouseIndex();	//Get Current Mouse Pos (Action Drag)
+	FVector2D CalculateLocalPos(int32 _LayerIndex, int32 _ActionIndex);	//Get Action Pos (Pixel)
+	void SetDragPoint(FVector2D _pointPos);	//Move Drag Assist UI (CPP_Mouse_Index)
 
-	UPROPERTY(meta = (BindWidget))
-	class USinglePropertyView* CPP_PropertyView_ActionList = nullptr;
+	/// <summary>
+	/// Scroll Box
+	/// </summary>
+	void SlideHorizon(float _slideRatio);
+	void CalculateSlide();	//Calculate Slide Vector
+	void FocusOnSelect();	//Move Scroll to Selected Action
 
-	UPROPERTY(meta = (BindWidget))
-	class UButton* CPP_Btn_ChangeAction = nullptr;
+	/// <summary>
+	/// Preview
+	/// </summary>
+	void OnPostStopPreview();
 
-	UPROPERTY(meta = (BindWidget))
-	class UButton* CPP_Btn_CancelAction = nullptr;
+	/// <summary>
+	/// Tool Function
+	/// </summary>
+	UFUNCTION(BlueprintCallable) bool IsControllPressing(); //Ctrl
+	UFUNCTION(BlueprintCallable) void UndoClip();			//Ctrl + Z
+	UFUNCTION(BlueprintCallable) void DuplicateAction();	//Ctrl + D
+	UFUNCTION(BlueprintCallable) void CopyAction();			//Ctrl + C
+	UFUNCTION(BlueprintCallable) void PasteAction();		//Ctrl + V
+	//UFUNCTION(BlueprintCallable) void ToggleSearchAction();	//Ctrl + F
+	UFUNCTION(BlueprintCallable) void QuickSave();			//Ctrl + S
+	UFUNCTION(BlueprintCallable) void DeleteSelectAction(); //Delete
+	UFUNCTION(BlueprintCallable) void SetControllPressed(bool _bControllPressed);
+	UFUNCTION(BlueprintCallable) void MoveToNeighbor(FKey _Key);	//WASD
 
-	UPROPERTY(meta = (BindWidget))
-	class UButton* CPP_Btn_Save = nullptr;
+	UFUNCTION()
+	void OnClickSaveButton();
+	UFUNCTION()
+	void OnClickLoadButton();
+	UFUNCTION()
+	void OnClickAddActionConfirm();
+	UFUNCTION()
+	void OnClickAddActionCancel();
+	UFUNCTION()
+	void OnClickChangeActionConfirm();
+	UFUNCTION()
+	void OnClickChangeActionCancel();
+	UFUNCTION()
+	void OnClickSearchActionPrev();
+	UFUNCTION()
+	void OnClickSearchActionNext();
+	UFUNCTION()
+	void OnClickPlayPreviewButton();
+	UFUNCTION()
+	void OnClickStopPreviewButton();
 
-	UPROPERTY(meta = (BindWidget))
-	class UButton* CPP_Btn_Load = nullptr;
+	UFUNCTION()
+	void OnScrollSequenceLayer(float _CurrentOffset);
+	UFUNCTION()
+	void OnScrollSequenceActionHorizontal(float _CurrentOffset);
+	UFUNCTION()
+	void OnScrollSequenceActionVertical(float _CurrentOffset);
 
-	UPROPERTY(meta = (BindWidget))
-	class UButton* CPP_Btn_Play = nullptr;
+	UFUNCTION()
+	void OnPropertyChange_AddActionClass(FName PropertyName);
+	UFUNCTION()
+	void OnPropertyChange_ChangeActionClass(FName PropertyName);
+	UFUNCTION()
+	void OnPropertyChange_SearchActionClass(FName PropertyName);
+	UFUNCTION()
+	void OnPropertyChanged_SequenceInspector(FName PropertyName);
 
-	UPROPERTY(meta = (BindWidget))
-	class UButton* CPP_Btn_Stop = nullptr;
+	UFUNCTION()
+	void OnPostPlayingActionChanged(int32 _ActionIndex);
+	UFUNCTION()
+	void OnPostDialogueFinish();
 
-	UPROPERTY(meta = (BindWidget))
-	class UIH_Widget_DialogueToolAction* CPP_Widget_SelectShadow = nullptr;
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DialogueToolWidget", meta = ( DisplayName = "Class", MustImplement = "UsingActionInterface"))
+		TSubclassOf<class UDialogueAction> CurrentAddActionClass;
 
-	UPROPERTY(meta = (BindWidget))
-	class UTextBlock* CPP_Txt_FileName = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DialogueToolWidget", meta = (DisplayName = "Class", MustImplement = "UsingActionInterface" ))
+		TSubclassOf<class UDialogueAction> CurrentSearchActionClass;
 
-	UPROPERTY(meta = (BindWidget))
-	class UImage* CPP_Img_Test = nullptr;
-
-	UPROPERTY(meta = (BindWidget))
-	class UDetailsView* CPP_DetailView_Action = nullptr;
+	FDialoguePlayer_OnFinish OnDialogueFinish;
 
 private:
 	FString LoadFilePath = TEXT("");
+
+	TArray<FDialogueClip> DialogueClipBoard;
 
 	FString NewFileName = TEXT("NewDialogue.json");
 	FString CurrentDialogueFileName;
@@ -157,15 +199,111 @@ private:
 	UPROPERTY()
 	FIH_Dialogue CurrentDialogue;
 
-public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DialogueToolWidget", meta = (DisplayName = "Class"))
-	TSubclassOf<UDialogueAction> CurrentAddActionClass;
+	UPROPERTY()
+	class UIH_Widget_DialogueToolAction* CurrentSelectedAction = nullptr;
 
-private:
-	UIH_Widget_DialogueToolAction* ChangeTargetActionWidget = nullptr;
-	
-	UIH_Widget_DialogueToolAction* CurrentSelectActionWidget = nullptr;
+	bool bSelectActionChanged = false;
+	class UDialogueAction* OriginAction = nullptr;	 // Used When Ctrl + Z
 
-	TPair<int32, int32> GrabStartPos;
-	TPair<int32, int32> GrabEndPos;
+	class UDialogueAction* CopiedAction = nullptr;	// Used When Ctrl + C,V
+	int32 CurrentAddActionLayerIndex;
+	int32 CurrentAddActionIndex;
+
+	TPair<int32, int32> DragPostIndex;				// Used When Dragging
+	TPair<int32, int32> DragFormerIndex;			// Used When Dragging
+
+	TArray<TPair<int32, int32>> SearchedActionList;
+
+	bool bCompletePlayPreview = false;
+	FGeometry pActionGeometry;
+
+protected:
+	UPROPERTY(meta = (BindWidget))
+	class UTextBlock* Text_Filename_Content;
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* Button_Save;
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* Button_Load;
+
+	UPROPERTY(meta = (BindWidget))
+	class UTextBlock* Text_TimeLineProgress;
+
+	UPROPERTY(meta = (BindWidget))
+	class UIH_DetailsView* DetailsView_Inspector;
+
+	UPROPERTY(meta = (BindWidget))
+	class UImage* Image_IndexLine;
+
+	UPROPERTY(meta = (BindWidget))
+	class UScrollBox* ScrollBox_SequenceIndex;
+
+	UPROPERTY(meta = (BindWidget))
+	class UScrollBox* ScrollBox_SequenceLayer;
+
+	UPROPERTY(meta = (BindWidget))
+	class UScrollBox* ScrollBox_SequenceAction_Horizontal;
+
+	UPROPERTY(meta = (BindWidget))
+	class UScrollBox* ScrollBox_SequenceAction_Vertical;
+
+	UPROPERTY(meta = (BindWidget))
+	class UCanvasPanel* Canvas_AddAction;
+
+	UPROPERTY(meta = (BindWidget))
+	class UCanvasPanel* Canvas_ChangeAction;
+
+	UPROPERTY(meta = (BindWidget))
+	class UIH_SinglePropertyView* PropertyView_AddActionClass;
+
+	UPROPERTY(meta = (BindWidget))
+	class UIH_SinglePropertyView* PropertyView_ChangeActionClass;
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* Button_AddAction_Confirm;
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* Button_AddAction_Cancel;
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* Button_ChangeAction_Confirm;
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* Button_ChangeAction_Cancel;
+
+	UPROPERTY(meta = (BindWidget))
+	class UImage* Image_TimelineBlock;
+
+	UPROPERTY(meta = (BindWidget))
+	class UScrollBox* ScrollBox_Timeline_Hittest;
+
+	UPROPERTY(meta = (BindWidget))
+	class UScrollBox* ScrollBox_Timeline;
+
+	UPROPERTY(meta = (BindWidget))
+	class UHorizontalBox* HorizontalBox_Timeline_HitTest_Dummy;
+
+	UPROPERTY(meta = (BindWidget))
+	class UHorizontalBox* HorizontalBox_Timeline_Dummy;
+
+	UPROPERTY(meta = (BindWidget))
+	class USlider* Slider_TimeLine_HitTest;
+
+	UPROPERTY(meta = (BindWidget))
+	class USlider* Slider_TimeLine;
+
+	UPROPERTY(meta = (BindWidget))
+	class UIH_Widget_DialogueToolAction* GrabView_Action;
+
+	UPROPERTY(meta = (BindWidget))
+	class UImage* CPP_Mouse_Index;
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* Button_PlayPreview;
+
+	UPROPERTY(meta = (BindWidget))
+	class UButton* Button_StopPreview;
+
+	bool bControllPressed = false;
 };

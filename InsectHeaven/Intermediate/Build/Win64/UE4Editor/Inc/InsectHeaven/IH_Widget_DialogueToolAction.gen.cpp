@@ -13,18 +13,59 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeIH_Widget_DialogueToolAction() {}
 // Cross Module References
+	INSECTHEAVEN_API UFunction* Z_Construct_UDelegateFunction_InsectHeaven_SelectDelegate__DelegateSignature();
+	UPackage* Z_Construct_UPackage__Script_InsectHeaven();
+	UMG_API UClass* Z_Construct_UClass_UButton_NoRegister();
 	INSECTHEAVEN_API UClass* Z_Construct_UClass_UIH_Widget_DialogueToolAction_NoRegister();
 	INSECTHEAVEN_API UClass* Z_Construct_UClass_UIH_Widget_DialogueToolAction();
 	INSECTHEAVEN_API UClass* Z_Construct_UClass_UIH_Widget();
-	UPackage* Z_Construct_UPackage__Script_InsectHeaven();
 	UMG_API UClass* Z_Construct_UClass_UWidgetSwitcher_NoRegister();
 	UMG_API UClass* Z_Construct_UClass_UTextBlock_NoRegister();
-	UMG_API UClass* Z_Construct_UClass_UButton_NoRegister();
 	UMG_API UClass* Z_Construct_UClass_UCanvasPanel_NoRegister();
 	UMG_API UClass* Z_Construct_UClass_UImage_NoRegister();
-	INSECTHEAVEN_API UClass* Z_Construct_UClass_UDialogueEditToolWidget_NoRegister();
+	INSECTHEAVEN_API UClass* Z_Construct_UClass_UDialogueToolWidget_NoRegister();
 	INSECTHEAVEN_API UClass* Z_Construct_UClass_UDialogueAction_NoRegister();
 // End Cross Module References
+	struct Z_Construct_UDelegateFunction_InsectHeaven_SelectDelegate__DelegateSignature_Statics
+	{
+		struct _Script_InsectHeaven_eventSelectDelegate_Parms
+		{
+			UButton* _Button;
+		};
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp__Button_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp__Button;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_InsectHeaven_SelectDelegate__DelegateSignature_Statics::NewProp__Button_MetaData[] = {
+		{ "EditInline", "true" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UDelegateFunction_InsectHeaven_SelectDelegate__DelegateSignature_Statics::NewProp__Button = { "_Button", nullptr, (EPropertyFlags)0x0010000000080080, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(_Script_InsectHeaven_eventSelectDelegate_Parms, _Button), Z_Construct_UClass_UButton_NoRegister, METADATA_PARAMS(Z_Construct_UDelegateFunction_InsectHeaven_SelectDelegate__DelegateSignature_Statics::NewProp__Button_MetaData, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_InsectHeaven_SelectDelegate__DelegateSignature_Statics::NewProp__Button_MetaData)) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UDelegateFunction_InsectHeaven_SelectDelegate__DelegateSignature_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UDelegateFunction_InsectHeaven_SelectDelegate__DelegateSignature_Statics::NewProp__Button,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UDelegateFunction_InsectHeaven_SelectDelegate__DelegateSignature_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Widget/DialogueTool/IH_Widget_DialogueToolAction.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UDelegateFunction_InsectHeaven_SelectDelegate__DelegateSignature_Statics::FuncParams = { (UObject*(*)())Z_Construct_UPackage__Script_InsectHeaven, nullptr, "SelectDelegate__DelegateSignature", nullptr, nullptr, sizeof(_Script_InsectHeaven_eventSelectDelegate_Parms), Z_Construct_UDelegateFunction_InsectHeaven_SelectDelegate__DelegateSignature_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_InsectHeaven_SelectDelegate__DelegateSignature_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00130000, 0, 0, METADATA_PARAMS(Z_Construct_UDelegateFunction_InsectHeaven_SelectDelegate__DelegateSignature_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UDelegateFunction_InsectHeaven_SelectDelegate__DelegateSignature_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UDelegateFunction_InsectHeaven_SelectDelegate__DelegateSignature()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UDelegateFunction_InsectHeaven_SelectDelegate__DelegateSignature_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	DEFINE_FUNCTION(UIH_Widget_DialogueToolAction::execOnClickChangeAction)
 	{
 		P_FINISH;
@@ -53,6 +94,13 @@ void EmptyLinkFunctionForGeneratedCodeIH_Widget_DialogueToolAction() {}
 		P_THIS->OnClickActon();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(UIH_Widget_DialogueToolAction::execOnPressSelectButton)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->OnPressSelectButton();
+		P_NATIVE_END;
+	}
 	void UIH_Widget_DialogueToolAction::StaticRegisterNativesUIH_Widget_DialogueToolAction()
 	{
 		UClass* Class = UIH_Widget_DialogueToolAction::StaticClass();
@@ -60,6 +108,7 @@ void EmptyLinkFunctionForGeneratedCodeIH_Widget_DialogueToolAction() {}
 			{ "OnClickActon", &UIH_Widget_DialogueToolAction::execOnClickActon },
 			{ "OnClickChangeAction", &UIH_Widget_DialogueToolAction::execOnClickChangeAction },
 			{ "OnClickOption", &UIH_Widget_DialogueToolAction::execOnClickOption },
+			{ "OnPressSelectButton", &UIH_Widget_DialogueToolAction::execOnPressSelectButton },
 			{ "OnReleaseAction", &UIH_Widget_DialogueToolAction::execOnReleaseAction },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -127,6 +176,28 @@ void EmptyLinkFunctionForGeneratedCodeIH_Widget_DialogueToolAction() {}
 		if (!ReturnFunction)
 		{
 			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_UIH_Widget_DialogueToolAction_OnClickOption_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UIH_Widget_DialogueToolAction_OnPressSelectButton_Statics
+	{
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UIH_Widget_DialogueToolAction_OnPressSelectButton_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Widget/DialogueTool/IH_Widget_DialogueToolAction.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UIH_Widget_DialogueToolAction_OnPressSelectButton_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UIH_Widget_DialogueToolAction, nullptr, "OnPressSelectButton", nullptr, nullptr, 0, nullptr, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UIH_Widget_DialogueToolAction_OnPressSelectButton_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UIH_Widget_DialogueToolAction_OnPressSelectButton_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_UIH_Widget_DialogueToolAction_OnPressSelectButton()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_UIH_Widget_DialogueToolAction_OnPressSelectButton_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -211,6 +282,10 @@ void EmptyLinkFunctionForGeneratedCodeIH_Widget_DialogueToolAction() {}
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_ActionInfo_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_ActionInfo;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_selectClick_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FMulticastDelegatePropertyParams NewProp_selectClick;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -223,6 +298,7 @@ void EmptyLinkFunctionForGeneratedCodeIH_Widget_DialogueToolAction() {}
 		{ &Z_Construct_UFunction_UIH_Widget_DialogueToolAction_OnClickActon, "OnClickActon" }, // 923461360
 		{ &Z_Construct_UFunction_UIH_Widget_DialogueToolAction_OnClickChangeAction, "OnClickChangeAction" }, // 1852766245
 		{ &Z_Construct_UFunction_UIH_Widget_DialogueToolAction_OnClickOption, "OnClickOption" }, // 1642519262
+		{ &Z_Construct_UFunction_UIH_Widget_DialogueToolAction_OnPressSelectButton, "OnPressSelectButton" }, // 2437650974
 		{ &Z_Construct_UFunction_UIH_Widget_DialogueToolAction_OnReleaseAction, "OnReleaseAction" }, // 3844142686
 	};
 #if WITH_METADATA
@@ -317,13 +393,19 @@ void EmptyLinkFunctionForGeneratedCodeIH_Widget_DialogueToolAction() {}
 		{ "ModuleRelativePath", "Widget/DialogueTool/IH_Widget_DialogueToolAction.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_ToolWidget = { "ToolWidget", nullptr, (EPropertyFlags)0x0040000000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UIH_Widget_DialogueToolAction, ToolWidget), Z_Construct_UClass_UDialogueEditToolWidget_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_ToolWidget_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_ToolWidget_MetaData)) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_ToolWidget = { "ToolWidget", nullptr, (EPropertyFlags)0x0040000000080008, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UIH_Widget_DialogueToolAction, ToolWidget), Z_Construct_UClass_UDialogueToolWidget_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_ToolWidget_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_ToolWidget_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_ActionInfo_MetaData[] = {
 		{ "ModuleRelativePath", "Widget/DialogueTool/IH_Widget_DialogueToolAction.h" },
 	};
 #endif
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_ActionInfo = { "ActionInfo", nullptr, (EPropertyFlags)0x0040000000000000, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UIH_Widget_DialogueToolAction, ActionInfo), Z_Construct_UClass_UDialogueAction_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_ActionInfo_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_ActionInfo_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_selectClick_MetaData[] = {
+		{ "ModuleRelativePath", "Widget/DialogueTool/IH_Widget_DialogueToolAction.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_selectClick = { "selectClick", nullptr, (EPropertyFlags)0x0040000000080000, UE4CodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UIH_Widget_DialogueToolAction, selectClick), Z_Construct_UDelegateFunction_InsectHeaven_SelectDelegate__DelegateSignature, METADATA_PARAMS(Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_selectClick_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_selectClick_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_CPP_Switcher_Content,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_CPP_Txt_Name,
@@ -337,6 +419,7 @@ void EmptyLinkFunctionForGeneratedCodeIH_Widget_DialogueToolAction() {}
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_CPP_Img_Select,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_ToolWidget,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_ActionInfo,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::NewProp_selectClick,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_UIH_Widget_DialogueToolAction_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<UIH_Widget_DialogueToolAction>::IsAbstract,
@@ -365,7 +448,7 @@ void EmptyLinkFunctionForGeneratedCodeIH_Widget_DialogueToolAction() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UIH_Widget_DialogueToolAction, 2168915588);
+	IMPLEMENT_CLASS(UIH_Widget_DialogueToolAction, 284004249);
 	template<> INSECTHEAVEN_API UClass* StaticClass<UIH_Widget_DialogueToolAction>()
 	{
 		return UIH_Widget_DialogueToolAction::StaticClass();

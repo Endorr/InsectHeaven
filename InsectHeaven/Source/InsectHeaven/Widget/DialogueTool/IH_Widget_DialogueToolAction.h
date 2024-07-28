@@ -1,9 +1,12 @@
 ﻿#pragma once
 #include "IH_Widget.h"
+#include "Dialogue/DialogueEditToolWidget.h"
 #include "IH_Widget_DialogueToolAction.generated.h"
 
 class UDialogueAction;
 class UDialogueEditToolWidget;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSelectDelegate, class UButton*, _Button);
 
 UCLASS()
 class UIH_Widget_DialogueToolAction : public UIH_Widget
@@ -17,7 +20,7 @@ public:
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 	virtual void NativeDestruct() override;
 
-	void SetParentWidget(UDialogueEditToolWidget* _ToolWidget);
+	void SetParentWidget(UDialogueToolWidget* _ToolWidget);
 	void SetLayerInfo(int32 _LayerIndex);
 	void SetActionInfo(UDialogueAction* _Action, int32 _LayerIndex, int32 _ActionIndex);
 
@@ -29,6 +32,11 @@ public:
 
 	void SetSelect(bool _IsSelect);
 	void SetShadow(UDialogueAction* _Action, int32 _LayerIndex, int32 _ActionIndex);
+	class UButton* GetSelectButton();
+
+	UFUNCTION()
+	void OnPressSelectButton();
+	FSelectDelegate& GetSelectDelgate();
 
 protected:
 	UFUNCTION()
@@ -76,7 +84,7 @@ protected:
 	
 private:
 	UPROPERTY()
-	class UDialogueEditToolWidget* ToolWidget = nullptr;
+	class UDialogueToolWidget* ToolWidget = nullptr;
 
 	UPROPERTY()
 	class UDialogueAction* ActionInfo = nullptr;
@@ -84,4 +92,7 @@ private:
 	int32 LayerIndex = INDEX_NONE;
 
 	int32 ActionIndex = INDEX_NONE;
+
+	UPROPERTY()
+	FSelectDelegate selectClick;
 };

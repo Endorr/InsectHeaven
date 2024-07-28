@@ -16,6 +16,7 @@ public:
 	static UIH_SingletonManager* CreateInstance();
 	static void DestroyInstance();
 	static UIH_SingletonManager* GetInstance() { return Instance;}
+	static bool HasInstance();
 
 protected:
 	static UIH_SingletonManager* Instance;
@@ -63,3 +64,4 @@ protected:
 };
 
 #define gMngKernel (*UIH_SingletonManager::GetInstance())
+#define HasgKernel UIH_SingletonManager::HasInstance()

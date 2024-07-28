@@ -1,129 +1,64 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "DialogueEditToolWidget.h"
 
-#include "DesktopPlatformModule.h"
+#include "Widget/IH_WidgetManager.h"
+#include "Scene/IH_SceneManager.h"
+#include "DesktopplatformModule.h"
+#include "Misc/ConfigCacheIni.h"
 #include "DialogueActionLayer.h"
-#include "EngineAnalytics.h"
-#include "FileHelpers.h"
-#include "IAssetViewport.h"
-#include "IDesktopPlatform.h"
-#include "IH_DialoguePlayer.h"
+#include "GameFramework/GameModeBase.h"
 #include "IH_GameMode_DialgueTool.h"
-#include "IH_WidgetManager.h"
-#include "LevelEditor.h"
-#include "UnrealEdGlobals.h"
-#include "Action/DialogueAction_Empty.h"
-#include "Blueprint/WidgetLayoutLibrary.h"
-#include "Components/Button.h"
+#include "InsectHeaven.h"
+
+#include "Components/TextBlock.h"
+#include "Components/ScrollBox.h"
 #include "Components/CanvasPanel.h"
-#include "Components/CanvasPanelSlot.h"
-#include "Components/DetailsView.h"
+#include "Components/Button.h"
 #include "Components/HorizontalBox.h"
 #include "Components/Image.h"
-#include "Components/ScrollBox.h"
-#include "Components/TextBlock.h"
+#include "Components/Slider.h"
+#include "ISinglePropertyView.h"
+
+#include <Blueprint/WidgetLayoutLibrary.h>
+
+#include "UIH_CinemaFunctionLibrary.h"
+#include "UIH_FunctionLibrary.h"
+#include "Action/DialogueAction_Talk.h"
+#include "Action/DialogueAction_Empty.h"
+
+#include "Components/CanvasPanelSlot.h"
+#include "Components/DetailsView.h"
+#include "Components/SinglePropertyView.h"
+#include "Dialogue/DialogueManager.h"
+#include "Dialogue/IH_SinglePropertyView.h"
+#include "Dialogue/UIH_DetailsView.h"
 #include "DialogueTool/IH_Widget_DialogueToolAction.h"
-#include "Editor/UnrealEdEngine.h"
-#include "UMGEditor/Public/Components/SinglePropertyView.h"
-#include "Framework/Application/SlateApplication.h"
-#include "Misc/FileHelper.h"
-#include "Serialization/JsonSerializer.h"
-#include "Serialization/JsonWriter.h"
-#include "Widgets/SViewport.h"
+#include "DialogueTool/IH_Widget_DialogueToolActionAdd.h"
+#include "DialogueTool/IH_Widget_DialogueToolLayer.h"
+#include "DialogueTool/IH_Widget_DialogueToolLayerAdd.h"
+#include "Kismet/GameplayStatics.h"
 
-static FString ActionLineObjectPath = "/Game/Widget/Dialogue/DialogueToolActionLine.DialogueToolActionLine_C";
+const int32 UpperBannerHeight = 100;
+const int32 ActionInterval = 210;
+const int32 LayerHeight = 88;
+const float SlideRatio = 10.f;
+const int32 RightSlidePoint = 1900;
+const int32 LeftSlidePoint = 200;
+const FVector2D FirstActionPos = FVector2D(212,618.230774);
 
-bool FIH_Dialogue::SaveToJson(const FString& _strFilePath)
-{
-	const FString strJsonPath = FPaths::ProjectContentDir() + FString(TEXT("Dialogue/")) + _strFilePath;
-	FString JsonString;
 
-	TSharedRef<FJsonObject> JsonObject = MakeShareable(new FJsonObject());
-
-	TArray<TSharedPtr<FJsonValue>> Values;
-
-	for(int index = 0; index < ActionLayers.Num(); ++index)
-	{
-		TSharedRef<FJsonObject> json = MakeShareable(new FJsonObject());
-		TSharedRef<FJsonValueObject> value = MakeShareable(new FJsonValueObject(json));
-
-		ActionLayers[index]->SaveToJson(json);
-
-		Values.Add(value);
-	}
-
-	JsonObject->SetArrayField(TEXT("ActionLayers"), Values);
-
-	FString OutputString;
-	TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&OutputString);
-	FJsonSerializer::Serialize(JsonObject, Writer);
-
-	bool Result = FFileHelper::SaveStringToFile(OutputString, *strJsonPath);
-
-	return Result;
-}
-
-void UDialogueEditToolWidget::NativeConstruct()
+void UDialogueToolWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	CPP_PropertyView_ActionList = Cast<USinglePropertyView>(GetWidgetFromName(TEXT("CPP_PropertyView_ActionList")));
-	if(CPP_PropertyView_ActionList)
-	{
-		CPP_PropertyView_ActionList->SetObject(this);
-		CPP_PropertyView_ActionList->SetPropertyName(TEXT("CurrentAddActionClass"));
-	}
+	Button_PlayPreview->OnClicked.AddUniqueDynamic(this, &UDialogueToolWidget::OnClickPlayPreviewButton);
+	Button_StopPreview->OnClicked.AddUniqueDynamic(this, &UDialogueToolWidget::OnClickStopPreviewButton);
 
-	if(CPP_Btn_ChangeAction)
-	{
-		CPP_Btn_ChangeAction->OnClicked.AddUniqueDynamic(this, &UDialogueEditToolWidget::OnClick_ChangeAction);
-	}
-	
-	if(CPP_Btn_CancelAction)
-	{
-		CPP_Btn_CancelAction->OnClicked.AddUniqueDynamic(this, &UDialogueEditToolWidget::OnClick_CancelAction);
-	}
+	//SetFileName(FPaths::GetCleanFilename(NewFileName) );
+	SetFileName(TEXT("") );
 
-	if(CPP_Btn_Save)
-	{
-		CPP_Btn_Save->OnClicked.AddUniqueDynamic(this, &UDialogueEditToolWidget::OnClick_SaveButton);
-	}
-
-	if(CPP_Btn_Load)
-	{
-		CPP_Btn_Load->OnClicked.AddUniqueDynamic(this, &UDialogueEditToolWidget::OnClick_LoadButton);
-	}
-
-	if(CPP_Btn_Play)
-	{
-		CPP_Btn_Play->OnClicked.AddUniqueDynamic(this, &UDialogueEditToolWidget::OnClick_Play);
-	}
-
-	if(CPP_Btn_Stop)
-	{
-		CPP_Btn_Stop->OnClicked.AddUniqueDynamic(this, &UDialogueEditToolWidget::OnClick_Stop);
-	}
-	
-	if(CPP_Widget_SelectShadow)
-	{
-		CPP_Widget_SelectShadow->SetShadow(nullptr, INDEX_NONE, INDEX_NONE);
-	}
-
-	GrabEndPos = TPair<int32, int32>(INDEX_NONE, INDEX_NONE);
-	
-	for(auto& elem : CPP_Scroll_Layer->GetAllChildren())
-	{
-		if(UIH_Widget_DialogueToolAction* ActionWidget = Cast<UIH_Widget_DialogueToolAction>(elem))
-		{
-			ActionWidget->SetParentWidget(this);
-		}
-	}
-
-	SetFileName(TEXT(""));
 	bool bLoadActiveDialogue = false;
-	GConfig->GetBool(TEXT("/Script/InsectHeaven.DialogueTool"), TEXT("OpenWithActiveDialogue"), bLoadActiveDialogue, GGameIni);
+	GConfig->GetBool(TEXT("/Script/ProjectVic.DialogueTool"), TEXT("OpenWithActiveDialogue"), bLoadActiveDialogue, GGameIni);
+
 	if (bLoadActiveDialogue)
 	{
 		LoadActiveDialogue();
@@ -134,10 +69,1630 @@ void UDialogueEditToolWidget::NativeConstruct()
 		
 		SetFileName(FPaths::GetCleanFilename(SavedCurrentFileName));
 	}
+	else
+	{
+		CreateWidgets();
+	}
+
+	GrabView_Action->GetSelectButton()->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+	GrabView_Action->SetVisibility(ESlateVisibility::Hidden);
+	GrabView_Action->SetRenderOpacity(0.7f);
+
+	FProperty* pProp = GetClass()->PropertyLink;
+
+	Button_Save->OnClicked.AddUniqueDynamic(this, &UDialogueToolWidget::OnClickSaveButton);
+	Button_Load->OnClicked.AddUniqueDynamic(this, &UDialogueToolWidget::OnClickLoadButton);
+
+	DetailsView_Inspector->OnPrpertyValueChanged_PV.AddUniqueDynamic(this, &UDialogueToolWidget::OnPropertyChanged_SequenceInspector);
+	ScrollBox_SequenceLayer->OnUserScrolled.AddUniqueDynamic(this, &UDialogueToolWidget::OnScrollSequenceLayer);
+	ScrollBox_SequenceAction_Horizontal->OnUserScrolled.AddUniqueDynamic(this, &UDialogueToolWidget::OnScrollSequenceActionHorizontal);
+	ScrollBox_SequenceAction_Vertical->OnUserScrolled.AddUniqueDynamic(this, &UDialogueToolWidget::OnScrollSequenceActionVertical);
+	PropertyView_AddActionClass->SetObject(this);
+	PropertyView_AddActionClass->SetPropertyName(TEXT("CurrentAddActionClass"));
+	PropertyView_AddActionClass->OnPropertyChanged_PV.AddUniqueDynamic(this, &UDialogueToolWidget::OnPropertyChange_AddActionClass);
+	PropertyView_ChangeActionClass->SetObject(this);
+	PropertyView_ChangeActionClass->SetPropertyName(TEXT("CurrentAddActionClass"));
+	PropertyView_ChangeActionClass->OnPropertyChanged_PV.AddUniqueDynamic(this, &UDialogueToolWidget::OnPropertyChange_ChangeActionClass);
+	Button_AddAction_Confirm->OnClicked.AddUniqueDynamic(this, &UDialogueToolWidget::OnClickAddActionConfirm);
+	Button_AddAction_Cancel->OnClicked.AddUniqueDynamic(this, &UDialogueToolWidget::OnClickAddActionCancel);
+	Button_ChangeAction_Confirm->OnClicked.AddUniqueDynamic(this, &UDialogueToolWidget::OnClickChangeActionConfirm);
+	Button_ChangeAction_Cancel->OnClicked.AddUniqueDynamic(this, &UDialogueToolWidget::OnClickChangeActionCancel);
+
+	Button_PlayPreview->OnClicked.AddUniqueDynamic(this, &UDialogueToolWidget::OnClickPlayPreviewButton);
+	Button_StopPreview->OnClicked.AddUniqueDynamic(this, &UDialogueToolWidget::OnClickStopPreviewButton);
+
+	//OnDialogueFinish.BindUFunction(this, TEXT("OnPostDialogueFinish"));
+	
+	// while (pProp != nullptr)
+	// {
+	// 	if (pProp->GetClass() == FObjectProperty::StaticClass())
+	// 	{
+	// 		FObjectProperty* pObjProp = CastField<FObjectProperty>(pProp);
+	//
+	// 		if (pObjProp->PropertyClass == UWidgetAnimation::StaticClass())
+	// 		{
+	// 			UObject* _obj = pObjProp->GetObjectPropertyValue_InContainer(this);
+	//
+	// 			UWidgetAnimation* pWidgetAnim = Cast<UWidgetAnimation>(_obj);
+	//
+	// 			if (pWidgetAnim != nullptr && pWidgetAnim->MovieScene != nullptr && pWidgetAnim->GetMovieScene()->GetName() == TEXT("Noti"))
+	// 			{
+	// 				NotiAnimation = pWidgetAnim;
+	// 			}
+	// 		}
+	// 	}
+	//
+	// 	pProp = pProp->PropertyLinkNext;
+	// }
 }
 
-bool UDialogueEditToolWidget::OpenFiles(const FString& Title, const FString& FileTypes, FString& InOutLastPath,
-	EFileDialogFlags::Type DialogMode, TArray<FString>& OutOpenFilenames)
+void UDialogueToolWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
+{
+	Super::NativeTick(MyGeometry, InDeltaTime);
+
+	if (bCompletePlayPreview == false)
+	{
+		if (UDialogueManager::HasInstance())
+		{
+			bCompletePlayPreview = true;
+
+			AIH_DialoguePlayer* DialoguePlayer = gDialogueMng.GetOrCreateDialoguePlayer();
+			if (DialoguePlayer)
+			{
+				 if (DialoguePlayer->OnPlayingActionChanged.IsBound())
+				 	DialoguePlayer->OnPlayingActionChanged.Clear();
+				
+				 DialoguePlayer->OnPlayingActionChanged.AddDynamic(this, &UDialogueToolWidget::OnPostPlayingActionChanged);
+				 DialoguePlayer->GetFinishDelegate().AddLambda([this](){
+				 	if(OnDialogueFinish.IsBound())
+				 		OnDialogueFinish.Broadcast();
+				 });
+			}
+
+		}
+	}
+	else
+	{
+		if (UIH_SceneManager::HasInstance())
+		{
+			bCompletePlayPreview = false;
+
+			//OnPostStopPreview();
+		}
+	}
+		
+
+	CalculateMouseIndex();
+
+	UCanvasPanelSlot* grabViewPanel = UWidgetLayoutLibrary::SlotAsCanvasSlot(GrabView_Action);
+	if (grabViewPanel) 
+	{
+		FVector2D mousePos = GetMousePos();
+
+		grabViewPanel->SetPosition(FVector2D(mousePos.X-20,mousePos.Y-20));
+	}
+
+	if (GrabView_Action->GetVisibility() == ESlateVisibility::SelfHitTestInvisible) 
+	{
+		CPP_Mouse_Index->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+	}
+	else 
+	{
+		CPP_Mouse_Index->SetVisibility(ESlateVisibility::Hidden);
+	}
+
+	CalculateSlide();
+}
+
+void UDialogueToolWidget::NativeDestruct()
+{
+	Super::NativeDestruct();
+
+}
+
+void UDialogueToolWidget::LoadActiveDialogue()
+{
+	CurrentDialogue = UIH_CinemaFunctionLibrary::LoadActiveDialogue();
+
+	ClearWidgets();
+	CreateWidgets();
+}
+
+void UDialogueToolWidget::UnloadActiveDialogue()
+{
+	CurrentDialogue = FIH_Dialogue();
+
+	ClearWidgets();
+}
+
+void UDialogueToolWidget::ClearWidgets()
+{
+	ClearSequenceInspectorWidgets();
+}
+
+void UDialogueToolWidget::ClearSequenceInspectorWidgets()
+{
+	DetailsView_Inspector->SetVisibility(ESlateVisibility::Collapsed);
+	DetailsView_Inspector->SetObject(nullptr);
+}
+
+void UDialogueToolWidget::ClearSequenceTimelineWidggets()
+{
+	Image_IndexLine->SetVisibility(ESlateVisibility::Collapsed);
+	ScrollBox_Timeline->SetVisibility(ESlateVisibility::Collapsed);
+	ScrollBox_Timeline_Hittest->SetVisibility(ESlateVisibility::Collapsed);
+	Button_PlayPreview->SetVisibility(ESlateVisibility::Collapsed);
+	Button_StopPreview->SetVisibility(ESlateVisibility::Collapsed);
+
+
+	ScrollBox_SequenceIndex->ClearChildren();
+	ScrollBox_SequenceLayer->ClearChildren();
+	ScrollBox_SequenceAction_Vertical->ClearChildren();
+	HorizontalBox_Timeline_HitTest_Dummy->ClearChildren();
+	HorizontalBox_Timeline_Dummy->ClearChildren();
+
+	CurrentAddActionClass = nullptr;
+	CurrentAddActionLayerIndex = -1;
+	CurrentAddActionIndex = -1;
+}
+
+void UDialogueToolWidget::CreateWidgets()
+{
+	CreateSequenceInspectorWidgets();
+	CreateSequenceTimelineWidgets();
+}
+
+void UDialogueToolWidget::CreateSequenceInspectorWidgets()
+{
+}
+
+void UDialogueToolWidget::CreateSequenceTimelineWidgets()
+{
+	Image_IndexLine->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+	ScrollBox_Timeline->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+	ScrollBox_Timeline_Hittest->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+	Button_PlayPreview->SetVisibility(ESlateVisibility::Visible);
+	Button_StopPreview->SetVisibility(ESlateVisibility::Visible);
+
+	ScrollBox_SequenceIndex->ClearChildren();
+	ScrollBox_SequenceLayer->ClearChildren();
+	ScrollBox_SequenceAction_Vertical->ClearChildren();
+	HorizontalBox_Timeline_HitTest_Dummy->ClearChildren();
+	HorizontalBox_Timeline_Dummy->ClearChildren();
+
+	Slider_TimeLine_HitTest->SetValue(0.0f);
+	Slider_TimeLine->SetValue(0.0f);
+
+	CurrentAddActionClass = nullptr;
+	CurrentAddActionLayerIndex = -1;
+	CurrentAddActionIndex = -1;
+
+	int32 HighestActionCount = 0;
+	for (int32 Index = 0; Index < CurrentDialogue.ActionLayers.Num(); ++Index)
+	{
+		int32 ActionCount = CurrentDialogue.ActionLayers[Index]->GetActionCount();
+
+		if (ActionCount > HighestActionCount)
+		{
+			HighestActionCount = ActionCount;
+		}
+	}
+
+	SetTimelineProgressText(0, HighestActionCount);
+
+
+	int32 IndexMinCount = 8;
+	int32 IndexCreateCount = (HighestActionCount > IndexMinCount) ? HighestActionCount : IndexMinCount;
+
+	IndexCreateCount += 1;
+
+	for (int32 Index = 0; Index < CurrentDialogue.ActionLayers.Num(); ++Index)
+	{
+		FSoftClassPath SequenceLayerClassPath(TEXT("/Game/Widget/Dialogue/DialogueToolLayer.DialogueToolLayer_C"));
+		UClass* SequenceLayerClass = Cast<UClass>(SequenceLayerClassPath.TryLoad());
+		
+		UIH_Widget_DialogueToolLayer* SequenceLayer = CreateWidget<UIH_Widget_DialogueToolLayer>(this, SequenceLayerClass);
+		SequenceLayer->SetToolWidget(this);
+		
+		ScrollBox_SequenceLayer->AddChild(SequenceLayer);
+		
+		SequenceLayer->SetInfo(Index);
+	}
+	
+	 FSoftClassPath SequenceLayerAddClassPath(TEXT("/Game/Widget/Dialogue/DialogueToolLayerAdd.DialogueToolLayerAdd_C"));
+	 UClass* SequenceLayerAddClass = Cast<UClass>(SequenceLayerAddClassPath.TryLoad());
+	
+	 UIH_Widget_DialogueToolLayerAdd* SequenceLayerAdd = CreateWidget<UIH_Widget_DialogueToolLayerAdd>(this, SequenceLayerAddClass);
+	 SequenceLayerAdd->SetToolWidget(this);
+	
+	 ScrollBox_SequenceLayer->AddChild(SequenceLayerAdd);
+
+
+	for (int32 LayerIndex = 0; LayerIndex < CurrentDialogue.ActionLayers.Num(); ++LayerIndex)
+	{
+		UHorizontalBox* ActionHorizontalBox = NewObject<UHorizontalBox>();
+		ScrollBox_SequenceAction_Vertical->AddChild(ActionHorizontalBox);
+
+		for (int32 ActionIndex = 0; ActionIndex < CurrentDialogue.ActionLayers[LayerIndex]->GetActions().Num(); ++ActionIndex)
+		{
+			FSoftClassPath SequenceActionClassPath(TEXT("/Game/Widget/Dialogue/DialogueToolAction.DialogueToolAction_C"));
+			UClass* SequenceActionClass = Cast<UClass>(SequenceActionClassPath.TryLoad());
+			
+			UIH_Widget_DialogueToolAction* SequenceAction = CreateWidget<UIH_Widget_DialogueToolAction>(this, SequenceActionClass);
+			SequenceAction->SetParentWidget(this);
+			
+			ActionHorizontalBox->AddChild(SequenceAction);
+			
+			SequenceAction->SetActionInfo(CurrentDialogue.ActionLayers[LayerIndex]->GetActions()[ActionIndex], LayerIndex, ActionIndex);
+			//SequenceAction->GetContextDelegate().AddDynamic(this, &UDialogueToolWidget::CloseDeselectContext);
+			SequenceAction->GetSelectButton()->OnReleased.AddDynamic(this, &UDialogueToolWidget::GrabOffAction);
+			SequenceAction->GetSelectDelgate().AddDynamic(this, &UDialogueToolWidget::GrabAction);
+		}
+
+		 FSoftClassPath SequenceActionAddClassPath(TEXT("/Game/Widget/Dialogue/DialogueToolActionAdd.DialogueToolActionAdd_C"));
+		 UClass* SequenceActionAddClass = Cast<UClass>(SequenceActionAddClassPath.TryLoad());
+		
+		 UIH_Widget_DialogueToolActionAdd* SequenceActionAdd = CreateWidget<UIH_Widget_DialogueToolActionAdd>(this, SequenceActionAddClass);
+		 SequenceActionAdd->SetToolWidget(this);
+		 SequenceActionAdd->SetInfo(LayerIndex);
+		
+		 ActionHorizontalBox->AddChild(SequenceActionAdd);
+	}
+
+
+	UHorizontalBox* ActionHorizontalBox = NewObject<UHorizontalBox>();
+	ScrollBox_SequenceAction_Vertical->AddChild(ActionHorizontalBox);
+	
+	FSoftClassPath SequenceActionAddClassPath(TEXT("/Game/Widget/Dialogue/DialogueToolActionAdd.DialogueToolActionAdd_C"));
+	UClass* SequenceActionAddClass = Cast<UClass>(SequenceActionAddClassPath.TryLoad());
+	
+	UIH_Widget_DialogueToolActionAdd* SequenceActionAdd = CreateWidget<UIH_Widget_DialogueToolActionAdd>(this, SequenceActionAddClass);
+	SequenceActionAdd->SetToolWidget(this);
+	
+	ActionHorizontalBox->AddChild(SequenceActionAdd);
+	ActionHorizontalBox->SetVisibility(ESlateVisibility::Hidden);
+}
+
+void UDialogueToolWidget::SetFileName(const FString& _FileName)
+{
+	CurrentDialogueFileName = _FileName;
+	Text_Filename_Content->SetText(FText::FromString(_FileName));
+}
+
+bool UDialogueToolWidget::SaveFile(const FString& Title, const FString& FileTypes, FString& InOutLastPath, const FString& DefaultFile, FString& OutFilename)
+{
+	OutFilename = FString();
+
+	IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
+	bool bFileChosen = false;
+	TArray<FString> OutFilenames;
+	if (DesktopPlatform)
+	{
+		bFileChosen = DesktopPlatform->SaveFileDialog(
+			FSlateApplication::Get().FindBestParentWindowHandleForDialogs(nullptr),
+			Title,
+			InOutLastPath,
+			DefaultFile,
+			FileTypes,
+			EFileDialogFlags::None,
+			OutFilenames
+		);
+	}
+
+	bFileChosen = (OutFilenames.Num() > 0);
+
+	if (bFileChosen)
+	{
+		// User successfully chose a file; remember the path for the next time the dialog opens.
+		InOutLastPath = OutFilenames[0];
+		OutFilename = OutFilenames[0];
+	}
+
+	return bFileChosen;
+}
+
+void UDialogueToolWidget::AddLayer()
+{
+	int32 MaxIndexCnt = 0;
+	for(auto& elem : CurrentDialogue.ActionLayers)
+	{
+		MaxIndexCnt = (MaxIndexCnt > elem->GetActionCount()) ? MaxIndexCnt : elem->GetActionCount();
+	}
+	
+	UDialogueActionLayer* ActionLayer = NewObject<UDialogueActionLayer>();
+	CurrentDialogue.ActionLayers.Add(ActionLayer);
+
+	for (int i = 0; i < MaxIndexCnt; ++i)
+	{
+		UDialogueAction* AddedAction = NewObject<UDialogueAction_Empty>(this);
+		AddActionAt(CurrentDialogue.ActionLayers.Num()-1, i,AddedAction);
+	}
+
+
+	FDialogueClip fDialogueClip;
+	fDialogueClip.eClipState = eCreateLayer;
+	fDialogueClip.layerPos = CurrentDialogue.ActionLayers.Num()-1;
+	fDialogueClip.layerActionCnt = MaxIndexCnt;
+	DialogueClipBoard.Emplace(fDialogueClip);
+
+	ClearSequenceTimelineWidggets();
+	CreateSequenceTimelineWidgets();
+
+	UIH_Widget_DialogueToolLayer* LayerSlot = Cast<UIH_Widget_DialogueToolLayer>(ScrollBox_SequenceLayer->GetChildAt(ScrollBox_SequenceLayer->GetChildrenCount() - 2));
+	//LayerSlot->PlayAppearAnim();
+
+	UIH_Widget_DialogueToolLayerAdd* LayerAddSlot = Cast<UIH_Widget_DialogueToolLayerAdd>(ScrollBox_SequenceLayer->GetChildAt(ScrollBox_SequenceLayer->GetChildrenCount() - 1));
+	LayerAddSlot->PlayPushAnim();
+}
+
+void UDialogueToolWidget::AddLayerAt(int32 _LayerIndex, bool _IgnoreClip)
+{
+
+	if (_IgnoreClip == false)
+	{
+		FDialogueClip fDialogueClip;
+		fDialogueClip.eClipState = eCreateLayer;
+		fDialogueClip.layerPos = _LayerIndex;
+		DialogueClipBoard.Emplace(fDialogueClip);
+	}
+
+	UDialogueActionLayer* ActionLayer = NewObject<UDialogueActionLayer>();
+	CurrentDialogue.ActionLayers.Insert(ActionLayer, _LayerIndex);
+
+	ClearSequenceTimelineWidggets();
+	CreateSequenceTimelineWidgets();
+
+	 // UIH_Widget_DialogueToolLayer* LayerSlot = Cast<UIH_Widget_DialogueToolLayer>(ScrollBox_SequenceLayer->GetChildAt(ScrollBox_SequenceLayer->GetChildrenCount() - 2));
+	 // LayerSlot->PlayAppearAnim();
+	 //
+	 // for (int32 Index = _LayerIndex + 1; Index < ScrollBox_SequenceLayer->GetChildrenCount(); ++Index)
+	 // {
+	 // 	UIH_Widget_DialogueToolLayer* PushLayerSlot = Cast< UIH_Widget_DialogueToolLayer>(ScrollBox_SequenceLayer->GetChildAt(Index));
+	 // 	if (PushLayerSlot)
+	 // 	{
+	 // 		PushLayerSlot->PlayPushAnim();
+	 // 	}
+	 // }
+	 //
+	 // UIH_Widget_DialogueToolLayerAdd* LayerAddSlot = Cast<UIH_Widget_DialogueToolLayerAdd>(ScrollBox_SequenceLayer->GetChildAt(ScrollBox_SequenceLayer->GetChildrenCount() - 1));
+	 // LayerAddSlot->PlayPushAnim();
+}
+
+void UDialogueToolWidget::DeleteLayer(int32 _LayerIndex, bool _IgnoreClip)
+{
+	
+	int32 deletedActionCnt = CurrentDialogue.ActionLayers[_LayerIndex]->GetActionCount();
+	for (int32 actionCnt = CurrentDialogue.ActionLayers[_LayerIndex]->GetActionCount() -1; actionCnt > -1; --actionCnt) 
+	{
+		DeleteAction(_LayerIndex, actionCnt, false);
+	}
+
+	if (_IgnoreClip == false) 
+	{
+		FDialogueClip fDialogueClip;
+		fDialogueClip.eClipState = eDeleteLayer;
+		fDialogueClip.layerPos = _LayerIndex;
+		fDialogueClip.layerActionCnt = deletedActionCnt;
+		DialogueClipBoard.Emplace(fDialogueClip);
+	}
+
+	CurrentDialogue.ActionLayers.RemoveAt(_LayerIndex);
+
+	ClearSequenceTimelineWidggets();
+	CreateSequenceTimelineWidgets();
+
+
+	// for (int32 Index = _LayerIndex; Index < ScrollBox_SequenceLayer->GetChildrenCount(); ++Index)
+	// {
+	// 	UPV_DialogueTool_SequenceLayer* PushLayerSlot = Cast< UPV_DialogueTool_SequenceLayer>(ScrollBox_SequenceLayer->GetChildAt(Index));
+	// 	if (PushLayerSlot)
+	// 	{
+	// 		PushLayerSlot->PlayPullAnim();
+	// 	}
+	// }
+	//
+	// UPV_DialogueTool_SequenceLayerAdd* LayerAddSlot = Cast<UPV_DialogueTool_SequenceLayerAdd>(ScrollBox_SequenceLayer->GetChildAt(ScrollBox_SequenceLayer->GetChildrenCount() - 1));
+	// LayerAddSlot->PlayPullAnim();
+}
+
+void UDialogueToolWidget::SelectAction(class UIH_Widget_DialogueToolAction* _Action)
+{
+	DetailsView_Inspector->SetObject(_Action->GetActionInfo());
+	DetailsView_Inspector->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+
+	CurrentSelectedAction = _Action;
+	OriginAction = NewObject<UDialogueAction>(this, CurrentSelectedAction->GetActionInfo()->GetClass(), NAME_None, RF_Public, CurrentSelectedAction->GetActionInfo());
+
+	if (IsValid(CurrentSelectedAction))
+	{
+		CurrentSelectedAction->SetSelect(true);
+	}
+}
+
+void UDialogueToolWidget::DeselectAction()
+{
+	if (IsValid(CurrentSelectedAction))
+	{
+		if (bSelectActionChanged == true)
+		{
+			int32 LayerIndex, ActionIndex;
+			CalculatePosition(CurrentSelectedAction, LayerIndex, ActionIndex);
+
+			FDialogueClip fDialogueClip = FDialogueClip();
+			fDialogueClip.eClipState = eChangeActionInfo;
+			fDialogueClip.formerAction = OriginAction;
+			fDialogueClip.formerActionPos = TPair<int32, int32>(LayerIndex, ActionIndex);
+			DialogueClipBoard.Emplace(fDialogueClip);
+		}
+
+		bSelectActionChanged = false;
+		OriginAction = nullptr;
+
+		CurrentSelectedAction->SetSelect(false);
+	}
+
+	DetailsView_Inspector->SetVisibility(ESlateVisibility::Collapsed);
+	DetailsView_Inspector->SetObject(nullptr);
+}
+
+void UDialogueToolWidget::OpenAddAction(int32 _LayerIndex)
+{
+	Canvas_AddAction->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+
+	CurrentAddActionClass = nullptr;
+	CurrentAddActionLayerIndex = _LayerIndex;
+
+	Button_AddAction_Confirm->SetIsEnabled(false);
+	Image_TimelineBlock->SetVisibility(ESlateVisibility::Visible);
+}
+
+void UDialogueToolWidget::OpenAddActionAt(int32 _LayerIndex, int32 _ActionIndex)
+{
+	Canvas_AddAction->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+
+	CurrentAddActionLayerIndex = _LayerIndex;
+	CurrentAddActionIndex = _ActionIndex;
+
+	Button_AddAction_Confirm->SetIsEnabled(false);
+	Image_TimelineBlock->SetVisibility(ESlateVisibility::Visible);
+}
+
+void UDialogueToolWidget::OpenChangeActionAt(int32 _LayerIndex, int32 _ActionIndex)
+{
+	Canvas_ChangeAction->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+
+	CurrentAddActionLayerIndex = _LayerIndex;
+	CurrentAddActionIndex = _ActionIndex;
+
+	Button_ChangeAction_Confirm->SetIsEnabled(false);
+	Image_TimelineBlock->SetVisibility(ESlateVisibility::Visible);
+}
+
+void UDialogueToolWidget::CloseAddAction()
+{
+	Canvas_AddAction->SetVisibility(ESlateVisibility::Collapsed);
+
+	CurrentAddActionClass = nullptr;
+	CurrentAddActionLayerIndex = -1;
+	CurrentAddActionIndex = -1;
+
+	Button_AddAction_Confirm->SetIsEnabled(false);
+	Image_TimelineBlock->SetVisibility(ESlateVisibility::Collapsed);
+}
+
+void UDialogueToolWidget::CloseChangeAction()
+{
+	Canvas_ChangeAction->SetVisibility(ESlateVisibility::Collapsed);
+
+	CurrentAddActionClass = nullptr;
+	CurrentAddActionLayerIndex = -1;
+	CurrentAddActionIndex = -1;
+
+	Button_ChangeAction_Confirm->SetIsEnabled(false);
+	Image_TimelineBlock->SetVisibility(ESlateVisibility::Collapsed);
+}
+
+void UDialogueToolWidget::AddAction(int32 _LayerIndex, TSubclassOf<UDialogueAction> _ActionClass)
+{
+	for (int32 LayerIndex = 0; LayerIndex < CurrentDialogue.ActionLayers.Num(); ++LayerIndex)
+	{
+		if (LayerIndex == _LayerIndex)
+		{
+			UDialogueAction* AddedAction = NewObject<UDialogueAction>(this, _ActionClass);
+			CurrentDialogue.ActionLayers[LayerIndex]->GetActions().Add(AddedAction);
+
+			FDialogueClip fDialogueClip;
+			fDialogueClip.eClipState = eCreateAction;
+			fDialogueClip.nowActionPos = TPair<int32, int32>(LayerIndex, CurrentDialogue.ActionLayers[LayerIndex]->GetActionCount()-1);
+			DialogueClipBoard.Emplace(fDialogueClip);
+		}
+	}
+
+	ClearSequenceTimelineWidggets();
+	CreateSequenceTimelineWidgets();
+
+	//UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>( ScrollBox_SequenceAction_Vertical->GetChildAt(_LayerIndex));
+	//UIH_Widget_DialogueToolAction* ActionSlot = Cast< UIH_Widget_DialogueToolAction>( ActionHorizontalBox->GetChildAt(ActionHorizontalBox->GetChildrenCount() - 2));
+	//ActionSlot->PlayAppearAnim();
+
+	// UPV_DialogueTool_SequenceActionAdd* PushActionAddSlot = Cast< UPV_DialogueTool_SequenceActionAdd>(ActionHorizontalBox->GetChildAt(ActionHorizontalBox->GetChildrenCount() - 1));
+	// if (PushActionAddSlot)
+	// {
+	// 	PushActionAddSlot->PlayPushAnim();
+	// }
+}
+
+void UDialogueToolWidget::AddActionAt(int32 _LayerIndex, int32 _ActionIndex, TSubclassOf<UDialogueAction> _ActionClass)
+{
+	for (int32 LayerIndex = 0; LayerIndex < CurrentDialogue.ActionLayers.Num(); ++LayerIndex)
+	{
+		if (LayerIndex == _LayerIndex)
+		{
+			FDialogueClip fDialogueClip;
+			fDialogueClip.eClipState = eCreateAction;
+			fDialogueClip.nowActionPos = TPair<int32, int32>(LayerIndex, _ActionIndex);
+			DialogueClipBoard.Emplace(fDialogueClip);
+
+			UDialogueAction* AddedAction = NewObject<UDialogueAction>(this, _ActionClass);
+			CurrentDialogue.ActionLayers[LayerIndex]->GetActions().Insert( AddedAction, _ActionIndex );
+		}
+	}
+
+	ClearSequenceTimelineWidggets();
+	CreateSequenceTimelineWidgets();
+
+	// UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(_LayerIndex));
+	// UPV_DialogueTool_SequenceAction* AddedActionSlot = Cast< UPV_DialogueTool_SequenceAction>(ActionHorizontalBox->GetChildAt(_ActionIndex));
+	// AddedActionSlot->PlayAppearAnim();
+	//
+	// for (int32 Index = _ActionIndex + 1; Index < ActionHorizontalBox->GetChildrenCount(); ++Index)
+	// {
+	// 	UPV_DialogueTool_SequenceAction* PushActionSlot = Cast< UPV_DialogueTool_SequenceAction>(ActionHorizontalBox->GetChildAt(Index));
+	// 	if (PushActionSlot)
+	// 	{
+	// 		PushActionSlot->PlayPushAnim();
+	// 	}
+	// }
+	//
+	// UPV_DialogueTool_SequenceActionAdd* PushActionAddSlot = Cast< UPV_DialogueTool_SequenceActionAdd>(ActionHorizontalBox->GetChildAt(ActionHorizontalBox->GetChildrenCount() - 1));
+	// if (PushActionAddSlot)
+	// {
+	// 	PushActionAddSlot->PlayPushAnim();
+	// }
+}
+
+void UDialogueToolWidget::AddActionAt(int32 _LayerIndex, int32 _ActionIndex, UDialogueAction* _ActionInfo, bool _IgnoreClip)
+{
+
+	for (int32 LayerIndex = 0; LayerIndex < CurrentDialogue.ActionLayers.Num(); ++LayerIndex)
+	{
+		if (LayerIndex == _LayerIndex)
+		{
+			if (_IgnoreClip == false)
+			{
+				FDialogueClip fDialogueClip;
+				fDialogueClip.eClipState = eCreateAction;
+				fDialogueClip.nowActionPos = TPair<int32, int32>(LayerIndex, _ActionIndex);
+				DialogueClipBoard.Emplace(fDialogueClip);
+			}
+			CurrentDialogue.ActionLayers[LayerIndex]->GetActions().Insert(_ActionInfo, _ActionIndex);
+		}
+	}
+
+	ClearSequenceTimelineWidggets();
+	CreateSequenceTimelineWidgets();
+
+	// UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(_LayerIndex));
+	// UPV_DialogueTool_SequenceAction* AddedActionSlot = Cast< UPV_DialogueTool_SequenceAction>(ActionHorizontalBox->GetChildAt(_ActionIndex));
+	// AddedActionSlot->PlayAppearAnim();
+	//
+	// for (int32 Index = _ActionIndex + 1; Index < ActionHorizontalBox->GetChildrenCount(); ++Index)
+	// {
+	// 	UPV_DialogueTool_SequenceAction* PushActionSlot = Cast< UPV_DialogueTool_SequenceAction>(ActionHorizontalBox->GetChildAt(Index));
+	// 	if (PushActionSlot)
+	// 	{
+	// 		PushActionSlot->PlayPushAnim();
+	// 	}
+	// }
+	//
+	// UPV_DialogueTool_SequenceActionAdd* PushActionAddSlot = Cast< UPV_DialogueTool_SequenceActionAdd>(ActionHorizontalBox->GetChildAt(ActionHorizontalBox->GetChildrenCount() - 1));
+	// if (PushActionAddSlot)
+	// {
+	// 	PushActionAddSlot->PlayPushAnim();
+	// }
+}
+
+void UDialogueToolWidget::AddActionColumn(int32 _LayerIndex, int32 _ActionIndex, TSubclassOf<UDialogueAction> _ActionClass)
+{
+	if (_ActionIndex == -1)
+	{
+		AddAction(_LayerIndex, _ActionClass);
+	}
+	else
+	{
+		AddActionAt(_LayerIndex, _ActionIndex, _ActionClass);
+	}
+
+	int32 MaxLayerCnt = CurrentDialogue.ActionLayers.Num();
+	for (int32 i = 0; i < MaxLayerCnt; ++i)
+	{
+		if (i == _LayerIndex)
+		{
+			continue;
+		}
+
+		UDialogueAction* AddedAction = NewObject<UDialogueAction_Empty>(this);
+		AddActionAt(i, (_ActionIndex == -1) ? 0 : _ActionIndex, AddedAction);
+	}
+
+	FDialogueClip fDialogueClip;
+	fDialogueClip.eClipState = eCreateColumn;
+	fDialogueClip.layerActionCnt = MaxLayerCnt;
+	DialogueClipBoard.Emplace(fDialogueClip);
+}
+
+void UDialogueToolWidget::DeleteAction(class UIH_Widget_DialogueToolAction* _Action)
+{
+
+	int32 DeletedActionLayerIndex = 0;
+	int32 DeletedActionIndex = 0;
+
+	for (int32 LayerIndex = 0; LayerIndex < CurrentDialogue.ActionLayers.Num(); ++LayerIndex)
+	{
+		for (int32 ActionIndex = 0; ActionIndex < CurrentDialogue.ActionLayers[LayerIndex]->GetActions().Num(); ++ActionIndex)
+		{
+			UDialogueAction* SearchAction = CurrentDialogue.ActionLayers[LayerIndex]->GetActions()[ActionIndex];
+			if (SearchAction == _Action->GetActionInfo())
+			{
+				FDialogueClip fDialogueClip;
+				fDialogueClip.eClipState = eDeleteAction;
+				fDialogueClip.formerAction = NewObject<UDialogueAction>(this,SearchAction->GetClass(), NAME_None, RF_Public, SearchAction);
+				fDialogueClip.formerActionPos = TPair<int32, int32>(LayerIndex, ActionIndex);
+				DialogueClipBoard.Emplace(fDialogueClip);
+
+				CurrentDialogue.ActionLayers[LayerIndex]->GetActions().Remove(SearchAction);
+
+				DeletedActionLayerIndex = LayerIndex;
+				DeletedActionIndex = ActionIndex;
+
+				break;
+			}
+		}
+	}
+
+	ClearSequenceTimelineWidggets();
+	CreateSequenceTimelineWidgets();
+
+	// UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(DeletedActionLayerIndex));
+	// UPV_DialogueTool_SequenceAction* AddedActionSlot = Cast< UPV_DialogueTool_SequenceAction>(ActionHorizontalBox->GetChildAt(DeletedActionIndex));
+	//
+	// for (int32 Index = DeletedActionIndex; Index < ActionHorizontalBox->GetChildrenCount(); ++Index)
+	// {
+	// 	UPV_DialogueTool_SequenceAction* PushActionSlot = Cast< UPV_DialogueTool_SequenceAction>(ActionHorizontalBox->GetChildAt(Index));
+	// 	if (PushActionSlot)
+	// 	{
+	// 		PushActionSlot->PlayPullAnim();
+	// 	}
+	// }
+	//
+	// UPV_DialogueTool_SequenceActionAdd* PushActionAddSlot = Cast< UPV_DialogueTool_SequenceActionAdd>(ActionHorizontalBox->GetChildAt(ActionHorizontalBox->GetChildrenCount() - 1));
+	// if (PushActionAddSlot)
+	// {
+	// 	PushActionAddSlot->PlayPullAnim();
+	// }
+}
+
+
+
+void UDialogueToolWidget::DeleteAction(int32 _LayerIndex, int32 _ActionIndex, bool _IgnoreClip /*= false*/)
+{
+
+	if (_LayerIndex >= CurrentDialogue.ActionLayers.Num())
+		return;
+
+	if (_ActionIndex >= CurrentDialogue.ActionLayers[_LayerIndex]->GetActionCount()) 
+	{
+		return;
+	}
+
+	int32 DeletedActionLayerIndex = 0;
+	int32 DeletedActionIndex = 0;
+
+	UDialogueAction* SearchAction = CurrentDialogue.ActionLayers[_LayerIndex]->GetActions()[_ActionIndex];
+
+	if (_IgnoreClip == false)
+	{
+		FDialogueClip fDialogueClip;
+		fDialogueClip.eClipState = eDeleteAction;
+		fDialogueClip.formerAction = NewObject<UDialogueAction>(this, SearchAction->GetClass(), NAME_None, RF_Public, SearchAction);
+		fDialogueClip.formerActionPos = TPair<int32, int32>(_LayerIndex, _ActionIndex);
+		DialogueClipBoard.Emplace(fDialogueClip);
+	}
+
+	CurrentDialogue.ActionLayers[_LayerIndex]->GetActions().Remove(SearchAction);
+
+	DeletedActionLayerIndex = _LayerIndex;
+	DeletedActionIndex = _ActionIndex;
+
+	ClearSequenceTimelineWidggets();
+	CreateSequenceTimelineWidgets();
+
+	// UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(DeletedActionLayerIndex));
+	// UPV_DialogueTool_SequenceAction* AddedActionSlot = Cast< UPV_DialogueTool_SequenceAction>(ActionHorizontalBox->GetChildAt(DeletedActionIndex));
+	//
+	// for (int32 Index = DeletedActionIndex; Index < ActionHorizontalBox->GetChildrenCount(); ++Index)
+	// {
+	// 	UPV_DialogueTool_SequenceAction* PushActionSlot = Cast< UPV_DialogueTool_SequenceAction>(ActionHorizontalBox->GetChildAt(Index));
+	// 	if (PushActionSlot)
+	// 	{
+	// 		PushActionSlot->PlayPullAnim();
+	// 	}
+	// }
+	//
+	// UPV_DialogueTool_SequenceActionAdd* PushActionAddSlot = Cast< UPV_DialogueTool_SequenceActionAdd>(ActionHorizontalBox->GetChildAt(ActionHorizontalBox->GetChildrenCount() - 1));
+	// if (PushActionAddSlot)
+	// {
+	// 	PushActionAddSlot->PlayPullAnim();
+	// }
+}
+
+void UDialogueToolWidget::MoveAction(TPair<int32, int32> _formerPos, TPair<int32, int32> _postPos, UDialogueAction* _ActionInfo, bool _IgnoreClip)
+{
+	if (_ActionInfo == nullptr)
+	{
+		return;
+	}
+
+	if (_formerPos == _postPos)
+	{
+		return;
+	}
+	
+	if(_formerPos.Key == _postPos.Key
+		&& _formerPos.Value < _postPos.Value)
+	{
+		DeleteAction(_formerPos.Key, _formerPos.Value, true);
+		_postPos.Value -= 1;
+		AddActionAt(_postPos.Key, _postPos.Value, _ActionInfo, true);
+	}
+	else 
+	{
+		DeleteAction(_formerPos.Key, _formerPos.Value, true);
+		AddActionAt(_postPos.Key, _postPos.Value, _ActionInfo, true);
+	}
+
+	if (_IgnoreClip == false) 
+	{
+		FDialogueClip fDialogueClip;
+		fDialogueClip.eClipState = eMoveAction;
+		fDialogueClip.formerActionPos = _formerPos;
+		fDialogueClip.nowActionPos = _postPos;
+		fDialogueClip.nowAction = _ActionInfo;
+		DialogueClipBoard.Emplace(fDialogueClip);
+	}
+}
+
+void UDialogueToolWidget::ChangeAction(int32 _LayerIndex, int32 _ActionIndex, TSubclassOf<UDialogueAction> _ActionClass, bool _IgnoreClip /*= false*/)
+{
+	UDialogueAction* ChangedAction = CurrentDialogue.ActionLayers[_LayerIndex]->GetActions()[_ActionIndex];
+
+	if (_IgnoreClip == false)
+	{
+		FDialogueClip fDialogueClip;
+		fDialogueClip.eClipState = eChageAction;
+		fDialogueClip.formerAction = ChangedAction;
+		fDialogueClip.formerActionPos.Key = _LayerIndex;
+		fDialogueClip.formerActionPos.Value = _ActionIndex;
+		DialogueClipBoard.Emplace(fDialogueClip);
+	}
+
+	UDialogueAction* ChangingAction = NewObject<UDialogueAction>(this, _ActionClass);
+	CurrentDialogue.ActionLayers[_LayerIndex]->GetActions()[_ActionIndex] = ChangingAction;
+
+	UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(_LayerIndex));
+	UIH_Widget_DialogueToolAction* ActionSlot = Cast< UIH_Widget_DialogueToolAction>(ActionHorizontalBox->GetChildAt(_ActionIndex));
+	ActionSlot->SetActionInfo(ChangingAction, _LayerIndex, _ActionIndex);
+}
+
+void UDialogueToolWidget::SetTimelineProgressText(int32 _CurrentNumber, int32 _MaxNumber)
+{
+	FString TimeLineProgressText = TEXT("(") + FString::FromInt(_CurrentNumber) +TEXT("/") + FString::FromInt(_MaxNumber) +TEXT(")");
+	Text_TimeLineProgress->SetText(FText::FromString(TimeLineProgressText));
+}
+
+FVector2D UDialogueToolWidget::GetMousePos()
+{
+	FVector2D MousePosition = FSlateApplication::Get().GetCursorPos();
+	FGeometry ViewportGeometry = FGeometry();
+	MousePosition = ViewportGeometry.AbsoluteToLocal(MousePosition);
+	MousePosition = this->GetCachedGeometry().AbsoluteToLocal(MousePosition);
+	MousePosition.Y -= UpperBannerHeight;
+	return MousePosition;
+}
+
+bool UDialogueToolWidget::CalculatePosition(class UIH_Widget_DialogueToolAction* _Action, int32& _LayerIndex, int32& _Actionindex)
+{
+	for (int32 LayerIndex = 0; LayerIndex < CurrentDialogue.ActionLayers.Num(); ++LayerIndex)
+	{
+		UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(LayerIndex));
+
+		for (int32 Index = 0; Index < ActionHorizontalBox->GetChildrenCount(); ++Index)
+		{
+			UIH_Widget_DialogueToolAction* memberAction = Cast<UIH_Widget_DialogueToolAction>(ActionHorizontalBox->GetChildAt(Index));
+		
+			if (_Action == memberAction) 
+			{
+				_LayerIndex = LayerIndex;
+				_Actionindex = Index;
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+void UDialogueToolWidget::CalculateMouseIndex()
+{
+	FVector2D mousePos = GetMousePos();
+
+	int32 LayerCount = CurrentDialogue.ActionLayers.Num();
+	for (int32 LayerIndex = 0; LayerIndex < LayerCount; ++LayerIndex)
+	{
+		UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(LayerIndex));
+
+		for (int32 Index = 0; Index < ActionHorizontalBox->GetChildrenCount(); ++Index)
+		{
+			UIH_Widget_DialogueToolAction* memberAction = Cast< UIH_Widget_DialogueToolAction>(ActionHorizontalBox->GetChildAt(Index));
+			if (!memberAction)
+				continue;
+
+			FVector2D ActionLocalPos = CalculateLocalPos(LayerIndex,Index);
+			FVector2D ActionLocalEndPos = FVector2D(ActionLocalPos.X + ActionInterval, ActionLocalPos.Y + LayerHeight);
+
+			if (ActionLocalPos.Y > mousePos.Y || ActionLocalEndPos.Y <= mousePos.Y)	//행 계산
+			{
+				break;
+			}
+
+			if (ActionLocalPos.X > mousePos.X || ActionLocalEndPos.X <= mousePos.X) //열 계산
+			{
+				continue;
+			}
+
+			if (ActionLocalPos.X + ActionInterval * 0.5f > mousePos.X) 
+			{
+				SetDragPoint(ActionLocalPos);
+				DragPostIndex = TPair<int32,int32>(LayerIndex, Index);
+			}
+			else 
+			{
+				FVector2D RearPos = FVector2D(ActionLocalEndPos.X, ActionLocalPos.Y);
+				SetDragPoint(RearPos);
+
+				if (CurrentSelectedAction != memberAction) 
+				{
+					DragPostIndex = TPair<int32, int32>(LayerIndex, Index + 1);
+				}
+				else 
+				{
+					DragPostIndex = TPair<int32, int32>(LayerIndex, Index);
+				}
+			}
+		}
+	}
+}
+
+FVector2D UDialogueToolWidget::CalculateLocalPos(int32 _LayerIndex, int32 _ActionIndex)
+{
+	FVector2D LocalPos;
+	LocalPos.X = FirstActionPos.X + ActionInterval * _ActionIndex;
+	LocalPos.X -= ScrollBox_SequenceAction_Horizontal->GetScrollOffset();
+	LocalPos.Y = FirstActionPos.Y + LayerHeight * _LayerIndex;
+	LocalPos.Y -= ScrollBox_SequenceAction_Vertical->GetScrollOffset();
+	return LocalPos;
+}
+
+void UDialogueToolWidget::CalculateSlide()
+{
+	if (GrabView_Action->GetVisibility() != ESlateVisibility::SelfHitTestInvisible)
+		return;
+
+	FVector2D mousePos = GetMousePos();
+
+	if (mousePos.X <= LeftSlidePoint)
+	{
+		SlideHorizon(SlideRatio * -1.f);
+	}
+
+	if (mousePos.X >= RightSlidePoint) 
+	{
+		SlideHorizon(SlideRatio);
+	}
+}
+
+void UDialogueToolWidget::SetDragPoint(FVector2D _pointPos)
+{
+	UCanvasPanelSlot* dragPointPanel = UWidgetLayoutLibrary::SlotAsCanvasSlot(CPP_Mouse_Index);
+	if (dragPointPanel)
+	{
+		dragPointPanel->SetPosition(_pointPos);
+	}
+}
+
+void UDialogueToolWidget::SlideHorizon(float _slideRatio)
+{
+	float currentOffset = ScrollBox_SequenceAction_Horizontal->GetScrollOffset();
+	currentOffset += _slideRatio;
+
+	if (currentOffset < 0)
+		currentOffset = 0;
+	else if (currentOffset > ScrollBox_SequenceAction_Horizontal->GetScrollOffsetOfEnd())
+		currentOffset = ScrollBox_SequenceAction_Horizontal->GetScrollOffsetOfEnd();
+
+	ScrollBox_SequenceAction_Horizontal->SetScrollOffset(currentOffset);
+	ScrollBox_SequenceIndex->SetScrollOffset(currentOffset);
+}
+
+void UDialogueToolWidget::OnPostStopPreview()
+{
+	Slider_TimeLine_HitTest->SetValue(0.0f);
+	Slider_TimeLine->SetValue(0.0f);
+
+	int32 ActionCount = ScrollBox_SequenceIndex->GetChildrenCount() - 1;
+	SetTimelineProgressText(0, ActionCount);
+}
+
+void UDialogueToolWidget::FocusOnSelect()
+{
+	TPair<int32,int32> selectIndex;
+	CurrentSelectedAction->GetPos(selectIndex.Key, selectIndex.Value);
+
+	int32 maxActionCnt, maxLayerCnt;
+	UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(0));
+
+	maxLayerCnt = ScrollBox_SequenceAction_Vertical->GetChildrenCount();
+	maxActionCnt = ActionHorizontalBox->GetChildrenCount();
+
+	float selectHorizonRatio = (float)selectIndex.Value / maxActionCnt;
+	float scrollHorizon = ScrollBox_SequenceAction_Horizontal->GetScrollOffsetOfEnd();
+	ScrollBox_SequenceAction_Horizontal->SetScrollOffset(scrollHorizon * selectHorizonRatio);
+	ScrollBox_SequenceIndex->SetScrollOffset(scrollHorizon * selectHorizonRatio);
+
+	float selectVerticalRatio = (float)selectIndex.Key / maxLayerCnt;
+	float scrollVertical = ScrollBox_SequenceAction_Vertical->GetScrollOffsetOfEnd();
+	ScrollBox_SequenceAction_Vertical->SetScrollOffset(scrollVertical * selectVerticalRatio);
+}
+
+void UDialogueToolWidget::CloseDeselectContext(UButton* _Button)
+{
+	for (int32 LayerIndex = 0; LayerIndex < CurrentDialogue.ActionLayers.Num(); ++LayerIndex) 
+	{
+		UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(LayerIndex));
+
+		for (int32 Index = 0; Index < ActionHorizontalBox->GetChildrenCount(); ++Index)
+		{
+			UIH_Widget_DialogueToolAction* PushActionSlot = Cast< UIH_Widget_DialogueToolAction>(ActionHorizontalBox->GetChildAt(Index));
+			if (PushActionSlot)
+			{
+				// if (PushActionSlot->GetContextButton() != _Button) 
+				// {
+				// 	PushActionSlot->SetContextVisibility(false);
+				// }
+				// else 
+				// {
+				// 	PushActionSlot->SetContextVisibility(true);
+				// }
+			}
+		}
+	}
+}
+
+void UDialogueToolWidget::GrabAction(class UButton* _Button)
+{
+	for (int32 LayerIndex = 0; LayerIndex < CurrentDialogue.ActionLayers.Num(); ++LayerIndex)
+	{
+		UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(LayerIndex));
+
+		for (int32 Index = 0; Index < ActionHorizontalBox->GetChildrenCount(); ++Index)
+		{
+			UIH_Widget_DialogueToolAction* PushActionSlot = Cast< UIH_Widget_DialogueToolAction>(ActionHorizontalBox->GetChildAt(Index));
+			if (PushActionSlot)
+			{
+				if (PushActionSlot->GetSelectButton() == _Button)
+				{
+					GrabView_Action->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+					GrabView_Action->SetActionInfo(PushActionSlot->GetActionInfo(), -1, -1);
+					DragFormerIndex = TPair<int32, int32>(LayerIndex, Index);
+					return;
+				}
+			}
+		}
+	}
+}
+
+void UDialogueToolWidget::GrabOffAction()
+{
+	if (GrabView_Action->GetVisibility() ==ESlateVisibility::SelfHitTestInvisible)
+	{
+		MoveAction(DragFormerIndex, DragPostIndex, GrabView_Action->GetActionInfo());
+
+		GrabView_Action->SetVisibility(ESlateVisibility::Hidden);
+		GrabView_Action->SetActionInfo(nullptr, -1, -1);
+	}
+}
+
+void UDialogueToolWidget::OnClickSaveButton()
+{
+	FString FilePath = FPaths::ProjectContentDir() + FString(TEXT("Dialogue/"));
+	FString FileTypes = TEXT("Dialogue File (*.json)|*.json");
+	FString DefaultFileName = NewFileName;
+	FString FileName;
+
+	bool bSaveFileResult = SaveFile(TEXT("Save Dialogue File")
+		, FileTypes
+		, FilePath
+		, DefaultFileName
+		, FileName);
+
+	if (bSaveFileResult)
+	{
+		UIH_CinemaFunctionLibrary::SaveDialogue(CurrentDialogue, FileName);
+
+		SetFileName(FPaths::GetCleanFilename(FileName));
+	}
+}
+
+void UDialogueToolWidget::OnClickLoadButton()
+{
+	FString FilePath = FPaths::ProjectContentDir() + FString(TEXT("Dialogue/"));
+	FString FileTypes = TEXT("Dialogue File (*.json)|*.json");
+	TArray<FString> FileNames;
+
+	bool bOpenFileesult = OpenFiles(TEXT("Load Dialogue File")
+						, FileTypes
+						, FilePath
+						, EFileDialogFlags::None
+						, FileNames);
+
+	if (bOpenFileesult == false)
+	{
+		return;
+	}
+
+	UnloadActiveDialogue();
+
+	CurrentDialogue = UIH_CinemaFunctionLibrary::LoadDialogue(FileNames[0]);
+
+	LoadFilePath = FileNames[0];
+	SetFileName(FPaths::GetCleanFilename(FileNames[0]));
+
+	CreateWidgets();
+
+	bSelectActionChanged = false;
+	OriginAction = nullptr;
+	CopiedAction = nullptr;
+	DialogueClipBoard.Empty();
+
+	ScrollBox_SequenceAction_Horizontal->SetScrollOffset(0.f);
+	ScrollBox_SequenceIndex->SetScrollOffset(0.f);
+	ScrollBox_SequenceAction_Vertical->SetScrollOffset(0.f);
+}
+
+void UDialogueToolWidget::OnScrollSequenceLayer(float _CurrentOffset)
+{
+	ScrollBox_SequenceAction_Vertical->SetScrollOffset(_CurrentOffset);
+}
+
+void UDialogueToolWidget::OnScrollSequenceActionHorizontal(float _CurrentOffset)
+{
+	ScrollBox_SequenceIndex->SetScrollOffset(_CurrentOffset);
+	ScrollBox_Timeline_Hittest->SetScrollOffset(_CurrentOffset);
+	ScrollBox_Timeline->SetScrollOffset(_CurrentOffset);
+}
+
+void UDialogueToolWidget::OnScrollSequenceActionVertical(float _CurrentOffset)
+{
+	ScrollBox_SequenceLayer->SetScrollOffset(_CurrentOffset);
+}
+
+void UDialogueToolWidget::OnPropertyChange_AddActionClass(FName PropertyName)
+{
+	if (CurrentAddActionClass == nullptr)
+	{
+		Button_AddAction_Confirm->SetIsEnabled(false);
+	}
+	else
+	{
+		UDialogueAction* AddedAction = NewObject<UDialogueAction>(this, CurrentAddActionClass);
+		Button_AddAction_Confirm->SetIsEnabled(true);
+	}
+}
+
+void UDialogueToolWidget::OnPropertyChange_ChangeActionClass(FName PropertyName)
+{
+	if (CurrentAddActionClass == nullptr)
+	{
+		Button_ChangeAction_Confirm->SetIsEnabled(false);
+	}
+	else
+	{
+		UDialogueAction* AddedAction = NewObject<UDialogueAction>(this, CurrentAddActionClass);
+		Button_ChangeAction_Confirm->SetIsEnabled(true);
+	}
+}
+
+void UDialogueToolWidget::OnPropertyChange_SearchActionClass(FName PropertyName)
+{
+	// SearchedActionList.Empty();
+	//
+	// if (CurrentSearchActionClass == nullptr) 
+	// {
+	// 	Text_SearchActionResult->SetText(FText::FromString(TEXT("Result: 0")));
+	// 	return;
+	// }
+	//
+	// int32 LayerCnt = CurrentDialogue.ActionLayers.Num();
+	// int32 MaxActionCnt = 0;
+	// for (int32 LayerIndex = 0; LayerIndex < LayerCnt; ++LayerIndex)
+	// {
+	// 	int32 CurrentActionCnt = CurrentDialogue.ActionLayers[LayerIndex]->GetActionCount();
+	// 	MaxActionCnt = (MaxActionCnt > CurrentActionCnt) ? MaxActionCnt : CurrentActionCnt;
+	// }
+	//
+	// int32 SearchActionCnt = 0;
+	// for (int32 ActionIndex = 0; ActionIndex < MaxActionCnt; ++ActionIndex)
+	// {
+	// 	for (int32 LayerIndex = 0; LayerIndex < LayerCnt; ++LayerIndex)
+	// 	{
+	// 		UDialogueActionLayer* CurrentLayer = CurrentDialogue.ActionLayers[LayerIndex];
+	// 		int32 CurrentActionCnt = CurrentLayer->GetActionCount();
+	// 		if (CurrentActionCnt <= ActionIndex)
+	// 			break;
+	//
+	// 		if (CurrentSearchActionClass->GetName() == (CurrentLayer->GetActions()[ActionIndex]->GetClass()->GetName())) 
+	// 		{
+	// 			++SearchActionCnt;
+	// 			SearchedActionList.Add(TPair<int32, int32>(LayerIndex, ActionIndex));
+	// 		}
+	// 	}
+	// }
+	//
+	// FString SearchResult = TEXT("Result: ") + FString::FromInt(SearchActionCnt);
+	// Text_SearchActionResult->SetText(FText::FromString(SearchResult));
+	//
+	// if (SearchedActionList.Num() > 0)
+	// {
+	// 	TPair<int32, int32> firstAction = SearchedActionList[0];
+	// 	DeselectAction();
+	// 	SelectAction(GetSequenceAction(firstAction));
+	// 	FocusOnSelect();
+	// }
+}
+
+void UDialogueToolWidget::OnClickAddActionConfirm()
+{
+	AddActionColumn(CurrentAddActionLayerIndex,CurrentAddActionIndex,CurrentAddActionClass);
+
+	CloseAddAction();
+}
+
+void UDialogueToolWidget::OnClickAddActionCancel()
+{
+	CloseAddAction();
+}
+
+void UDialogueToolWidget::OnClickChangeActionConfirm()
+{
+	ChangeAction(CurrentAddActionLayerIndex,CurrentAddActionIndex,CurrentAddActionClass);
+
+	CloseChangeAction();
+}
+
+void UDialogueToolWidget::OnClickChangeActionCancel()
+{
+	CloseChangeAction();
+}
+
+void UDialogueToolWidget::OnClickSearchActionPrev()
+{
+	// if (SearchedActionList.Num() <= 0) return;
+	//
+	// if (IsValid(CurrentSelectedAction) == false) 
+	// {
+	// 	SelectAction(GetSequenceAction(SearchedActionList[0]));
+	// 	FocusOnSelect();
+	// 	return;
+	// }
+	//
+	// TPair<int32, int32> CurrentSelectedActionIndex = CurrentSelectedAction->GetActionIndex();
+	//
+	// int32 CurrentSelectedActionPos = 0;
+	// for (auto& elem : SearchedActionList) 
+	// {
+	// 	if (elem == CurrentSelectedActionIndex) 
+	// 	{
+	// 		break;
+	// 	}
+	// 	else 
+	// 	{
+	// 		++CurrentSelectedActionPos;
+	// 	}
+	// }
+	//
+	// if (CurrentSelectedActionPos == SearchedActionList.Num()) 
+	// {
+	// 	DeselectAction();
+	// 	SelectAction(GetSequenceAction(SearchedActionList[0]));
+	// 	FocusOnSelect();
+	// 	return;
+	// }
+	//
+	// if (0 == CurrentSelectedActionPos) 
+	// {
+	// 	FocusOnSelect();
+	// 	return;
+	// }
+	//
+	// DeselectAction();
+	// SelectAction(GetSequenceAction(SearchedActionList[CurrentSelectedActionPos - 1]));
+	// FocusOnSelect();
+}
+
+void UDialogueToolWidget::OnClickSearchActionNext()
+{
+	// if (SearchedActionList.Num() <= 0) return;
+	//
+	// int32 LastSearchedActionPos = SearchedActionList.Num() - 1;
+	//
+	// if (nullptr == CurrentSelectedAction)
+	// {
+	// 	SelectAction(GetSequenceAction(SearchedActionList[LastSearchedActionPos]));
+	// 	FocusOnSelect();
+	// 	return;
+	// }
+	//
+	// TPair<int32, int32> CurrentSelectedActionIndex = CurrentSelectedAction->GetActionIndex();
+	//
+	// int32 CurrentSelectedActionPos = 0;
+	// for (auto& elem : SearchedActionList)
+	// {
+	// 	if (elem == CurrentSelectedActionIndex)
+	// 	{
+	// 		break;
+	// 	}
+	// 	else
+	// 	{
+	// 		++CurrentSelectedActionPos;
+	// 	}
+	// }
+	//
+	// if (CurrentSelectedActionPos == SearchedActionList.Num())
+	// {
+	// 	DeselectAction();
+	// 	SelectAction(GetSequenceAction(SearchedActionList[LastSearchedActionPos]));
+	// 	FocusOnSelect();
+	// 	return;
+	// }
+	//
+	// if (LastSearchedActionPos == CurrentSelectedActionPos)
+	// {
+	// 	FocusOnSelect();
+	// 	return;
+	// }
+	//
+	// DeselectAction();
+	// SelectAction(GetSequenceAction(SearchedActionList[CurrentSelectedActionPos + 1]));
+	// FocusOnSelect();
+}
+
+void UDialogueToolWidget::OnPostPlayingActionChanged(int32 _ActionIndex)
+{
+	int32 ActionCount = ScrollBox_SequenceIndex->GetChildrenCount() - 1;
+
+	float PlayRate = ((float)_ActionIndex + 0.5f) / (float)ActionCount;
+	float SliderRate = PlayRate * ((float)ActionCount / (float)(ActionCount + 1));
+
+	Slider_TimeLine_HitTest->SetValue(SliderRate);
+	Slider_TimeLine->SetValue(SliderRate);
+
+	SetTimelineProgressText(_ActionIndex + 1, ActionCount);
+}
+
+void UDialogueToolWidget::OnClickPlayPreviewButton()
+{
+	if (UIH_FunctionLibrary::GetGameWorld())
+	{
+		AGameModeBase* GameMode = UGameplayStatics::GetGameMode(UIH_FunctionLibrary::GetGameWorld());
+		if(GameMode)
+		{
+			if( GameMode->IsA(AIH_GameMode_DialgueTool::StaticClass()) )
+			{
+				return;
+			}
+		}
+	}
+	
+	GConfig->SetBool(TEXT("/Script/ProjectVic.DialogueTool"), TEXT("OpenWithActiveDialogue"), true, GGameIni);
+	GConfig->SetString(TEXT("/Script/ProjectVic.DialogueTool"), TEXT("CurrentFileName"), *CurrentDialogueFileName, GGameIni);
+	GConfig->SetString(TEXT("/Script/ProjectVic.DialogueTool"), TEXT("CurrentFilePath"), *LoadFilePath, GGameIni);
+
+	UIH_CinemaFunctionLibrary::PlayDialoguePreview(CurrentDialogue);
+}
+
+void UDialogueToolWidget::OnClickStopPreviewButton()
+{
+	if (UIH_FunctionLibrary::GetGameWorld())
+	{
+		AGameModeBase* GameMode = UGameplayStatics::GetGameMode(UIH_FunctionLibrary::GetGameWorld());
+		if (GameMode)
+		{
+			if (GameMode->IsA(AIH_GameMode_DialgueTool::StaticClass()))
+			{
+				UIH_CinemaFunctionLibrary::StopDialoguePreview();
+			}
+		}
+	}
+
+	Slider_TimeLine_HitTest->SetValue(0.0f);
+	Slider_TimeLine->SetValue(0.0f);
+
+	int32 ActionCount = ScrollBox_SequenceIndex->GetChildrenCount() - 1;
+	SetTimelineProgressText(0, ActionCount);
+}
+
+void UDialogueToolWidget::OnPropertyChanged_SequenceInspector(FName PropertyName)
+{
+	for (int32 LayerIndex = 0; LayerIndex < CurrentDialogue.ActionLayers.Num(); ++LayerIndex)
+	{
+		for (int32 ActionIndex = 0; ActionIndex < CurrentDialogue.ActionLayers[LayerIndex]->GetActions().Num(); ++ActionIndex)
+		{
+			if (CurrentDialogue.ActionLayers[LayerIndex]->GetActions()[ActionIndex] == DetailsView_Inspector->GetObject() )
+			{
+				UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(LayerIndex));
+				UIH_Widget_DialogueToolAction* ActionSlot = Cast< UIH_Widget_DialogueToolAction>(ActionHorizontalBox->GetChildAt(ActionIndex));
+	
+				ActionSlot->SetActionInfo(CurrentDialogue.ActionLayers[LayerIndex]->GetActions()[ActionIndex], LayerIndex, ActionIndex);
+				bSelectActionChanged = true;
+			}
+		}
+	}
+}
+
+void UDialogueToolWidget::OnPostDialogueFinish()
+{
+	int32 ActionCount = ScrollBox_SequenceIndex->GetChildrenCount() - 1;
+
+	float FinishRate = (float)ActionCount / (float)ScrollBox_SequenceIndex->GetChildrenCount();
+
+	Slider_TimeLine_HitTest->SetValue(FinishRate);
+	Slider_TimeLine->SetValue(FinishRate);
+
+	SetTimelineProgressText(ActionCount, ActionCount);
+
+}
+
+void UDialogueToolWidget::UndoClip()
+{
+	int32 clipBoardSize = DialogueClipBoard.Num();
+	if (clipBoardSize <= 0) 
+	{
+		return;
+	}
+
+	FDialogueClip fDialoueClip = DialogueClipBoard[clipBoardSize - 1];
+	DialogueClipBoard.RemoveAt(clipBoardSize-1);
+
+	switch (fDialoueClip.eClipState)
+	{
+	case eCreateLayer:
+		for (int32 actionCnt = 0; actionCnt < fDialoueClip.layerActionCnt; ++actionCnt)
+		{
+			UndoClip();
+		}
+		DeleteLayer(fDialoueClip.layerPos, true);
+		break;
+	case eDeleteLayer:
+		AddLayerAt(fDialoueClip.layerPos, true);
+		for (int32 actionCnt = 0; actionCnt < fDialoueClip.layerActionCnt; ++actionCnt) 
+		{
+			UndoClip();
+		}
+		break;
+	case eCreateColumn:
+		for (int32 actionCnt = 0; actionCnt < fDialoueClip.layerActionCnt; ++actionCnt)
+		{
+			UndoClip();
+		}
+		break;
+	case eCreateAction:
+		DeleteAction(fDialoueClip.nowActionPos.Key,fDialoueClip.nowActionPos.Value,true);
+		break;
+	case eDeleteAction:
+		AddActionAt(fDialoueClip.formerActionPos.Key, fDialoueClip.formerActionPos.Value, fDialoueClip.formerAction, true);
+		break;
+	case eMoveAction:
+		MoveAction(fDialoueClip.nowActionPos, fDialoueClip.formerActionPos, fDialoueClip.nowAction, true);
+		break;
+	case eChageAction:
+		CurrentDialogue.ActionLayers[fDialoueClip.formerActionPos.Key]->GetActions()[fDialoueClip.formerActionPos.Value] = fDialoueClip.formerAction;
+	case eChangeActionInfo:
+		UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(fDialoueClip.formerActionPos.Key));
+		UIH_Widget_DialogueToolAction* ActionSlot = Cast< UIH_Widget_DialogueToolAction>(ActionHorizontalBox->GetChildAt(fDialoueClip.formerActionPos.Value));
+		ActionSlot->SetActionInfo(fDialoueClip.formerAction, fDialoueClip.formerActionPos.Key, fDialoueClip.formerActionPos.Value);
+		break;
+	}
+}
+
+void UDialogueToolWidget::DuplicateAction()
+{
+	if (CurrentSelectedAction == nullptr)
+		return;
+
+	int32 LayerIndex, ActionIndex;
+
+	CalculatePosition(CurrentSelectedAction, LayerIndex, ActionIndex);
+	UDialogueAction* AddedAction = NewObject<UDialogueAction>(this, CurrentSelectedAction->GetActionInfo()->GetClass(),NAME_None, RF_Public, CurrentSelectedAction->GetActionInfo());
+	AddActionAt(LayerIndex, ActionIndex+1, AddedAction);
+
+	UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(LayerIndex));
+	CurrentSelectedAction = Cast<UIH_Widget_DialogueToolAction>(ActionHorizontalBox->GetChildAt(ActionIndex));
+	CurrentSelectedAction->OnPressSelectButton();
+	GrabView_Action->SetVisibility(ESlateVisibility::Hidden);
+}
+
+void UDialogueToolWidget::CopyAction()
+{
+	CopiedAction = CurrentSelectedAction->GetActionInfo();
+}
+
+void UDialogueToolWidget::PasteAction()
+{
+	if (CopiedAction == nullptr || CurrentSelectedAction == nullptr) 
+		return;
+
+	int32 LayerIndex, ActionIndex;
+
+	CalculatePosition(CurrentSelectedAction, LayerIndex, ActionIndex);
+	UDialogueAction* AddedAction = NewObject<UDialogueAction>(this, CopiedAction->GetClass(), NAME_None, RF_Public, CopiedAction);
+	AddActionAt(LayerIndex, ActionIndex + 1, AddedAction);
+
+	UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(LayerIndex));
+	CurrentSelectedAction = Cast<UIH_Widget_DialogueToolAction>(ActionHorizontalBox->GetChildAt(ActionIndex));
+	CurrentSelectedAction->OnPressSelectButton();
+
+	GrabView_Action->SetVisibility(ESlateVisibility::Hidden);
+	GrabView_Action->SetActionInfo(nullptr, -1, -1);
+}
+
+void UDialogueToolWidget::QuickSave()
+{
+	if (TEXT("") == LoadFilePath)
+		return;
+
+	// if(NotiAnimation)
+	// 	PlayAnimation(NotiAnimation,0.f,1.f);
+
+	UIH_CinemaFunctionLibrary::SaveDialogue(CurrentDialogue, LoadFilePath);
+	SetFileName(FPaths::GetCleanFilename(LoadFilePath));
+}
+
+void UDialogueToolWidget::DeleteSelectAction()
+{
+	if (CurrentSelectedAction == nullptr)
+		return;
+
+	DeleteAction(CurrentSelectedAction);
+}
+
+bool UDialogueToolWidget::IsControllPressing()
+{
+	return bControllPressed;
+}
+
+void UDialogueToolWidget::SetControllPressed(bool _bControllPressed)
+{
+	bControllPressed = _bControllPressed;
+}
+
+void UDialogueToolWidget::MoveToNeighbor(FKey _Key)
+{
+	if (_Key != EKeys::W && _Key != EKeys::A
+		&& _Key != EKeys::S && _Key != EKeys::D)
+	{
+		return;
+	}
+
+	if (nullptr == CurrentSelectedAction || GrabView_Action->GetVisibility() != ESlateVisibility::Hidden)
+	{
+		return;
+	}
+
+	GrabView_Action->SetActionInfo(nullptr, -1, -1);
+
+	int32 LayerIndex, ActionIndex;
+
+	CalculatePosition(CurrentSelectedAction, LayerIndex, ActionIndex);
+
+	int32 LayerCnt = ScrollBox_SequenceAction_Vertical->GetChildrenCount();
+	int32 ActionCnt = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(LayerIndex))->GetChildrenCount();
+	
+	if (_Key == EKeys::W)
+	{
+
+		if (0 == LayerIndex)
+		{
+			return;
+		}
+
+		bSelectActionChanged = true;
+		DeselectAction();
+
+		UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(LayerIndex-1));
+		CurrentSelectedAction = Cast<UIH_Widget_DialogueToolAction>(ActionHorizontalBox->GetChildAt(ActionIndex));
+		CurrentSelectedAction->OnPressSelectButton();
+		FocusOnSelect();
+		GrabView_Action->SetVisibility(ESlateVisibility::Hidden);
+	}
+	else if (_Key == EKeys::S)
+	{
+		if (LayerCnt - 2 <= LayerIndex)
+		{
+			return;
+		}
+
+		bSelectActionChanged = true;
+		DeselectAction();
+
+		UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(LayerIndex + 1));
+		CurrentSelectedAction = Cast<UIH_Widget_DialogueToolAction>(ActionHorizontalBox->GetChildAt(ActionIndex));
+		CurrentSelectedAction->OnPressSelectButton();
+		FocusOnSelect();
+		GrabView_Action->SetVisibility(ESlateVisibility::Hidden);
+	}
+	else if (_Key == EKeys::A)
+	{
+		if (0 == ActionIndex)
+		{
+			return;
+		}
+
+		bSelectActionChanged = true;
+		DeselectAction();
+
+		UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(LayerIndex));
+		CurrentSelectedAction = Cast<UIH_Widget_DialogueToolAction>(ActionHorizontalBox->GetChildAt(ActionIndex - 1));
+		CurrentSelectedAction->OnPressSelectButton();
+		FocusOnSelect();
+		GrabView_Action->SetVisibility(ESlateVisibility::Hidden);
+	}
+	else if (_Key == EKeys::D)
+	{
+		if (ActionCnt -2 <= ActionIndex)
+		{
+			return;
+		}
+
+		bSelectActionChanged = true;
+		DeselectAction();
+
+		UHorizontalBox* ActionHorizontalBox = Cast<UHorizontalBox>(ScrollBox_SequenceAction_Vertical->GetChildAt(LayerIndex));
+		CurrentSelectedAction = Cast<UIH_Widget_DialogueToolAction>(ActionHorizontalBox->GetChildAt(ActionIndex + 1));
+		CurrentSelectedAction->OnPressSelectButton();
+		FocusOnSelect();
+		GrabView_Action->SetVisibility(ESlateVisibility::Hidden);
+	}
+
+	//float SlideVector = 0.f;
+	//if (_Key == EKeys::A)
+	//	SlideVector = -30.f;
+	//else if (_Key == EKeys::D)
+	//	SlideVector = 30.f;
+
+	//SlideHorizon(SlideVector);
+}
+
+bool UDialogueToolWidget::OpenFiles(const FString& Title, const FString& FileTypes, FString& InOutLastPath, EFileDialogFlags::Type DialogMode, TArray<FString>& OutOpenFilenames)
 {
 	IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
 	bool bOpened = false;
@@ -163,705 +1718,4 @@ bool UDialogueEditToolWidget::OpenFiles(const FString& Title, const FString& Fil
 	}
 
 	return bOpened;
-}
-
-void UDialogueEditToolWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
-{
-	Super::NativeTick(MyGeometry, InDeltaTime);
-
-	if(ESlateVisibility::Collapsed != CPP_Widget_SelectShadow->GetVisibility())
-	{
-		UCanvasPanelSlot* GrabViewPanel = UWidgetLayoutLibrary::SlotAsCanvasSlot(CPP_Widget_SelectShadow);
-		if(GrabViewPanel)
-		{
-			FVector2D mousePos = GetMousePos();
-
-			GrabViewPanel->SetPosition(FVector2D(mousePos.X-20,mousePos.Y-20));
-		}
-	}
-}
-
-void UDialogueEditToolWidget::NativeDestruct()
-{
-	Super::NativeDestruct();
-}
-
-void UDialogueEditToolWidget::AddNewLayer()
-{
-	if(CPP_Scroll_Layer && CPP_Scroll_ActionLine)
-	{
-		int32 MaxActionCount = 0;
-		for(auto& elem : CurrentDialogue.ActionLayers)
-		{
-			MaxActionCount = (MaxActionCount < elem->GetActionCount()) ? elem->GetActionCount() : MaxActionCount;
-		}
-
-		UDialogueActionLayer* NewLayer = NewObject<UDialogueActionLayer>();
-		for(int32 ActionIndex = 0; ActionIndex < MaxActionCount; ++ActionIndex)
-		{
-			NewLayer->AddAction(UDialogueAction_Empty::StaticClass());
-		}
-		CurrentDialogue.ActionLayers.Emplace(NewLayer);
-
-		ReadCurrentDialogue();
-	}
-}
-
-void UDialogueEditToolWidget::AddNewAction(int32 _LayerIndex)
-{
-	if(CPP_Scroll_ActionLine)
-	{
-		if(CurrentDialogue.ActionLayers.Num() <= _LayerIndex)
-			return;
-
-		CurrentDialogue.ActionLayers[_LayerIndex]->AddAction(UDialogueAction_Empty::StaticClass());
-
-		ReadCurrentDialogue();
-	}
-}
-
-void UDialogueEditToolWidget::AddNewActionAt(int32 _LayerIndex, int32 _ActionIndex, UDialogueAction* _ActionInfo)
-{
-	if(CPP_Scroll_ActionLine)
-	{
-		if(CurrentDialogue.ActionLayers.Num() <= _LayerIndex)
-			return;
-		
-		if(_ActionIndex > CurrentDialogue.ActionLayers[_LayerIndex]->GetActions().Num())
-		{
-			return;
-		}
-		else if(_ActionIndex == CurrentDialogue.ActionLayers[_LayerIndex]->GetActions().Num())
-		{
-			CurrentDialogue.ActionLayers[_LayerIndex]->GetActions().Add(_ActionInfo);
-		}
-		else
-		{
-			CurrentDialogue.ActionLayers[_LayerIndex]->GetActions().Insert(_ActionInfo, _ActionIndex);
-		}
-		
-		ReadCurrentDialogue();
-	}
-}
-
-void UDialogueEditToolWidget::SelectAction(UIH_Widget_DialogueToolAction* _SelectAction)
-{
-	CPP_DetailView_Action->SetObject(_SelectAction->GetActionInfo());
-	CPP_DetailView_Action->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
-	
-	CurrentSelectActionWidget = _SelectAction;
-
-	for(auto& elem : CPP_Scroll_ActionLine->GetAllChildren())
-	{
-		if(UHorizontalBox* ActionLineWidget = Cast<UHorizontalBox>(elem))
-		{
-			for(auto& lineElem : ActionLineWidget->GetAllChildren())
-			{
-				if(UIH_Widget_DialogueToolAction* ActionWidget = Cast<UIH_Widget_DialogueToolAction>(lineElem))
-				{
-					ActionWidget->SetSelect(ActionWidget == _SelectAction);
-				}
-			}
-		}
-	}
-}
-
-void UDialogueEditToolWidget::DeleteAction(int32 _LayerIndex, int32 _ActionIndex)
-{
-	SelectAction(nullptr);
-
-	if(CurrentDialogue.ActionLayers.Num() <= _LayerIndex)
-		return;
-
-	UDialogueActionLayer* ActionLine = CurrentDialogue.ActionLayers[_LayerIndex];
-	if(ActionLine->GetActionCount() <= _ActionIndex)
-		return;
-
-	ActionLine->RemoveAction(_ActionIndex);
-
-	ReadCurrentDialogue();
-}
-
-void UDialogueEditToolWidget::MoveAction(TPair<int32, int32> _FormerPos, TPair<int32, int32> _PostPos)
-{
-	if(nullptr == CPP_Widget_SelectShadow)
-		return;
-
-	if(_FormerPos != _PostPos)
-	{
-		AddNewActionAt(_PostPos.Key, _PostPos.Value, CPP_Widget_SelectShadow->GetActionInfo());
-		DeleteAction(_FormerPos.Key, _FormerPos.Value);
-	}
-	
-	ReleaseShadow();
-	ReadCurrentDialogue();
-}
-
-void UDialogueEditToolWidget::ShowChangeActionCanvas(UIH_Widget_DialogueToolAction* _TargetAction)
-{
-	if(CPP_Canvas_ActionChange)
-	{
-		CPP_Canvas_ActionChange->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
-	}
-
-	ChangeTargetActionWidget = _TargetAction;
-}
-
-UIH_Widget_DialogueToolAction* UDialogueEditToolWidget::FindAction(int32 _LayerIndex, int32 _ActionIndex)
-{
-	if(CPP_Scroll_ActionLine->GetChildrenCount() <= _LayerIndex)
-		return nullptr;
-
-	if(UHorizontalBox* TargetActionLine = Cast<UHorizontalBox>(CPP_Scroll_ActionLine->GetChildAt(_LayerIndex)))
-	{
-		if(TargetActionLine->GetChildrenCount() - 1 > _ActionIndex)
-		{
-			if(UIH_Widget_DialogueToolAction* TargetActionWidget = Cast<UIH_Widget_DialogueToolAction>(TargetActionLine->GetChildAt(_ActionIndex)))
-			{
-				return TargetActionWidget;
-			}
-		}
-	}
-
-	return nullptr;
-}
-
-void UDialogueEditToolWidget::ReleaseShadow()
-{
-	CPP_Widget_SelectShadow->SetVisibility(ESlateVisibility::Collapsed);
-	CPP_Widget_SelectShadow->SetShadow(nullptr, INDEX_NONE, INDEX_NONE);
-}
-
-void UDialogueEditToolWidget::OnClick_SaveButton()
-{
-	FString FilePath = FPaths::ProjectContentDir() + FString(TEXT("Dialogue/"));
-	FString FileTypes = TEXT("Dialogue File (*.json)|*.json");
-	FString DefaultFileName = TEXT("NewDialogue.json");
-	FString FileName;
-
-	bool SaveFileResult = SaveFile(TEXT("Save Dialogue File")
-		, FileTypes
-		, FilePath
-		, DefaultFileName
-		, FileName);
-
-	if(SaveFileResult)
-	{
-		const FString strJsonPath = FileName;
-		FString JsonString;
-
-		TSharedRef<FJsonObject> JsonObject = MakeShareable(new FJsonObject());
-
-		{ // Save Action
-			TArray<TSharedPtr<FJsonValue>> Values;
-
-			for (int i = 0; i < CurrentDialogue.ActionLayers.Num(); ++i)
-			{
-				TSharedRef<FJsonObject> json = MakeShareable(new FJsonObject());
-				TSharedPtr<FJsonValueObject> value = MakeShareable(new FJsonValueObject(json));
-
-				CurrentDialogue.ActionLayers[i]->SaveToJson(json);
-
-				Values.Add(value);
-			}
-
-			JsonObject->SetArrayField(TEXT("ActionLayers"), Values);
-		}
-
-		FString OutputString;
-		TSharedRef< TJsonWriter<> > Writer = TJsonWriterFactory<>::Create(&OutputString);
-		FJsonSerializer::Serialize(JsonObject, Writer);
-
-		FFileHelper::SaveStringToFile(OutputString, *strJsonPath);
-		CPP_Txt_FileName->SetText(FText::FromString(FPaths::GetCleanFilename(FileName)));
-	}
-}
-
-void UDialogueEditToolWidget::OnClick_LoadButton()
-{
-	FString FilePath = FPaths::ProjectContentDir() + FString(TEXT("Dialogue/"));
-	FString FileTypes = TEXT("Dialogue File (*.json)|*.json");
-	TArray<FString> FileNames;
-
-	bool bOpenFileesult = OpenFiles(TEXT("Load Dialogue File")
-						, FileTypes
-						, FilePath
-						, EFileDialogFlags::None
-						, FileNames);
-
-	if (bOpenFileesult == false)
-	{
-		return;
-	}
-
-	const FString JsonFilePath = FileNames[0];
-	FString JsonString;
-
-	FFileHelper::LoadFileToString(JsonString, *JsonFilePath);
-
-	TSharedPtr<FJsonObject> JsonObject = MakeShareable(new FJsonObject());
-	TSharedRef<TJsonReader<>> JsonReader = TJsonReaderFactory<>::Create(JsonString);
-
-	if (FJsonSerializer::Deserialize(JsonReader, JsonObject) && JsonObject.IsValid())
-	{
-		FIH_Dialogue Dialogue;
-
-		const TArray<TSharedPtr<FJsonValue>>& arrActionLayer = JsonObject->GetArrayField(TEXT("ActionLayers"));
-		for (const TSharedPtr<FJsonValue>& ActionLayer : arrActionLayer)
-		{
-			UDialogueActionLayer* pLayer = NewObject<UDialogueActionLayer>();
-			Dialogue.ActionLayers.Add(pLayer);
-
-			pLayer->LoadToJson(ActionLayer);
-		}
-
-		CurrentDialogue = Dialogue;
-	}
-
-	LoadFilePath = FileNames[0];
-	CPP_Txt_FileName->SetText(FText::FromString(FPaths::GetCleanFilename(FileNames[0])));
-
-	ReadCurrentDialogue();
-}
-
-void UDialogueEditToolWidget::OnClick_ChangeAction()
-{
-	//Get New Action Class
-	if(nullptr != ChangeTargetActionWidget)
-	{
-		int32 LayerIndex, ActionIndex;
-		ChangeTargetActionWidget->GetPos(LayerIndex, ActionIndex);
-		UDialogueAction* NewAction = NewObject<UDialogueAction>(this, CurrentAddActionClass);
-		CurrentDialogue.ActionLayers[LayerIndex]->GetActions()[ActionIndex] = NewAction;
-		ChangeTargetActionWidget->SetActionInfo(NewAction, LayerIndex, ActionIndex);
-		ChangeTargetActionWidget = nullptr;
-	}
-
-	if(CPP_Canvas_ActionChange)
-	{
-		CPP_Canvas_ActionChange->SetVisibility(ESlateVisibility::Collapsed);
-	}
-}
-
-void UDialogueEditToolWidget::OnClick_CancelAction()
-{
-	if(CPP_Canvas_ActionChange)
-	{
-		CPP_Canvas_ActionChange->SetVisibility(ESlateVisibility::Collapsed);
-	}
-}
-
-void UDialogueEditToolWidget::OnClick_Play()
-{
-	GConfig->SetBool(TEXT("/Script/InsectHeaven.DialogueTool"), TEXT("OpenWithActiveDialogue"), true, GGameIni);
-	GConfig->SetString(TEXT("/Script/InsectHeaven.DialogueTool"), TEXT("CurrentFileName"), *CurrentDialogueFileName, GGameIni);
-	GConfig->SetString(TEXT("/Script/InsectHeaven.DialogueTool"), TEXT("CurrentFilePath"), *LoadFilePath, GGameIni);
-
-	SaveDialogue(CurrentDialogue, FPaths::ProjectContentDir() + FString(TEXT("Dialogue/")) + TEXT("ActiveDialogue"));
-
-	FLevelEditorModule& LevelEditorModule = FModuleManager::GetModuleChecked<FLevelEditorModule>(TEXT("LevelEditor"));
-
-	ULevelEditorPlaySettings* PlaySettings = GetMutableDefault<ULevelEditorPlaySettings>();
-	PlaySettings->LastExecutedPlayModeType = PlayMode_InViewPort;
-
-	FPropertyChangedEvent PropChangeEvent(ULevelEditorPlaySettings::StaticClass()->FindPropertyByName(GET_MEMBER_NAME_CHECKED(ULevelEditorPlaySettings, LastExecutedPlayModeType)));
-	PlaySettings->PostEditChangeProperty(PropChangeEvent);
-
-	PlaySettings->SaveConfig();
-
-	if (FEngineAnalytics::IsAvailable())
-	{
-		// play location
-		FString PlayLocationString;
-
-		switch (PlaySettings->LastExecutedPlayModeLocation)
-		{
-		case PlayLocation_CurrentCameraLocation:
-			PlayLocationString = TEXT("CurrentCameraLocation");
-			break;
-
-		case PlayLocation_DefaultPlayerStart:
-			PlayLocationString = TEXT("DefaultPlayerStart");
-			break;
-
-		default:
-			PlayLocationString = TEXT("<UNKNOWN>");
-		}
-
-		// play mode
-		FString PlayModeString;
-
-		switch (PlaySettings->LastExecutedPlayModeType)
-		{
-		case PlayMode_InViewPort:
-			PlayModeString = TEXT("InViewPort");
-			break;
-
-		case PlayMode_InEditorFloating:
-			PlayModeString = TEXT("InEditorFloating");
-			break;
-
-		case PlayMode_InMobilePreview:
-			PlayModeString = TEXT("InMobilePreview");
-			break;
-
-		case PlayMode_InTargetedMobilePreview:
-			PlayModeString = TEXT("InTargetedMobilePreview");
-			break;
-
-		case PlayMode_InVulkanPreview:
-			PlayModeString = TEXT("InVulkanPreview");
-			break;
-
-		case PlayMode_InNewProcess:
-			PlayModeString = TEXT("InNewProcess");
-			break;
-
-		case PlayMode_InVR:
-			PlayModeString = TEXT("InVR");
-			break;
-
-		case PlayMode_Simulate:
-			PlayModeString = TEXT("Simulate");
-			break;
-
-		default:
-			PlayModeString = TEXT("<UNKNOWN>");
-		}
-
-		FEngineAnalytics::GetProvider().RecordEvent(TEXT("Editor.Usage.PIE"), TEXT("PlayLocation"), PlayLocationString);
-		FEngineAnalytics::GetProvider().RecordEvent(TEXT("Editor.Usage.PIE"), TEXT("PlayMode"), PlayModeString);
-	}
-
-	TSharedPtr<IAssetViewport> ActiveLevelViewport = LevelEditorModule.GetFirstActiveViewport();
-
-	const bool bAtPlayerStart = false;
-	FRequestPlaySessionParams SessionParams;
-
-	if (ActiveLevelViewport.IsValid() && FSlateApplication::Get().FindWidgetWindow(ActiveLevelViewport->AsWidget()).IsValid())
-	{
-		SessionParams.DestinationSlateViewport = ActiveLevelViewport;
-
-		if (!bAtPlayerStart)
-		{
-			SessionParams.StartLocation = FVector::ZeroVector;
-			SessionParams.StartRotation = FRotator::ZeroRotator;
-		}
-	}
-
-	SessionParams.WorldType = EPlaySessionWorldType::PlayInEditor;
-	SessionParams.GlobalMapOverride = TEXT("/Game/Scene/Editor/DialogueTest.DialogueTest");
-	SessionParams.GameModeOverride = AIH_GameMode_DialgueTool::StaticClass();
-	SessionParams.SessionDestination = EPlaySessionDestinationType::InProcess;
-
-	FEditorFileUtils::LoadMap(TEXT("/Game/Scene/Editor/DialogueTest"));
-
-	GUnrealEd->RequestPlaySession(SessionParams);
-}
-
-void UDialogueEditToolWidget::OnClick_Stop()
-{
-	GEditor->RequestEndPlayMap();
-}
-
-void UDialogueEditToolWidget::GrabAction(UIH_Widget_DialogueToolAction* _Widget)
-{
-	GrabStartPos = TPair<int32, int32>(INDEX_NONE, INDEX_NONE);
-	GrabEndPos = TPair<int32, int32>(INDEX_NONE, INDEX_NONE);
-	
-	if(nullptr != _Widget)
-	{
-		_Widget->GetPos(GrabStartPos.Key, GrabStartPos.Value);
-		CPP_Widget_SelectShadow->SetVisibility(ESlateVisibility::HitTestInvisible);
-		CPP_Widget_SelectShadow->SetShadow(_Widget->GetActionInfo(), GrabStartPos.Key, GrabStartPos.Value);
-	}
-	else
-	{
-		ReleaseShadow();
-	}
-}
-
-void UDialogueEditToolWidget::GrabOffAction()
-{
-	CalculateMouseIndex();
-
-	GrabOffAction(FindAction(GrabEndPos.Key, GrabEndPos.Value));
-}
-
-void UDialogueEditToolWidget::GrabOffAction(UIH_Widget_DialogueToolAction* _Widget)
-{
-	CalculateMouseIndex();
-	
-	if(ESlateVisibility::Collapsed != CPP_Widget_SelectShadow->GetVisibility())
-	{
-		if(GrabStartPos.Key != INDEX_NONE && GrabStartPos.Value != INDEX_NONE
-			&& GrabEndPos.Key != INDEX_NONE && GrabEndPos.Value != INDEX_NONE)
-		MoveAction(GrabStartPos, GrabEndPos);
-
-		ReleaseShadow();
-	}
-}
-
-void UDialogueEditToolWidget::DeleteSelectAction()
-{
-	if(nullptr == CurrentSelectActionWidget)
-	{
-		return;
-	}
-
-	int32 LayerIndex, ActionIndex;
-	CurrentSelectActionWidget->GetPos(LayerIndex, ActionIndex);
-	CurrentSelectActionWidget = nullptr;
-	DeleteAction(LayerIndex, ActionIndex);
-}
-
-FVector2D UDialogueEditToolWidget::GetMousePos()
-{
-	FVector2D MousePosition = FSlateApplication::Get().GetCursorPos();
-	FGeometry ViewportGeometry = FGeometry();
-	MousePosition = ViewportGeometry.AbsoluteToLocal(MousePosition);
-	MousePosition = this->GetCachedGeometry().AbsoluteToLocal(MousePosition);
-	return MousePosition;
-}
-
-void UDialogueEditToolWidget::CalculateMouseIndex()
-{
-	FVector2D CurrentScreenSize = this->GetCachedGeometry().GetLocalSize();
-	FVector2D DefaultScreenSize = FVector2D(1920.f, 1080.f);
-	
-	FVector2D ConvertMousePos = GetMousePos();
-	ConvertMousePos.X = ConvertMousePos.X / CurrentScreenSize.X * DefaultScreenSize.X;
-	ConvertMousePos.Y = ConvertMousePos.Y / CurrentScreenSize.Y * DefaultScreenSize.Y;
-
-	FVector2D ConvertStartPos = FVector2D(226.f, 730.f);
-	ConvertStartPos.X = ConvertStartPos.X / CurrentScreenSize.X * DefaultScreenSize.X;
-
-	FVector2D ActionWidgetSize = FVector2D(220.f, 80.f);
-	ActionWidgetSize.X = ActionWidgetSize.X / CurrentScreenSize.X * DefaultScreenSize.X;
-	ActionWidgetSize.Y = ActionWidgetSize.Y / CurrentScreenSize.Y * DefaultScreenSize.Y;
-
-	int32 LayerCount = CurrentDialogue.ActionLayers.Num();
-	for(int32 LayerIndex = 0; LayerIndex < LayerCount; ++LayerIndex)
-	{
-		UHorizontalBox* ActionLine = Cast<UHorizontalBox>(CPP_Scroll_ActionLine->GetChildAt(LayerIndex));
-
-		for(int32 ActionIndex = 0; ActionIndex < ActionLine->GetChildrenCount(); ++ActionIndex)
-		{
-			UIH_Widget_DialogueToolAction* ActionWidget = Cast<UIH_Widget_DialogueToolAction>(ActionLine->GetChildAt(ActionIndex));
-			if(nullptr == ActionWidget || nullptr == ActionWidget->GetActionInfo())
-			{
-				return;
-			}
-
-			FVector2D ActionLocalPos = FVector2D(0,0);
-			ActionLocalPos.X = ConvertStartPos.X + ActionWidgetSize.X * ActionIndex;
-			ActionLocalPos.Y = ConvertStartPos.Y + ActionWidgetSize.Y * LayerIndex;
-			FVector2D ActionLocalEndPos = FVector2D(ActionLocalPos.X + 210.f, ActionLocalPos.Y + 88.f);
-
-			if(ActionLocalPos.Y > ConvertMousePos.Y || ActionLocalEndPos.Y <= ConvertMousePos.Y)
-			{
-				break;
-			}
-
-			if(ActionLocalPos.X > ConvertMousePos.X || ActionLocalEndPos.X <= ConvertMousePos.X)
-			{
-				continue;
-			}
-
-			if(ActionLocalPos.X + 210.f * 0.5f > ConvertMousePos.X)
-			{
-				GrabEndPos = TPair<int32, int32>(LayerIndex, ActionIndex);
-				return;
-			}
-			else
-			{
-				if(CurrentSelectActionWidget != ActionWidget)
-				{
-					GrabEndPos = TPair<int32, int32>(LayerIndex, ActionIndex + 1);
-					return;
-				}
-				else
-				{
-					GrabEndPos = TPair<int32, int32>(LayerIndex, ActionIndex);
-					return;
-				}
-			}
-		}
-	}
-}
-
-FVector2D UDialogueEditToolWidget::CalculateActionPos(int32 _LayerIndex, int32 _ActionIndex)
-{
-	//230 750
-	FVector2D LocalPos;
-	LocalPos.X = 230.f + 210.f * _ActionIndex;
-	LocalPos.Y = 750.f + 88.f * _LayerIndex;
-	return LocalPos;
-}
-
-void UDialogueEditToolWidget::LoadActiveDialogue()
-{
-	FString FilePath = FPaths::ProjectContentDir() + FString(TEXT("Dialogue/")) + FString(TEXT("ActiveDialogue"));
-	CurrentDialogue = LoadDialogue(FilePath);
-}
-
-void UDialogueEditToolWidget::ReadCurrentDialogue()
-{
-	CPP_Scroll_Layer->ClearChildren();
-	CPP_Scroll_ActionLine->ClearChildren();
-
-	ReleaseShadow();
-	CurrentSelectActionWidget = nullptr;
-
-	const FSoftClassPath ActionPath(UIH_Widget_DialogueToolAction::GetWidgetPath());
-	UClass* ActionWidgetClass = Cast<UClass>(ActionPath.TryLoad());
-
-	//Add Layer Index
-	{
-		//Actual Layer
-		int32 LayerCount = CurrentDialogue.ActionLayers.Num();
-		for(int32 Index = 0; Index < LayerCount; ++Index)
-		{
-			if(UIH_Widget_DialogueToolAction* LayerWidget = CreateWidget<UIH_Widget_DialogueToolAction>(this, ActionWidgetClass))
-			{
-				LayerWidget->SetParentWidget(this);
-				LayerWidget->SetLayerInfo(Index);
-				CPP_Scroll_Layer->AddChild(LayerWidget);
-
-				UHorizontalBox* ActionLineBox = NewObject<UHorizontalBox>();
-				CPP_Scroll_ActionLine->AddChild(ActionLineBox);
-			}
-		}
-
-		//Add Button
-		if(UIH_Widget_DialogueToolAction* LayerWidget = CreateWidget<UIH_Widget_DialogueToolAction>(this, ActionWidgetClass))
-		{
-			LayerWidget->SetParentWidget(this);
-			CPP_Scroll_Layer->AddChild(LayerWidget);
-		}
-	}
-
-	//Add Action
-	{
-		for(int32 LayerIndex = 0; LayerIndex < CurrentDialogue.ActionLayers.Num(); ++LayerIndex)
-		{
-			UHorizontalBox* ActionBox = Cast<UHorizontalBox>(CPP_Scroll_ActionLine->GetChildAt(LayerIndex));
-			UDialogueActionLayer* ActionLine = CurrentDialogue.ActionLayers[LayerIndex];
-			for(int32 ActionIndex = 0; ActionIndex < ActionLine->GetActionCount(); ++ActionIndex)
-			{
-				if(UIH_Widget_DialogueToolAction* ActionWidget = CreateWidget<UIH_Widget_DialogueToolAction>(this, ActionWidgetClass))
-				{
-					ActionWidget->SetParentWidget(this);
-					UDialogueAction* ActionInfo = ActionLine->GetActions()[ActionIndex];
-					ActionWidget->SetActionInfo(ActionInfo, LayerIndex, ActionIndex);
-					ActionBox->AddChild(ActionWidget);
-				}
-			}
-			if(UIH_Widget_DialogueToolAction* ActionWidget = CreateWidget<UIH_Widget_DialogueToolAction>(this, ActionWidgetClass))
-			{
-				ActionWidget->SetParentWidget(this);
-				ActionWidget->SetActionInfo(nullptr, LayerIndex, INDEX_NONE);
-				ActionBox->AddChild(ActionWidget);
-			}
-		}
-	}
-}
-
-bool UDialogueEditToolWidget::SaveFile(const FString& _Title, const FString& _FileTypes, FString& _InOutLastPath,
-	const FString& _DefaultFile, FString& _OutFileName)
-{
-	_OutFileName = FString();
-
-	IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
-	bool bFileChosen = false;
-	TArray<FString> OutFileNames;
-	if(DesktopPlatform)
-	{
-		bFileChosen = DesktopPlatform->SaveFileDialog(
-			FSlateApplication::Get().FindBestParentWindowHandleForDialogs(nullptr),
-			_Title,
-			_InOutLastPath,
-			_DefaultFile,
-			_FileTypes,
-			EFileDialogFlags::None,
-			OutFileNames);
-	}
-
-	bFileChosen = (OutFileNames.Num() > 0);
-
-	if(bFileChosen)
-	{
-		_InOutLastPath = OutFileNames[0];
-		_OutFileName = OutFileNames[0];
-	}
-
-	return bFileChosen;
-}
-
-void UDialogueEditToolWidget::SetFileName(const FString& _FileName)
-{
-	CurrentDialogueFileName = _FileName;
-	CPP_Txt_FileName->SetText(FText::FromString(_FileName));
-}
-
-FIH_Dialogue UDialogueEditToolWidget::LoadDialogue(const FString& _strFileName)
-{
-	const FString JsonFilePath = _strFileName;
-	FString JsonString;
-
-	FFileHelper::LoadFileToString(JsonString, *JsonFilePath);
-
-	TSharedPtr<FJsonObject> JsonObject = MakeShareable(new FJsonObject());
-	TSharedRef<TJsonReader<>> JsonReader = TJsonReaderFactory<>::Create(JsonString);
-
-	if (FJsonSerializer::Deserialize(JsonReader, JsonObject) && JsonObject.IsValid())
-	{
-		FIH_Dialogue Dialogue;
-
-		const TArray<TSharedPtr<FJsonValue>>& arrActionLayer = JsonObject->GetArrayField(TEXT("ActionLayers"));
-		for (const TSharedPtr<FJsonValue>& ActionLayer : arrActionLayer)
-		{
-			UDialogueActionLayer* pLayer = NewObject<UDialogueActionLayer>();
-			Dialogue.ActionLayers.Add(pLayer);
-
-			pLayer->LoadToJson(ActionLayer);
-		}
-
-
-		return Dialogue;
-	}
-
-	return FIH_Dialogue();
-}
-
-bool UDialogueEditToolWidget::SaveDialogue(FIH_Dialogue& _Dialogue, const FString& _strFileName)
-{
-	const FString strJsonPath = _strFileName;
-	FString JsonString; //Json converted to FString
-
-	TSharedRef<FJsonObject> JsonObject = MakeShareable(new FJsonObject());
-
-	{ // Save Action
-		TArray<TSharedPtr<FJsonValue>> Values;
-
-		for (int i = 0; i < _Dialogue.ActionLayers.Num(); ++i)
-		{
-			TSharedRef<FJsonObject> json = MakeShareable(new FJsonObject());
-			TSharedPtr<FJsonValueObject> value = MakeShareable(new FJsonValueObject(json));
-
-			_Dialogue.ActionLayers[i]->SaveToJson(json);
-
-			Values.Add(value);
-		}
-
-		JsonObject->SetArrayField(TEXT("ActionLayers"), Values);
-	}
-
-
-	FString OutputString;
-	TSharedRef< TJsonWriter<> > Writer = TJsonWriterFactory<>::Create(&OutputString);
-	FJsonSerializer::Serialize(JsonObject, Writer);
-
-	bool bResult = FFileHelper::SaveStringToFile(OutputString, *strJsonPath);
-	return bResult;
 }

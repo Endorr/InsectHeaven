@@ -60,14 +60,15 @@ private:
 	bool CreateDialogueWidget();
 	void DestroyDialogueWidget();
 
+public:
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPlayingActionChanged, int32, ActionIndex);
+	FOnPlayingActionChanged OnPlayingActionChanged;
+
 protected:
 	UPROPERTY()
 	TArray<UDialogueActionLayer*> ActionLayers;
 	
 	FSimpleMulticastDelegate FinishDelegate;
-
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPlayingActionChanged, int32, ActionIndex);
-	FOnPlayingActionChanged OnPlayingActionChanged;
 
 	UPROPERTY()
 	class UIH_Widget_DialogueScene* DialogueWidget = nullptr;
