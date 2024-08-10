@@ -20,6 +20,8 @@ public:
 	void SetText(FString _Text, bool _bImmediate);
 	void SetCommitDelegate(FDialogueWidgetButtonEvent _Delegate);
 
+	void SetBackground(int32 _ImageID, bool _IsSwitching);
+
 	bool IsShowTalkPanel();
 	void HideTalkPanel();
 

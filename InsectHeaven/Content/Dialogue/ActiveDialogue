@@ -7,12 +7,76 @@
 					"bWaitInput": false
 				},
 				{
+					"ClassType": "DialogueAction_ShowActor",
+					"bWaitInput": false,
+					"ActorID": 0,
+					"IsLeft": true
+				},
+				{
+					"ClassType": "DialogueAction_Talk",
+					"bWaitInput": true,
+					"ActorName": "None",
+					"TalkString": "testee"
+				},
+				{
+					"ClassType": "DialogueAction_Talk",
+					"bWaitInput": true,
+					"ActorName": "None",
+					"TalkString": "gqsvrf"
+				},
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				}
+			]
+		},
+		{
+			"Actions": [
+				{
+					"ClassType": "DialogueAction_Fade",
+					"bWaitInput": false,
+					"IsFadeOut": true
+				},
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				},
+				{
+					"ClassType": "DialogueAction_Fade",
+					"bWaitInput": false,
+					"IsFadeOut": false
+				},
+				{
 					"ClassType": "DialogueAction_Empty",
 					"bWaitInput": false
 				},
 				{
 					"ClassType": "DialogueAction_Empty",
 					"bWaitInput": false
+				}
+			]
+		},
+		{
+			"Actions": [
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				},
+				{
+					"ClassType": "DialogueAction_Background",
+					"bWaitInput": false,
+					"BackgroundID": 13,
+					"IsSwitching": false
+				},
+				{
+					"ClassType": "DialogueAction_Empty",
+					"bWaitInput": false
+				},
+				{
+					"ClassType": "DialogueAction_Background",
+					"bWaitInput": false,
+					"BackgroundID": 14,
+					"IsSwitching": true
 				},
 				{
 					"ClassType": "DialogueAction_Empty",

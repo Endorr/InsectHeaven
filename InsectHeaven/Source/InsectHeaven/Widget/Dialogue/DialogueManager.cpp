@@ -35,17 +35,19 @@ AIH_DialoguePlayer* UDialogueManager::GetOrCreateDialoguePlayer()
 	UClass* BlueprintClass = StaticLoadClass(UObject::StaticClass(), nullptr, *strFilePath);
 	if(nullptr != BlueprintClass)
 	{
-		UWorld* p_world = GetWorld();
-		FActorSpawnParameters Params;
-		Params.OverrideLevel = p_world->GetCurrentLevel();
-		Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-		FVector DefaultLocation = FVector(5000.f, 5000.f, 5000.f);
-		AActor* NewActor = p_world->SpawnActor(AIH_DialoguePlayer::StaticClass(), &DefaultLocation, &FRotator::ZeroRotator, Params);
+		if(UWorld* p_world = GetWorld())
+		{
+			FActorSpawnParameters Params;
+			Params.OverrideLevel = p_world->GetCurrentLevel();
+			Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+			FVector DefaultLocation = FVector(5000.f, 5000.f, 5000.f);
+			AActor* NewActor = p_world->SpawnActor(AIH_DialoguePlayer::StaticClass(), &DefaultLocation, &FRotator::ZeroRotator, Params);
 #if WITH_EDITOR
-		NewActor->SetActorLabel(TEXT("DialoguePlayer"));
+			NewActor->SetActorLabel(TEXT("DialoguePlayer"));
 #endif
-		pDialoguePlayer = Cast<AIH_DialoguePlayer>(NewActor);
-		return pDialoguePlayer.Get();
+			pDialoguePlayer = Cast<AIH_DialoguePlayer>(NewActor);
+			return pDialoguePlayer.Get();
+		}
 	}
 
 	return nullptr;

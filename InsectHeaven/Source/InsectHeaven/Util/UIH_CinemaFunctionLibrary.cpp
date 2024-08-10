@@ -198,14 +198,14 @@ void UIH_CinemaFunctionLibrary::PlayDialoguePreview(FIH_Dialogue& _Dialogue)
 	}
 
 	SessionParams.WorldType = EPlaySessionWorldType::PlayInEditor;
-	SessionParams.GlobalMapOverride = TEXT("/Game/EditorUtility/DialogueTool/Level/DialogueToolLevel.DialogueToolLevel");
+	SessionParams.GlobalMapOverride = TEXT("/Game/Dialogue/DialogueWorld.DialogueWorld");
 	SessionParams.GameModeOverride = AIH_GameMode_DialgueTool::StaticClass();
 	SessionParams.SessionDestination = EPlaySessionDestinationType::InProcess;
 
 
 	//GEditor->NewMap();
 
-	FEditorFileUtils::LoadMap(TEXT("/Game/EditorUtility/DialogueTool/Level/DialogueToolLevel"));
+	FEditorFileUtils::LoadMap(TEXT("/Game/Dialogue/DialogueWorld"));
 
 
 	//if (!HasPlayWorld())

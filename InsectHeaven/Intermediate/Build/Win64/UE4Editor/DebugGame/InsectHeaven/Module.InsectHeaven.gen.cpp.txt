@@ -39,26 +39,20 @@ C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Edit
 C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Library/Dialogue/DialogueActionLayer.h
 C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\DialogueActionLayer.generated.h
 C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/DialogueDefine.gen.cpp
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/DialogueManager.gen.cpp
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Widget/Dialogue/DialogueManager.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Library\IH_SingletonManager.h
-C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\Engine/StreamableManager.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_SingletonManager.generated.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Library\SingletonInterface.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Library\Dialogue/IH_DialoguePlayer.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_DialoguePlayer.generated.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\DialogueManager.generated.h
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_DialoguePlayer.gen.cpp
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_GameMode_DialgueTool.gen.cpp
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Library/Dialogue/IH_GameMode_DialgueTool.h
-C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/GameModeBase.h
-C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/Info.h
-C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\Info.generated.h
-C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\Engine/ServerStatReplicator.h
-C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\ServerStatReplicator.generated.h
-C:\Program Files\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/CoreOnline.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/DialogueEditToolWidget.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Library/Dialogue/DialogueEditToolWidget.h
+C:\Program Files\UE_4.27\Engine\Source\Editor\Blutility\Classes\EditorUtilityWidget.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Blueprint/UserWidget.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Components/SlateWrapperTypes.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\SlateWrapperTypes.generated.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Components/Widget.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Components/Visual.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\Visual.generated.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Slate/WidgetTransform.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\WidgetTransform.generated.h
 C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/PlayerController.h
 C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/OnlineReplStructs.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\CoreUObject\Public\UObject/CoreOnline.h
 C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\OnlineReplStructs.generated.h
 C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/PlayerMuteList.h
 C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\PlayerMuteList.generated.h
@@ -72,71 +66,6 @@ C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/Upda
 C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\UpdateLevelVisibilityLevelInfo.generated.h
 C:\Program Files\UE_4.27\Engine\Source\Runtime\ApplicationCore\Public\GenericPlatform/IInputInterface.h
 C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\PlayerController.generated.h
-C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\GameModeBase.generated.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_GameMode_DialgueTool.generated.h
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_LevelScriptActor.gen.cpp
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Scene/IH_LevelScriptActor.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Scene\IH_SceneDefine.h
-C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\Engine/LevelScriptActor.h
-C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\LevelScriptActor.generated.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_LevelScriptActor.generated.h
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Mapper_BasePath_Dir.gen.cpp
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Table/TableMapper/IH_Mapper_BasePath_Dir.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Table\TableMapper\IH_TableMapper.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Table/IH_TableManager.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Table\IH_TableDefine.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_TableManager.generated.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_TableMapper.generated.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Mapper_BasePath_Dir.generated.h
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Mapper_BasePath_Img.gen.cpp
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Table/TableMapper/IH_Mapper_BasePath_Img.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Mapper_BasePath_Img.generated.h
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Mapper_BasePath_Widget.gen.cpp
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Table/TableMapper/IH_Mapper_BasePath_Widget.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Mapper_BasePath_Widget.generated.h
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Mapper_Character_2D.gen.cpp
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Table/TableMapper/IH_Mapper_Character_2D.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Mapper_Character_2D.generated.h
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Mapper_InGame_Local.gen.cpp
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Table/TableMapper/IH_Mapper_InGame_Local.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Mapper_InGame_Local.generated.h
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Mapper_Resource_Widget.gen.cpp
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Table/TableMapper/IH_Mapper_Resource_Widget.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Mapper_Resource_Widget.generated.h
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Mapper_Script_Local.gen.cpp
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Table/TableMapper/IH_Mapper_Script_Local.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Mapper_Script_Local.generated.h
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_SceneBase.gen.cpp
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Scene/IH_SceneBase.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Util\IH_StateBase.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_StateBase.generated.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_SceneBase.generated.h
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_SceneDefine.gen.cpp
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_SceneLobby.gen.cpp
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Scene/Lobby/IH_SceneLobby.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_SceneLobby.generated.h
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_SceneManager.gen.cpp
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Scene/IH_SceneManager.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\IH_GameDefine.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_SceneManager.generated.h
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_SingletonManager.gen.cpp
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_StateBase.gen.cpp
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_StateMachine.gen.cpp
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Util/IH_StateMachine.h
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_StateMachine.generated.h
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_TableDefine.gen.cpp
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_TableManager.gen.cpp
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_TableMapper.gen.cpp
-C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Widget.gen.cpp
-C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Widget/IH_Widget.h
-C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Blueprint/UserWidget.h
-C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Components/SlateWrapperTypes.h
-C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\SlateWrapperTypes.generated.h
-C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Components/Widget.h
-C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Components/Visual.h
-C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\Visual.generated.h
-C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Slate/WidgetTransform.h
-C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\WidgetTransform.generated.h
 C:\Program Files\UE_4.27\Engine\Source\Runtime\UMG\Public\Blueprint/WidgetNavigation.h
 C:\Program Files\UE_4.27\Engine\Source\Runtime\SlateCore\Public\Types/NavigationMetaData.h
 C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\WidgetNavigation.generated.h
@@ -236,10 +165,106 @@ C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\PropertyP
 C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\DynamicPropertyPath.generated.h
 C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\WidgetBlueprintGeneratedClass.generated.h
 C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMG\UserWidget.generated.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Blutility\EditorUtilityWidget.generated.h
+C:\Program Files\UE_4.27\Engine\Source\Developer\DesktopPlatform\Public\IDesktopPlatform.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\DialogueEditToolWidget.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/DialogueManager.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Widget/Dialogue/DialogueManager.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Library\IH_SingletonManager.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\Engine/StreamableManager.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_SingletonManager.generated.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Library\SingletonInterface.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Library\Dialogue/IH_DialoguePlayer.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_DialoguePlayer.generated.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\DialogueManager.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_DialoguePlayer.gen.cpp
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_GameMode_DialgueTool.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Library/Dialogue/IH_GameMode_DialgueTool.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/GameModeBase.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\GameFramework/Info.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\Info.generated.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\Engine/ServerStatReplicator.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\ServerStatReplicator.generated.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\GameModeBase.generated.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_GameMode_DialgueTool.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_LevelScriptActor.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Scene/IH_LevelScriptActor.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Scene\IH_SceneDefine.h
+C:\Program Files\UE_4.27\Engine\Source\Runtime\Engine\Classes\Engine/LevelScriptActor.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\LevelScriptActor.generated.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_LevelScriptActor.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Mapper_BasePath_Dir.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Table/TableMapper/IH_Mapper_BasePath_Dir.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Table\TableMapper\IH_TableMapper.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Table/IH_TableManager.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Table\IH_TableDefine.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_TableManager.generated.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_TableMapper.generated.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Mapper_BasePath_Dir.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Mapper_BasePath_Img.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Table/TableMapper/IH_Mapper_BasePath_Img.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Mapper_BasePath_Img.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Mapper_BasePath_Widget.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Table/TableMapper/IH_Mapper_BasePath_Widget.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Mapper_BasePath_Widget.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Mapper_Character_2D.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Table/TableMapper/IH_Mapper_Character_2D.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Mapper_Character_2D.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Mapper_InGame_Local.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Table/TableMapper/IH_Mapper_InGame_Local.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Mapper_InGame_Local.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Mapper_Resource_Widget.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Table/TableMapper/IH_Mapper_Resource_Widget.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Mapper_Resource_Widget.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Mapper_Script_Local.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Table/TableMapper/IH_Mapper_Script_Local.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Mapper_Script_Local.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_SceneBase.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Scene/IH_SceneBase.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\Util\IH_StateBase.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_StateBase.generated.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_SceneBase.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_SceneDefine.gen.cpp
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_SceneLobby.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Scene/Lobby/IH_SceneLobby.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_SceneLobby.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_SceneManager.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Scene/IH_SceneManager.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven\IH_GameDefine.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_SceneManager.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_SinglePropertyView.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Widget/Dialogue/IH_SinglePropertyView.h
+C:\Program Files\UE_4.27\Engine\Source\Editor\UMGEditor\Public\Components/SinglePropertyView.h
+C:\Program Files\UE_4.27\Engine\Source\Editor\UMGEditor\Public\Components/PropertyViewBase.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMGEditor\PropertyViewBase.generated.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMGEditor\SinglePropertyView.generated.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_SinglePropertyView.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_SingletonManager.gen.cpp
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_StateBase.gen.cpp
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_StateMachine.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Util/IH_StateMachine.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_StateMachine.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_TableDefine.gen.cpp
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_TableManager.gen.cpp
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_TableMapper.gen.cpp
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Widget.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Widget/IH_Widget.h
 C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Widget.generated.h
 C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Widget_DialogueScene.gen.cpp
 C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Widget/Dialogue/IH_Widget_DialogueScene.h
 C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Widget_DialogueScene.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Widget_DialogueToolAction.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Widget/DialogueTool/IH_Widget_DialogueToolAction.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Widget_DialogueToolAction.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Widget_DialogueToolActionAdd.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Widget/DialogueTool/IH_Widget_DialogueToolActionAdd.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Widget_DialogueToolActionAdd.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Widget_DialogueToolLayer.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Widget/DialogueTool/IH_Widget_DialogueToolLayer.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Widget_DialogueToolLayer.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Widget_DialogueToolLayerAdd.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Widget/DialogueTool/IH_Widget_DialogueToolLayerAdd.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Widget_DialogueToolLayerAdd.generated.h
 C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/IH_Widget_MainLobby.gen.cpp
 C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Widget/MainLobby/IH_Widget_MainLobby.h
 C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\IH_Widget_MainLobby.generated.h
@@ -264,3 +289,14 @@ C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Edit
 C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/Script_Local.gen.cpp
 C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Table/DataStruct/Script_Local.h
 C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\Script_Local.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/UIH_CinemaFunctionLibrary.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Util/UIH_CinemaFunctionLibrary.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\UIH_CinemaFunctionLibrary.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/UIH_DetailsView.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Widget/Dialogue/UIH_DetailsView.h
+C:\Program Files\UE_4.27\Engine\Source\Editor\UMGEditor\Public\Components/DetailsView.h
+C:\Program Files\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\UMGEditor\DetailsView.generated.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\UIH_DetailsView.generated.h
+C:/Users/nanim/GitHub/InsectHeaven/InsectHeaven/Intermediate/Build/Win64/UE4Editor/Inc/InsectHeaven/UIH_FunctionLibrary.gen.cpp
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Source\InsectHeaven/Util/UIH_FunctionLibrary.h
+C:\Users\nanim\GitHub\InsectHeaven\InsectHeaven\Intermediate\Build\Win64\UE4Editor\Inc\InsectHeaven\UIH_FunctionLibrary.generated.h

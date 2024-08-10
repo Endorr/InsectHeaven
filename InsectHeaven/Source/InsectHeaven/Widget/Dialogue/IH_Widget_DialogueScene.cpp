@@ -63,6 +63,34 @@ void UIH_Widget_DialogueScene::SetCommitDelegate(FDialogueWidgetButtonEvent _Del
 	OnClickedDelegate = _Delegate;
 }
 
+void UIH_Widget_DialogueScene::SetBackground(int32 _ImageID, bool _IsSwitching)
+{
+	FString FilePath;
+	gTableMng.GetFilePath(ETableDataType::BasePathImage, _ImageID, FilePath);
+
+	if(UTexture2D* BackgroundImage = Cast<UTexture2D>(StaticLoadObject(UTexture2D::StaticClass(), nullptr, *FilePath)))
+	{
+		if(true == _IsSwitching)
+		{
+			if(CPP_Img_BackgroundSwitch && CPP_Img_Background)
+			{
+				CPP_Img_BackgroundSwitch->SetBrush(CPP_Img_Background->Brush);
+				CPP_Img_BackgroundSwitch->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+
+				CPP_Img_Background->SetBrushFromTexture(BackgroundImage);
+				PlayAnimationByName(TEXT("BackgroundChange"));
+			}
+		}
+		else
+		{
+			if(CPP_Img_Background)
+			{
+				CPP_Img_Background->SetBrushFromTexture(BackgroundImage);
+			}
+		}
+	}
+}
+
 bool UIH_Widget_DialogueScene::IsShowTalkPanel()
 {
 	if(CPP_Canvas_Script)
